@@ -6,30 +6,36 @@ if (session_status() == PHP_SESSION_NONE){ session_start();}
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <?php require_once('head.php')?>
+    <?php require_once '_include/head.php' ?>
     <script src="authentification.js" defer></script>
     <title>Authenticate</title>
 </head>
 
 <body>
-    <header>
-        <?php require_once '_header.php' ?>
-    </header>
 
-    <main id="main">
+    <header><a href="index.php"><h1>GAME VAULT</h1></a></header>
 
-        <div id="buttons">
-            <button id="switchInscription">Sign up</button>
-            <button id="switchConnexion">Sign in</button>
-        </div>
+    <main>
 
-        <div id="divForm"></div>
+        <form action="" method="POST">
+
+            <a href="index.php"><h2>Sign in</h2></a>
+
+            <label for="login">Login</label>
+            <input type="text" name="login" id="login" placeholder="login" required />
+            <div id="errorLogin" class="error"></div>
+
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" placeholder="Enter your password" required />
+            <div id="errorPass" class="error"></div>
+
+            <button type="submit">Submit</button>
+
+            <p>Not registered yet?</p>
+
+        </form>
 
     </main>
-
-    <footer>
-        <?php require_once '_include/footer.php' ?>
-    </footer>
 
 </body>
 
