@@ -1,6 +1,6 @@
 <?php
 
-require_once '../model/User_model.php';
+require_once 'model/UserModel.php';
 
 class UserController
 {
@@ -23,7 +23,7 @@ class UserController
 
             $hash = password_hash($password, PASSWORD_DEFAULT);
 
-            $model->InsertUserDb($login, $email, $hash) == 'okSignup' ? $messages['okReg'] = 'Your account is now created and you can login' : $messages['errorDb'] = 'There was an error with the database insertion, please try again later';
+            $model->InsertUserDb($login, $email, $hash) == 'okSignup' ? $messages['okReg'] = 'Your account is now created and you can login' : $messages['errorRegDb'] = 'There was an error with the database insertion, please try again later';
 
         }else{
 

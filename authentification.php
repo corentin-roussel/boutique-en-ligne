@@ -15,25 +15,30 @@ if (session_status() == PHP_SESSION_NONE){ session_start();}
 
     <header><a href="index.php"><h1>GAME VAULT</h1></a></header>
 
-    <main>
+    <main id="main">
 
-        <form action="" method="POST">
+        <div id="divForm">
 
-            <a href="index.php"><h2>Sign in</h2></a>
+            <form action="" method="POST" id="signinForm" class="form">
 
-            <label for="login">Login</label>
-            <input type="text" name="login" id="login" placeholder="login" required />
-            <div id="errorLogin" class="error"></div>
+                <h2>Sign in</h2>
 
-            <label for="password">Password</label>
-            <input type="password" name="password" id="password" placeholder="Enter your password" required />
-            <div id="errorPass" class="error"></div>
+                <label for="login">Login</label>
+                <input type="text" name="login" id="login" placeholder="login" required />
+                <div id="errorLogin" class="error"></div>
 
-            <button type="submit">Submit</button>
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" placeholder="Enter your password" required />
+                <div id="errorPass" class="error"></div>
 
-            <p>Not registered yet?</p>
+                <button type="submit">Submit</button>
 
-        </form>
+            </form>
+
+        </div>
+
+        <p id="switchInscription">Not registered yet?</p>
+        <p id="switchConnexion" style="display: none"><< Back</p>
 
     </main>
 

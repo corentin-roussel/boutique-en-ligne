@@ -5,7 +5,7 @@ class UserModel
 
     private PDO $conn;
 
-    private function __construct() {
+    public function __construct() {
 
         $db_username = 'root';
         $db_password = '';
@@ -36,12 +36,12 @@ class UserModel
 
     public function InsertUserDb($login, $email, $hash) {
 
-        $sql = "INSERT INTO user (`login`, `password`, `email`, `id_roles`) VALUES (:login, :pass, :email, :id_roles)";
+        $sql = "INSERT INTO user (`login`, `password`, `email`, `id_role`) VALUES (:login, :pass, :email, :id_role)";
         $req = $this->conn->prepare($sql);
         $req->execute(array(':login' => $login,
                             ':pass' => $hash,
                             ':email' => $email,
-                            ':id_roles' => 1
+                            ':id_role' => 1
         ));
 
         return 'okSignup';
