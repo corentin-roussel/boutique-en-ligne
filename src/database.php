@@ -14,7 +14,7 @@ function getPdo(): PDO
 
     try{
         $pdo = new PDO($dsn,$user,$password);
-        echo "connection réussis";
+        // echo "connection réussis";
         return $pdo;
     }catch( PDOException $e ) {
         echo "Erreur SQL :", $e->getMessage();

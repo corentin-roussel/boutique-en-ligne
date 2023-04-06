@@ -1,6 +1,7 @@
 <?php
 
 namespace App\model;
+
 require_once('./src/database.php');
 
  abstract class Model{

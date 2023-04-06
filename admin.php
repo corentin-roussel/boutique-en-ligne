@@ -1,10 +1,17 @@
 <?php
 
 
- require_once('./src/controllers/AdminController.php');
+require_once('./src/controllers/PlateformController.php');
+
+use App\controllers\AdminPlateform;
 
 
+$add_platform = new AdminPlateform();
 
+if (isset($_POST['content'])) {
+    $add_platform->addForm($_POST['content']);
+    die();
+}
 
 
 
@@ -55,27 +62,24 @@
     <div class="form-add-plateform">
         <form action="" method="POST" id="form-insert-plateform">
             <label for="plateform"></label>
-            <input type="text" placeholder="Write a plateform">
-            <button type="submit">ADD</button>
+            <input type="text" name="content" id="content" placeholder="Write a plateform">
+            <button type="submit" name="submit_form" value="submit_form">ADD</button>
         </form>
+    </div>
+
+    <div class="container-mess-plateform">
+        
     </div>
 
     <table>
         <thead>
             <tr>
-                <th>  Clients    
-                
+                <th> Platforms
                 </th>
-                <th>
-                    Age
-                </th>
-
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>Mehdi</td>
-                <td>15 ans</td>
 
             </tr>
         </tbody>
