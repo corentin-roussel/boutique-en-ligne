@@ -1,16 +1,21 @@
 <?php
 
-spl_autoload_register("my_autoloader");
 
-function my_autoloader($class, $directory)
+
+function my_autoloader($class)
 {
+    var_dump($class);
     $class_path = str_replace("\\", "/", $class);
-    $directory_path = str_replace("\\", "/", $directory);
+    var_dump($class_path);
+    $class_path = str_replace("App", "src", $class_path);
 
-    $file = __DIR__ . '/src/'. $directory_path . "/" . $class_path . ".php";
+    $file = __DIR__ . '/' . $class_path . ".php";
 
+    var_dump($file);
     if(file_exists($file))
     {
         require_once $file;
     }
 }
+
+spl_autoload_register("my_autoloader");
