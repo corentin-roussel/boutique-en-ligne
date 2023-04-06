@@ -1,0 +1,94 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+
+/****** Container Main Div Admin ******/
+
+.container-dash-admin{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 30vh;
+    /* border: 1px solid black; */
+    background-color: rgb(216, 205, 205);
+
+}
+
+.container-user-man{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 1.5%;
+    padding: 1%;
+
+    /* border: 1px solid black;  */
+    background-color: rgb(216, 205, 205);
+
+}
+
+.container-pro-stock{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 1.5%;
+    padding: 1%;
+    /* border: 1px solid black;  */
+    background-color: rgb(216, 205, 205);
+
+}
+
+.container-title-platform{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 25%;
+    margin-top: 1.5%;
+    padding: 1.5%;
+    /* border: 1px solid black;  */
+    background-color: rgb(216, 205, 205);
+}
+
+.container-btn-plateforme{
+
+    display: flex;
+    flex-direction: row ;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    border: 1px solid black;
+    margin-top: 3%;
+
+}
+
+.container-btn-plateforme button{
+    margin-left: 1.5%;
+    padding: 1%;
+
+}
+
+.form-add-plateform{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    border: 1px solid black;
+    margin-top: 1.5%;
+    margin-bottom: 1.5%;
+}
+
+table{
+    border: 1px solid black;
+    width: 100%;
+    border-collapse: collapse;
+}
+
