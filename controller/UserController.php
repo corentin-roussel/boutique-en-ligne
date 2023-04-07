@@ -5,7 +5,11 @@ require_once 'model/UserModel.php';
 class UserController
 {
 
-    public function __construct() {}
+    private $model;
+
+    public function __construct() {
+        $this->model = new UserModel;
+    }
 
     public function Register($login, $email, $password, $passwordConfirm) {
 
@@ -14,16 +18,15 @@ class UserController
         $password = htmlspecialchars(trim($password));
         $passwordConfirm = htmlspecialchars(trim($passwordConfirm));
 
-        $model = new UserModel;
         $messages = [];
 
-        $row = $model->RowCount('user', 'login', $login);
+        $row = $this->model->RowCount('user', 'login', $login);
 
         if($row <= 0 && strlen($login) >= 4 && !preg_match("[\W]", $login) && preg_match("/@/", $email) && preg_match("/\./", $email) && strlen($password) >= 5 && $password == $passwordConfirm) {
 
             $hash = password_hash($password, PASSWORD_DEFAULT);
 
-            $model->InsertUserDb($login, $email, $hash) == 'okSignup' ? $messages['okReg'] = 'Your account is now created and you can login' : $messages['errorRegDb'] = 'There was an error with the database insertion, please try again later';
+            $this->model->InsertUserDb($login, $email, $hash) == 'okSignup' ? $messages['okReg'] = 'Your account is now created and you can login' : $messages['errorRegDb'] = 'There was an error with the database insertion, please try again later';
 
         }else{
 
@@ -57,15 +60,13 @@ class UserController
 
         $login = htmlspecialchars(trim($login));
         $password = htmlspecialchars(trim($password));
-        
-        $model = new UserModel;
         $messages = [];
 
-        $row = $model->RowCount('user', 'login', $login);
+        $row = $this->model->RowCount('user', 'login', $login);
 
         if($row == 1){
 
-            $userDataDb = $model->GetUserData($login);
+            $userDataDb = $this->model->GetUserData($login);
 
             if(password_verify($password, $userDataDb['password'])) {
 
@@ -97,9 +98,6 @@ class UserController
         $birthdate = htmlspecialchars(trim($birthdate));
         $phoneNumber = htmlspecialchars(trim($phoneNumber));
 
-
-        $model = new UserModel;
-
         $messages = [];
 
         $sessionId = $_SESSION['user']['id'];
@@ -109,11 +107,11 @@ class UserController
 
             if(!empty($login) && $_SESSION['user']['login'] != $login && strlen($login) >= 4 && !preg_match("[\W]", $login)) {
 
-                $row = $model->RowCount('user', 'login', $login);
+                $row = $this->model->RowCount('user', 'login', $login);
 
                 if($row === 0) {
 
-                    $model->UpdateOneById($sessionId, 'login', $login, 'user', 'okLog') == 'okLog' ? $messages['okLoginEdit'] = 'Your login has been edited' : $messages['errorLoginDb'] = 'There was an error with the database insertion, please try again later';
+                    $this->model->UpdateOneById($sessionId, 'login', $login, 'user', 'okLog') == 'okLog' ? $messages['okLoginEdit'] = 'Your login has been edited' : $messages['errorLoginDb'] = 'There was an error with the database insertion, please try again later';
 
                     $_SESSION['user']['login'] = $login;
 
@@ -130,7 +128,7 @@ class UserController
 
                 $hash = password_hash($passwordNew, PASSWORD_DEFAULT);
 
-                $model->UpdateOneById($sessionId, 'password', $hash, 'user', 'okPass') == 'okPass' ? $messages['okPassEdit'] = 'Your password has been edited' : $messages['errorPassDb'] = 'There was an error with the database insertion, please try again later';;
+                $this->model->UpdateOneById($sessionId, 'password', $hash, 'user', 'okPass') == 'okPass' ? $messages['okPassEdit'] = 'Your password has been edited' : $messages['errorPassDb'] = 'There was an error with the database insertion, please try again later';;
             
             }elseif(strlen($passwordNew) < 5 && !empty($passwordNew)) {
 
@@ -147,11 +145,11 @@ class UserController
 
             if(!empty($email) && $_SESSION['user']['email'] != $email && preg_match("/@/", $email) && preg_match("/\./", $email)) {
 
-                $row = $model->RowCount('user', 'email', $email);
+                $row = $this->model->RowCount('user', 'email', $email);
 
                 if($row === 0) {
 
-                    $model->UpdateOneById($sessionId, 'email', $email, 'user', 'okEmail') == 'okEmail' ? $messages['okEmailEdit'] = 'Your email has been edited' : $messages['errorEmailDb'] = 'There was an error with the database insertion, please try again later';
+                    $this->model->UpdateOneById($sessionId, 'email', $email, 'user', 'okEmail') == 'okEmail' ? $messages['okEmailEdit'] = 'Your email has been edited' : $messages['errorEmailDb'] = 'There was an error with the database insertion, please try again later';
 
                     $_SESSION['user']['email'] = $email;
 
@@ -166,7 +164,7 @@ class UserController
 
             if(!empty($firstname) && $_SESSION['user']['firstname'] != $firstname) {
 
-                $model->UpdateOneById($sessionId, 'firstname', $firstname, 'user', 'okFirstname') == 'okFirstname' ? $messages['okFirstnameEdit'] = 'Your firstname has been edited' : $messages['errorFirstnameDb'] = 'There was an error with the database insertion, please try again later';
+                $this->model->UpdateOneById($sessionId, 'firstname', $firstname, 'user', 'okFirstname') == 'okFirstname' ? $messages['okFirstnameEdit'] = 'Your firstname has been edited' : $messages['errorFirstnameDb'] = 'There was an error with the database insertion, please try again later';
 
                 $_SESSION['user']['firstname'] = $firstname;
 
@@ -174,7 +172,7 @@ class UserController
 
             if(!empty($lastname) && $_SESSION['user']['lastname'] != $lastname) {
 
-                $model->UpdateOneById($sessionId, 'lastname', $lastname, 'user', 'okFirstname') == 'okLastname' ? $messages['okLastnameEdit'] = 'Your lastname has been edited' : $messages['errorLastnameDb'] = 'There was an error with the database insertion, please try again later';
+                $this->model->UpdateOneById($sessionId, 'lastname', $lastname, 'user', 'okFirstname') == 'okLastname' ? $messages['okLastnameEdit'] = 'Your lastname has been edited' : $messages['errorLastnameDb'] = 'There was an error with the database insertion, please try again later';
 
                 $_SESSION['user']['lastname'] = $lastname;
 
@@ -182,7 +180,7 @@ class UserController
 
             if(!empty($birthdate) && $_SESSION['user']['birthdate'] != $birthdate) {
 
-                $model->UpdateOneById($sessionId, 'birth_date', $birthdate, 'user', 'okBirthdate') == 'okBirthdate' ? $messages['okBirthdateEdit'] = 'Your birth date has been edited' : $messages['errorBirthdateDb'] = 'There was an error with the database insertion, please try again later';
+                $this->model->UpdateOneById($sessionId, 'birth_date', $birthdate, 'user', 'okBirthdate') == 'okBirthdate' ? $messages['okBirthdateEdit'] = 'Your birth date has been edited' : $messages['errorBirthdateDb'] = 'There was an error with the database insertion, please try again later';
 
                 $_SESSION['user']['birthdate'] = $birthdate;
 
@@ -190,11 +188,11 @@ class UserController
 
             if(!empty($phoneNumber) && $_SESSION['user']['phoneNumber'] != $phoneNumber) {
 
-                $row = $model->RowCount('user', 'phone_number', $phoneNumber);
+                $row = $this->model->RowCount('user', 'phone_number', $phoneNumber);
 
                 if($row === 0) {
 
-                    $model->UpdateOneById($sessionId, 'phone_number', $phoneNumber, 'user', 'okPhoneNumber') == 'okPhoneNumber' ? $messages['okPhoneNumberEdit'] = 'Your phone number has been edited' : $messages['errorPhoneNumberDb'] = 'There was an error with the database insertion, please try again later';
+                    $this->model->UpdateOneById($sessionId, 'phone_number', $phoneNumber, 'user', 'okPhoneNumber') == 'okPhoneNumber' ? $messages['okPhoneNumberEdit'] = 'Your phone number has been edited' : $messages['errorPhoneNumberDb'] = 'There was an error with the database insertion, please try again later';
                     
                     $_SESSION['user']['phoneNumber'] = $phoneNumber;
 
@@ -221,15 +219,13 @@ class UserController
 
     public function Delete() {
 
-        $model = new UserModel;
-
         $messages = [];
 
         if($_SESSION) {
 
             $sessionId = $_SESSION['user']['id'];
 
-            $model->DeleteLine('user', $sessionId) == 'okDel' ? ((session_destroy()) . ($messages['okDelAccount'] = 'Your account has been deleted')) : $messages['errorDelDb'] = 'There was an error with the database deletion, please try again later';
+            $this->model->DeleteLine('user', $sessionId) == 'okDel' ? ((session_destroy()) . ($messages['okDelAccount'] = 'Your account has been deleted')) : $messages['errorDelDb'] = 'There was an error with the database deletion, please try again later';
 
         }else{
             $messages['errorDel'] = 'You have to be connected to delete your account';

@@ -130,10 +130,6 @@ const switchInscription = document.getElementById('switchInscription');
 const switchConnexion = document.getElementById('switchConnexion');
 const divForm = document.getElementById('divForm');
 
-console.log(switchInscription)
-console.log(switchConnexion)
-console.log(divForm)
-
 window.addEventListener('load', async() => {
         
     const signinForm = document.getElementById('signinForm');
