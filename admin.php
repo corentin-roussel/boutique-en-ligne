@@ -1,34 +1,37 @@
 <?php
-if (session_status() == PHP_SESSION_NONE){ session_start();}
+
+require_once ("autoloader.php");
+
+    use App\Controller\AdminControllerGame;
+
+        $AdminController = new  AdminControllerGame();
+    if(isset($_GET['submitGame']))
+    {
+        $AdminController->insertGame($_POST["title"], $_POST["desc"], $_POST["price"], $_POST["image"], $_POST["release_date"], $_POST["developper"], $_POST["publisher"], $_POST["category"], $_POST["subcategory"]);
+    }
 ?>
 
-
-<!DOCTYPE html>
-<html lang="fr">
+<!doctype html>
+<html lang="en">
 <head>
-    <?php require_once '_include/head.php' ?>
-    <script src="admin_user.js" defer></script>
+   <?php require_once("_include/head.php") ?>
+    <script defer src="admin_game.js"></script>
     <title>Admin</title>
 </head>
-
 <body>
+    <header>
 
-    <header><?php require_once '_include/header.php' ?></header>
-
+    </header>
     <main>
+        <button class="button" id="addFormGame">Add Game</button>
 
-        <h2>User manager</h2>
+        <div id="placeAddGame">
 
-        <select name="roles" id="role">
-            <option value="all">-- Choose a role --</option>
-        </select>
-
-        <div id="displayUserData"></div>
-
+        </div>
     </main>
+    <footer>
 
-    <footer><?php require_once '_include/footer.php' ?></footer>
-
+    </footer>
 </body>
-
 </html>
+

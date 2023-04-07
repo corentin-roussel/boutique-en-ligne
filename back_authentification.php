@@ -1,9 +1,13 @@
 <?php
+require_once "autoloader.php";
+
+use App\Controller\UserController;
+
+if(session_status() == PHP_SESSION_NONE){ session_start();}
     
-    if(session_status() == PHP_SESSION_NONE){ session_start();}
-    
-    require_once 'controller/UserController.php';
+
     $user = new UserController();
+
 ?>
 
 <?php if(isset($_GET['inscription'])): ?>
