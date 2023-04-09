@@ -4,9 +4,9 @@ require_once ("autoloader.php");
 
     use App\Controller\AdminControllerGame;
 
-        $AdminController = new  AdminControllerGame();
     if(isset($_GET['submitGame']))
     {
+        $AdminController = new  AdminControllerGame();
         $AdminController->insertGame($_POST["title"], $_POST["desc"], $_POST["price"], $_POST["image"], $_POST["release_date"], $_POST["developper"], $_POST["publisher"], $_POST["category"], $_POST["subcategory"]);
     }
 ?>

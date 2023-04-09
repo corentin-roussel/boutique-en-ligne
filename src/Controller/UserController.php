@@ -74,7 +74,7 @@ class UserController
 
             $userDataDb = $model->GetUserData($login);
 
-            if (password_verify($password, $userDataDb['password'])) {
+            if(password_verify($password, $userDataDb['password'])) {
 
                 $_SESSION['user'] = array("id" => $userDataDb['id'], "login" => $userDataDb['login'], "email" => $userDataDb['email'], "firstname" => $userDataDb['firstname'], "lastname" => $userDataDb['lastname'], "birthdate" => $userDataDb['birth_date'], "phoneNumber" => $userDataDb['phone_number'], "role" => $userDataDb['role']);
 

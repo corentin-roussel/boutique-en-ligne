@@ -22,12 +22,46 @@ const submitGame = async(e, form) => {
     const response = await fetch("admin.php?submitGame=1", {body: formDataGame, method: "POST"});
     const displayErrorJSON = await response.json()
 
-    //displayErrorGame(displayErrorJSON);
+    await displayErrorGame(displayErrorJSON);
 
 }
 
-const displayErrorGame = () => {
-    
+const displayErrorGame = async(json) => {
+    const error_field = document.querySelector("#error-field");
+    error_field.innerHTML = "";
+
+    const error_desc = document.querySelector("#error-desc");
+    error_desc.innerHTML = "";
+
+    const error_price = document.querySelector("#error-price");
+    error_price.innerHTML = "";
+
+    if(json["priceCheck"])
+    {
+        const price_error = document.createElement("small");
+        price_error.innerHTML = json['priceCheck'];
+        price_error.className = "error";
+        error_price.appendChild(price_error);
+    }
+    if(json["lengthDesc"])
+    {
+        const desc_error = document.createElement("small");
+        desc_error.innerHTML = json['lengthDesc'];
+        desc_error.className = "error";
+        error_price.appendChild(desc_error);
+    }
+    if(json["emptyValues"])
+    {
+        const field_error = document.createElement("small");
+        field_error.innerHTML = json['emptyValues'];
+        field_error.className = "error";
+        error_field.appendChild(field_error);
+    }
+    if(json['okAddGame'])
+    {
+        alert(json['okAddGame'])
+    }
+
 }
 
 
