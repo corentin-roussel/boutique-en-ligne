@@ -30,7 +30,7 @@ class AdminControllerGame {
     private ?int $sub_category;
 
 
-    public function insertGame($title, $desc, $price, $image, $date, $developper, $publisher, $category, $sub_category)
+    public function insertGame($title, $desc, $price, $image, $date, $developper, $publisher, $checkboxArray, $category, $sub_category):void
     {
         $messages = [];
 
@@ -56,12 +56,15 @@ class AdminControllerGame {
         }
 
 
-        //$checkEmpty = array($title, $desc, $price, $image, $date, $developper, $publisher, $category, $sub_category);
+
 
         if(preg_match("#^[0-9]*$#" , $price) && grapheme_strlen($desc) > 100 && mempty($title, $desc, $price, $image, $date, $publisher, $developper, $category, $sub_category))
         {
             $AdminModel = new AdminModel();
             $AdminModel->reqInsertGame($title, $desc, $priceInt, $image, $date, $developper, $publisher, $categoryInt, $sub_categoryInt);
+
+            $this->setPlatform($checkboxArray);
+
 
             $messages['okAddGame'] = "You're game has been added to the product list";
         }
@@ -82,6 +85,21 @@ class AdminControllerGame {
         }
         $json = json_encode($messages, JSON_PRETTY_PRINT);
         echo $json;
+    }
+
+    public function setPlatform(array $arrayCheckbox) {
+
+        $AdminModel = new AdminModel();
+        $id_game = $AdminModel->fetchLastGame();
+
+        foreach ($arrayCheckbox as $key => $platform){
+            $intPlatform = (int)$platform;
+
+            $AdminModel->insertPlatform($id_game['id'], $intPlatform);
+        }
+
+
+
     }
 
 

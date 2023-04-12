@@ -1,4 +1,19 @@
 <?php
+require_once ("autoloader.php");
+
+use App\Controller\AdminControllerGame;
+use App\Model\AdminModel;
+
+
+$AdminController = new  AdminControllerGame();
+$adminShowGame = new AdminModel();
+
+$adminShowGame->fetchLastGame();
+
+$getPlatform = $adminShowGame->getPlatform();
+
+
+if(isset($_GET['formAddGame'])):
 ?>
 
 <form id="formGame" method="post">
@@ -23,8 +38,13 @@
     <label for="developper">Developper</label>
     <input type="text" name="developper" id="developper">
 
-    <label for="">Publisher</label>
+    <label for="publisher">Publisher</label>
     <input type="text" name="publisher" id="publisher">
+
+    <?php foreach ($getPlatform as $key => $platform){ ; ?>
+        <label for="platform"><?php echo $platform['platform'] ?></label>
+        <input type="checkbox" name="check_list[]" class="platform" value="<?php echo $platform['id'] ?>">
+    <?php }    ?>
 
     <label for="category">Category</label>
     <select name="category" id="category">
@@ -38,3 +58,18 @@
 
     <input type="submit" id="submitGame" name="submitGame">
 </form>
+<?php
+    die(); endif
+?>
+<?php
+
+
+    !isset($_GET['submitGame']) ?: $AdminController->insertGame($_POST["title"], $_POST["desc"], $_POST["price"], $_POST["image"], $_POST["release_date"], $_POST["developper"], $_POST["publisher"], $_POST['check_list'], $_POST["category"], $_POST["subcategory"]);var_dump($_POST);
+
+
+    !isset($_GET['showGame']) ?: $adminShowGame->selectGames();
+
+
+
+
+?>
