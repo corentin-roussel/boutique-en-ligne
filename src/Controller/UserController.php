@@ -12,7 +12,7 @@ class UserController
     {
     }
 
-    public function Register($login, $email, $password, $passwordConfirm)
+    public function Register(?string $login, ?string $email, ?string $password, ?string $passwordConfirm)
     {
 
         $login = htmlspecialchars(trim($login));
@@ -59,7 +59,7 @@ class UserController
         echo $json;
     }
 
-    public function Connect($login, $password)
+    public function Connect(?string $login, ?string $password)
     {
 
         $login = htmlspecialchars(trim($login));
@@ -92,7 +92,7 @@ class UserController
         echo $json;
     }
 
-    public function Update($login, $passwordNew, $passwordNewConfirm, $password, $email, $firstname, $lastname, $birthdate, $phoneNumber)
+    public function Update(?string $login, ?string $passwordNew, ?string $passwordNewConfirm, ?string $password, ?string $email, ?string $firstname, ?string $lastname, $birthdate, $phoneNumber)
     {
 
         $login = htmlspecialchars(trim($login));

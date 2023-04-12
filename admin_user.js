@@ -1,34 +1,33 @@
-const getRolesJSON = async() => {
-
-    const response = await fetch('back_admin_user.php?roles=1');
+const getRolesJSON = async() => {                                       // recupere les noms et les id de tous les roles de la db
+    
+    const response = await fetch('admin.php?getAllRoles=1');            // renvoie un tableau JSON avec les id et noms de tous les roles
     const dataJSON = await response.json();
-
-    console.log(dataJSON);
 
     return dataJSON;
 
 }
 
-const displaySelectRoles = async(functionToUse, selectId) => {
+const displaySelectRoles = async(functionToUse, selectId) => {          // ajouter les roles en option dans le select
 
-    const rolesJSON = await functionToUse;
+    const rolesJSON = await functionToUse;                              // choisir quelle fonction va etre utiliser pour recuperer les data des roles (tous les roles ou tous sauf l'actuel)
 
-    const parentSelect = document.getElementById(selectId);
+    const parentSelect = document.getElementById(selectId);             // cibler le select dans lequel on veux ajouteren option les roles recuperer
 
-    rolesJSON.forEach(role => {
+    rolesJSON.forEach(role => {                                         // parcourir le JSON recupere avec la fonction (les id et nom des roles)
 
-        let selectRole = document.createElement("option");
-        selectRole.value = role['id'];
-        selectRole.innerHTML = role['role'];
-        parentSelect.appendChild(selectRole);
+        let selectRole = document.createElement("option");              // creer un element option
+        selectRole.value = role['id'];                                  // lui attribuer l'id du role en value
+        selectRole.innerHTML = role['role'];                            // lui attribuer le nom du role pour l'afficher dans la liste
+        parentSelect.appendChild(selectRole);                           // append l'option dans le select
         
     });
 
 }
 
-const getRoleByInput = async(roleId) => {
 
-    const response = await fetch('back_admin_user.php?inputRole=' + roleId);
+const getRoleByInput = async(roleId) => {                               // recuperer un JSON des data de tous les user avec le role choisi
+
+    const response = await fetch('admin.php?inputRole=' + roleId);      // renvoie un tableau JSON de toutes les data des users appartenant au role choisi
     const userDataJSON = await response.json();
 
     return userDataJSON;
@@ -37,97 +36,93 @@ const getRoleByInput = async(roleId) => {
 
 const getAllRolesExeptActualJSON = async(actualRoleId) => {
 
-    const response = await fetch('back_admin_user.php?actualRole=' + actualRoleId);
+    const response = await fetch('admin.php?actualRole=' + actualRoleId);
     const roles = await response.json();
 
     return roles;
 
 }
 
-const displayRoleByInput = async(roleId) => {
+const displayUserDataByRole = async(roleId) => {                            // display un table HTML avec les data des user qui ont le role choisi
 
     const displayDiv = document.getElementById('displayUserData');
 
-    const userDataJSON = await getRoleByInput(roleId);
+    const response = await fetch('admin.php?tableUserRole=' + roleId);
+    const table = await response.text();
 
-    userDataJSON.forEach(user => {
-        console.log(user);
+    displayDiv.innerHTML = "";
+    displayDiv.innerHTML = table;
 
-        displayDiv.innerHTML = "";
 
-        const sectionUser = document.createElement("section");
-        sectionUser.id = 'user' + user['id'];
-        sectionUser.className = 'sectionUser';
+    /******************* Change role *******************/
 
-        displayDiv.appendChild(sectionUser);
+    const selectChangeRole = document.getElementsByClassName('selectChangeRole');
 
-            const divLoginRoleDelete = document.createElement("div");
-            divLoginRoleDelete.className = 'divLoginRoleDelete';
+    for(let select of selectChangeRole) {
+        
+        select.onchange = async(e) => {                                    // quand on choisis le role dans le select
 
-            sectionUser.appendChild(divLoginRoleDelete);
+            const roleId = e.target.value;                                      // on recupere la value de l'option choisie (l'id de role)
+            whenChangeRole(select.name, roleId);                                      // et on display les users qui correspondent au role choisis
+        
+        }
 
-                const titreLogin = document.createElement("h3");
-                titreLogin.className = 'titreLogin';
-                titreLogin.innerHTML = user['login'];
+    };
 
-                divLoginRoleDelete.appendChild(titreLogin);
 
-                const selectChangeRole = document.createElement("select");
-                selectChangeRole.name='rolesChange';
-                selectChangeRole.id = 'changeRoleUser' + user['id'];
-                selectChangeRole.className = 'selectChangeRole';
-                
-                divLoginRoleDelete.appendChild(selectChangeRole);
+    /******************* Click infos *******************/
 
-                    const optionActuelRoleUser = document.createElement("option");
-                    optionActuelRoleUser.value = user['id_role'];
-                    optionActuelRoleUser.innerHTML = user['role'];
-                    displaySelectRoles(getAllRolesExeptActualJSON(user['id_role']), selectChangeRole.id);
-                    
-                    selectChangeRole.appendChild(optionActuelRoleUser);
+    const infoButtons = document.getElementsByClassName('infoUser');
 
-                const deleteUserButton = document.createElement("button");
-                deleteUserButton.id = user['id'];
-                deleteUserButton.className = 'deleteUserButtons';
-                deleteUserButton.innerHTML = 'Delete';
+    for (let button of infoButtons) {
 
-                divLoginRoleDelete.appendChild(deleteUserButton);
+        button.addEventListener('click', async() => {
 
-                /**************************************************************************************/
-                /************************** AJOUTER ICONE FLECHE VERS LE BAS **************************/
-                /**************************************************************************************/
+            const infosDiv = document.getElementById('infosUser' + button.value);
 
-            const divOtherUserData = document.createElement("div");
-            divOtherUserData.className = 'divOtherUserData';
-            // divOtherUserData.style.display = "none";
+            console.log(infosDiv)
 
-            sectionUser.appendChild(divOtherUserData);
+            if(infosDiv.style.display === "none") {
 
-                const paraId = document.createElement("p");
-                paraId.innerHTML = 'id : ' + user['id'];
+                infosDiv.style.display = "block";
 
-                const paraEmail = document.createElement("p");
-                paraEmail.innerHTML = 'email : ' + user['email'];
+            }else{
 
-                const paraFirstname = document.createElement("p");
-                paraFirstname.innerHTML = 'firstname : ' + user['firstname'];
+                infosDiv.style.display = "none";
 
-                const paraLastname = document.createElement("p");
-                paraLastname.innerHTML = 'lastname : ' + user['lastname'];
+            }
+        }) 
+    }
 
-                const paraBirthDate = document.createElement("p");
-                paraBirthDate.innerHTML = 'birth date : ' + user['birth_date'];
 
-                const paraPhoneNumber = document.createElement("p");
-                paraPhoneNumber.innerHTML = 'phone number : ' + user['phone_number'];
+    /******************* Click delete *******************/
 
-                divOtherUserData.appendChild(paraId).appendChild(paraEmail).appendChild(paraFirstname).appendChild(paraLastname).appendChild(paraBirthDate).appendChild(paraPhoneNumber);
+    const deleteButton = document.getElementsByClassName('supprUser');
 
-                /*********************************************************************************/
-                /************************** AJOUTER COMMANDES DU USER ? **************************/
-                /*********************************************************************************/
-    
-    });
+    for (let buttonD of deleteButton) {
+        
+        console.log(buttonD);
+
+        buttonD.addEventListener('click', async() => {
+
+            if(window.confirm("Do you really want to delete this user ?")) {
+
+                const response = await fetch('admin.php?deleteUser=' + buttonD.value);
+                await response.text();
+
+                buttonD.parentNode.parentNode.parentNode.removeChild(buttonD.parentNode.parentNode);
+
+            }
+        })
+    }
+}
+
+const whenChangeRole = async(selectName, optionValue) => {                      // selectName = id user / optionValue = id role
+
+    const response = await fetch('admin.php?changeRole=' + optionValue + '&userId=' + selectName);
+    const message = await response.text();
+
+    console.log(message);
 
 }
 
@@ -135,14 +130,17 @@ const displayRoleByInput = async(roleId) => {
 
 
 
-const rolesSelect = document.getElementById('role');
 
-displaySelectRoles(getRolesJSON(), 'role');
-displayRoleByInput('all');
 
-rolesSelect.onchange = async(e) => {
+const rolesSelect = document.getElementById('role');                    // cible le select de role
 
-    var roleId = e.target.value;
-    displayRoleByInput(roleId);
+// AFFICHER LES ROLES DANS LE SELECT
+displaySelectRoles(getRolesJSON(), 'role');                             // getRolesJSON recupere tous les roles et displaySelectRoles cree les options correspondantes dans le select
+displayUserDataByRole('all');                                           // display tous les users dans la div
+
+rolesSelect.onchange = async(e) => {                                    // quand on choisis le role dans le select
+
+    const roleId = e.target.value;                                      // on recupere la value de l'option choisie (l'id de role)
+    displayUserDataByRole(roleId);                                      // et on display les users qui correspondent au role choisis
 
 }

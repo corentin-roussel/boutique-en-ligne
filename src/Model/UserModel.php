@@ -87,43 +87,4 @@ class UserModel
     }
 }
 
-
-/*
-
-public function LoginRowCount($login) {
-
-    $sql = "SELECT * FROM utilisateurs WHERE login=:login";
-
-    $req = $this->conn->prepare($sql);
-    $req->execute(array(':login' => $login));
-    $row = $req->rowCount();
-
-    return $row;
-
-}
-
-public function UpdateLogin($sessionId, $login) {
-
-    $sqlLog = "UPDATE user SET login = :login WHERE id = :sessionId";
-
-    $req = $this->conn->prepare($sqlLog);
-    $req->execute(array(':login' => $login, ':sessionId' => $sessionId));
-
-    return 'okLog';
-
-}
-
-public function UpdatePassword($sessionId, $hash) {
-
-    $sqlPass = "UPDATE user SET password = :hash WHERE id = :sessionId";
-
-    $req = $this->conn->prepare($sqlPass);
-    $req->execute(array(':hash' => $hash, ':sessionId' => $sessionId));
-
-    return 'okPass';
-
-}
-
-*/
-
 ?>
