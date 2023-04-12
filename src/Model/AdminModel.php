@@ -32,6 +32,7 @@ class AdminModel {
         ));
     }
 
+
     public function getPlatform() {
         $req = $this->conn->prepare("SELECT * FROM platform");
         $req->execute();
@@ -81,4 +82,75 @@ class AdminModel {
 
         echo json_encode($allGame, JSON_PRETTY_PRINT);
     }
+
+    public function GetAllRoles() {
+
+        $sql = "SELECT * FROM role";
+
+        $req = $this->conn->prepare($sql);
+        $req->execute();
+        $tab = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        return $tab;
+    }
+
+    public function GetUserDataByRoleId($idRole) {
+
+        if($idRole == 'all') {
+
+            $sql = "SELECT *,user.id FROM user INNER JOIN role ON user.id_role = role.id";
+
+            $req = $this->conn->prepare($sql);
+            $req->execute();
+            $tab = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        }else{
+
+            $sql = "SELECT *,user.id FROM user INNER JOIN role ON user.id_role = role.id WHERE id_role = :idRole";
+            
+            $req = $this->conn->prepare($sql);
+            $req->execute(array(':idRole' => $idRole));
+            $tab = $req->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        return $tab;
+
+    }
+
+    public function GetAllRoleExeptActualById($idActualRole) {
+
+        $sql = "SELECT * FROM role WHERE NOT id = :actualId";
+
+        $req = $this->conn->prepare($sql);
+        $req->execute(array(':actualId' => $idActualRole));
+        $tab = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        return $tab;
+
+    }
+
+    public function UpdateRole($idRole, $idUser) {
+
+        $sql = "UPDATE user SET id_role = :id_role WHERE id = :userId";
+
+        $req = $this->conn->prepare($sql);
+        $req->execute(array(':id_role' => $idRole,
+                            ':userId' => $idUser
+        ));
+        
+        return "Role changed successfully";
+
+    }
+
+    public function DeleteUser($idUser) {
+
+        $sql = "DELETE FROM user WHERE id = :idUser";
+
+        $req = $this->conn->prepare($sql);
+        $req->execute(array(':idUser' => $idUser));
+
+        return "User deleted successfully";
+
+    }
+
 }
