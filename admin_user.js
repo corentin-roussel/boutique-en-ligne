@@ -80,7 +80,6 @@ const displayUserDataByRole = async(roleId) => {                            // d
 
             const infosDiv = document.getElementById('infosUser' + button.value);
 
-            console.log(infosDiv)
 
             if(infosDiv.style.display === "none") {
 
@@ -101,7 +100,7 @@ const displayUserDataByRole = async(roleId) => {                            // d
 
     for (let buttonD of deleteButton) {
         
-        console.log(buttonD);
+
 
         buttonD.addEventListener('click', async() => {
 
@@ -122,7 +121,6 @@ const whenChangeRole = async(selectName, optionValue) => {                      
     const response = await fetch('admin.php?changeRole=' + optionValue + '&userId=' + selectName);
     const message = await response.text();
 
-    console.log(message);
 
 }
 

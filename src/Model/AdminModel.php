@@ -33,13 +33,14 @@ class AdminModel {
     }
 
 
-    public function getPlatform() {
+    public function getPlatform():array {
         $req = $this->conn->prepare("SELECT * FROM platform");
         $req->execute();
         return $req->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function insertPlatform($id_game, $id_platform) {
+    public function insertPlatform($id_game, $id_platform):void
+    {
         $req = $this->conn->prepare("INSERT INTO compatibility (id_game, id_platform) VALUES (:id_game, :id_platform)");
         $req->execute(array(
             ":id_game" => $id_game,
@@ -48,18 +49,101 @@ class AdminModel {
 
     }
 
+    public function searchGameById($id):array
+    {
+        $req = $this->conn->prepare("SELECT *,product.id, 
+                                    product.title,
+                                    product.description,
+                                    product.price,
+                                    product.image,
+                                    product.release_date,
+                                    product.developper,
+                                    product.publisher,
+                                    product.id_category,
+                                    product.id_subcategory,
+                                    compatibility.id_game,
+                                    compatibility.id_platform,
+                                    platform.id AS id_plat,
+                                    platform.platform FROM product INNER JOIN compatibility INNER JOIN platform WHERE product.id = :id");
+        $req->execute(array(
+           ":id" => $id
+        ));
 
-    public function fetchLastGame() {
+        return $req->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function updateById($title, $desc, $price, $image, $date, $developper, $publisher, $category, $sub_category, $id)
+    {
+        $req = $this->conn->prepare("UPDATE product SET title=:title, description=:description, price=:price, image=:image, release_date=:release_date, developper=:developper, publisher=:publisher, id_category=:id_category, id_subcategory=:id_subcategory WHERE id=:id");
+        $req->execute(array(
+            ":title" => $title,
+            ":description" => $desc,
+            ":price" => $price,
+            ":image" => $image,
+            ":release_date" => $date,
+            ":developper" => $developper,
+            ":publisher" => $publisher,
+            ":id_category" => $category,
+            ":id_subcategory" => $sub_category,
+            "id" => $id
+        ));
+
+
+    }
+
+//    public function findCompatibilityById($id)
+//    {
+//        $req = $this->conn->prepare("SELECT id_game, id_platform FROM compatibility INNER JOIN platform WHERE id_game=:id_game");
+//        $req->execute(array(
+//            ":id_game" => $id
+//        ));
+//
+//        return $req->fetchAll(PDO::FETCH_ASSOC);
+//    }
+
+    public function findCompatibility($id)
+    {
+        $req = $this->conn->prepare("SELECT id_game, id_platform FROM compatibility WHERE id_game=:id_game");
+        $req->execute(array(
+            ":id_game" => $id
+        ));
+
+        return $req->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
+    public function fetchLastGame():array
+    {
         $req = $this->conn->prepare("SELECT product.id FROM product ORDER BY id DESC LIMIT 1");
         $req->execute();
         $lastGame = $req->fetch(PDO::FETCH_ASSOC);
 
-        var_dump($lastGame);
-
         return $lastGame;
     }
 
-    public function selectGames()
+    public function deleteGame($id) {
+        $req = $this->conn->prepare("DELETE FROM product WHERE id = :id ");
+        $req->execute(array(
+            ":id" =>$id
+        ));
+
+        $req = $this->conn->prepare("DELETE FROM compatibility WHERE id_game = :id_game ");
+        $req->execute(array(
+            ":id_game" =>$id
+        ));
+
+
+    }
+
+    public function deleteCompat($id)
+    {
+        $req = $this->conn->prepare("DELETE FROM compatibility WHERE id_game = :id_game ");
+        $req->execute(array(
+            ":id_game" =>$id
+        ));
+    }
+
+    public function displayGames()
     {
 
         $req = $this->conn->prepare("SELECT * FROM product");

@@ -1,7 +1,10 @@
 let buttonAddFormGame = document.querySelector("#addFormGame");
 let buttonShowGames = document.querySelector("#showGames")
 let placeAddGame = document.querySelector("#placeAddGame");
-let placeShowGame = document.querySelector("#placeShowGames")
+let placeShowGame = document.querySelector("#placeShowGames");
+let update_game;
+let delete_game;
+let update_place;
 
 
 
@@ -12,6 +15,17 @@ const fetchFormGame = async() => {
     const form = await response.text();
 
     return form;
+}
+
+const submitGame = async(e, form) => {
+    e.preventDefault();
+
+    let formDataGame = new FormData(form);
+    const response = await fetch("admin_back.php?submitGame=1", {body: formDataGame, method: "POST"});
+    const displayErrorJSON = await response.json()
+
+    await displayErrorGame(displayErrorJSON);
+
 }
 
 const displayForm = (form, place) => {
@@ -57,16 +71,9 @@ const displayErrorGame = async(json) => {
 
 }
 
-const loopOnIndex = (objet, index) => {
-    let indexes;
-    for(let i = 0; i < index.length; i++)
-    {
-        indexes = objet[i]
-    }
-    return {"indexes" : indexes}
-}
 
-const fetchAllGame = async() => {
+
+const displayAllGame = async() => {
     const response = await fetch("admin_back.php?showGame=1");
     const result = await response.json();
 
@@ -79,6 +86,7 @@ const displayPrice = (price) => {
 
 const displayGame = (game, place) =>{
     placeShowGame.innerHTML = "";
+    let button = [];
     for(values of game)
     {
         const div_place_game = document.createElement("div");
@@ -119,32 +127,62 @@ const displayGame = (game, place) =>{
         }
         div_place_game.appendChild(div_platform);
 
-        const update_game =document.createElement("button");
+        update_game =document.createElement("button");
         update_game.setAttribute("value", values.id)
-        update_game.setAttribute("class", "button");
+        update_game.setAttribute("class", "button_update");
         update_game.innerHTML = "Update";
         div_place_game.appendChild(update_game);
 
-        const delete_game =document.createElement("button");
+        delete_game =document.createElement("button");
         delete_game.setAttribute("value", values.id)
-        delete_game.setAttribute("class", "button");
+        delete_game.setAttribute("class", "button_delete");
         delete_game.innerHTML = "Delete";
         div_place_game.appendChild(delete_game);
 
+        update_place = document.createElement("div");
+        update_place.setAttribute("id", values.id);
+        update_place.setAttribute("class", "update_place")
+        div_place_game.appendChild(update_place);
     }
 }
 
-const submitGame = async(e, form) => {
-    e.preventDefault();
 
-    let formDataGame = new FormData(form);
-    const response = await fetch("admin_back.php?submitGame=1", {body: formDataGame, method: "POST"});
-    const displayErrorJSON = await response.json()
 
-    await displayErrorGame(displayErrorJSON);
+const deleteGame = (idDelete) =>  {
+    let formData = new FormData();
+    formData.append("id" ,idDelete);
 
+    const response = fetch("admin_back.php?deleteGame=ok", {
+        method: "POST",
+        body: formData
+    })
 }
 
+const fetchUpdateFrom = async (id) => {
+    let formData = new FormData();
+    formData.append("id_update", id)
+
+    const response = await fetch("admin_back.php?formAddGame=ok&updateGame=ok", {
+        method: "POST",
+        body: formData
+    });
+    const formUpdate = await response.text();
+
+    return formUpdate
+}
+
+const updateGame = async(e, form, id) => {
+    e.preventDefault()
+    const formData = new FormData(form);
+    formData.append("id" , id)
+    const response = await fetch("admin_back.php?updateGame=ok", {
+        method: "POST",
+        body: formData
+    })
+    const json = await response.json();
+
+    await displayErrorGame(json);
+}
 
 
 
@@ -152,14 +190,70 @@ buttonAddFormGame.addEventListener('click', async() => {
     let formGame =  await fetchFormGame();
     displayForm(formGame, placeAddGame);
     let formSubmitGame = document.querySelector("#formGame");
+    if(update_place !== undefined)
+    {
+        for(formPlace of update_place)
+        {
+            formPlace.innerHTML = "";
+        }
+    }
 
-    formSubmitGame.addEventListener('submit', (e) => {
-        submitGame(e, formSubmitGame);
+
+    formSubmitGame.addEventListener('submit', async (e) => {
+        await submitGame(e, formSubmitGame);
+        if(placeShowGame.innerHTML.length > 10 )
+        {
+            update_game = document.querySelectorAll(".button_update");
+            delete_game = document.querySelectorAll(".button_delete");
+            update_place = document.querySelectorAll(".update_place");
+            await displayAllGame();
+        }
     })
 
 })
 
 buttonShowGames.addEventListener('click', async() => {
-    await fetchAllGame();
+    let button = await displayAllGame();
+    update_game = document.querySelectorAll(".button_update");
+    delete_game = document.querySelectorAll(".button_delete");
+    update_place = document.querySelectorAll(".update_place");
+
+
+    for(let j = 0; j < update_game.length; j++)
+    {
+        update_game[j].addEventListener("click", async () => {
+            placeAddGame.innerHTML = "";
+            for(let x = 0; x < update_place.length; x++)
+            {
+                update_place[x].innerHTML = "";
+            }
+            let formUpdate = await fetchUpdateFrom(update_game[j].value);
+            displayForm(formUpdate, update_game[j].nextSibling.nextSibling);
+            let formSubmitGame = document.querySelector("#formGame");
+
+            formSubmitGame.addEventListener("submit", async(e) => {
+                await updateGame(e, formSubmitGame, update_game[j].value);
+                await displayAllGame();
+            })
+
+
+
+        })
+    }
+
+    for(let i = 0; i < delete_game.length; i++)
+    {
+
+        delete_game[i].addEventListener("click", () => {
+            if(confirm('Are you sure you want to delete this game ??') === true)
+            {
+                deleteGame(delete_game[i].value);
+                displayAllGame();
+                alert("Your game has been deleted")
+            }
+
+        })
+    }
 })
+
 

@@ -6,45 +6,46 @@ use App\Model\AdminModel;
 
 
 $AdminController = new  AdminControllerGame();
-$adminShowGame = new AdminModel();
+$AdminModel = new AdminModel();
 
-$adminShowGame->fetchLastGame();
+$AdminModel->fetchLastGame();
 
-$getPlatform = $adminShowGame->getPlatform();
+$getPlatform = $AdminModel->getPlatform();
 
 
 if(isset($_GET['formAddGame'])):
 ?>
+<?php if(isset($_GET['updateGame'])) { $getValue = $AdminModel->searchGameById($_POST['id_update']); $compatId = $AdminModel->findCompatibility($_POST['id_update']);} ?>
 
 <form id="formGame" method="post">
     <label for="title">Title</label>
-    <input type="text" name="title" id="title">
+    <input type="text" name="title" id="title" value="<?php if(isset($_GET['updateGame'])) { echo $getValue['title'];} ?>">
     <div id="error-field"></div>
 
     <label for="desc">Description</label>
-    <textarea name="desc" id="desc" cols="30" rows="10"></textarea>
+    <textarea name="desc" id="desc" cols="30" rows="10" ><?php if(isset($_GET['updateGame'])) { echo $getValue['description'];} ?></textarea>
     <div id="error-desc"></div>
 
     <label for="price">Price</label>
-    <input type="number" id="price" name="price">
+    <input type="number" id="price" name="price" value="<?php if(isset($_GET['updateGame'])) { echo $getValue['price'];} ?>">
     <div id="error-price"></div>
 
     <label for="image">Image</label>
-    <input type="text" name="image" id="image">
+    <input type="text" name="image" id="image" value="<?php if(isset($_GET['updateGame'])) { echo $getValue['image'];} ?>">
 
     <label for="release_date">Release date</label>
-    <input type="date" name="release_date" id="release_date">
+    <input type="date" name="release_date" id="release_date" value="<?php if(isset($_GET['updateGame'])) { echo $getValue['release_date'];} ?>">
 
     <label for="developper">Developper</label>
-    <input type="text" name="developper" id="developper">
+    <input type="text" name="developper" id="developper" value="<?php if(isset($_GET['updateGame'])) { echo $getValue['developper'];} ?>">
 
     <label for="publisher">Publisher</label>
-    <input type="text" name="publisher" id="publisher">
+    <input type="text" name="publisher" id="publisher" value="<?php if(isset($_GET['updateGame'])) { echo $getValue['publisher'];} ?>">
 
-    <?php foreach ($getPlatform as $key => $platform){ ; ?>
+    <?php foreach ($getPlatform as $key => $platform):  ?>
         <label for="platform"><?php echo $platform['platform'] ?></label>
-        <input type="checkbox" name="check_list[]" class="platform" value="<?php echo $platform['id'] ?>">
-    <?php }    ?>
+        <input type="checkbox" name="check_list[]" class="platform" value="<?php echo $platform['id'] ?>" <?php if(isset($_GET['updateGame'])) {foreach($compatId as $checkbox) { if($platform['id'] == $checkbox['id_platform']) { echo "checked";} }} ?>
+    <?php endforeach;  ?>
 
     <label for="category">Category</label>
     <select name="category" id="category">
@@ -64,12 +65,14 @@ if(isset($_GET['formAddGame'])):
 <?php
 
 
-    !isset($_GET['submitGame']) ?: $AdminController->insertGame($_POST["title"], $_POST["desc"], $_POST["price"], $_POST["image"], $_POST["release_date"], $_POST["developper"], $_POST["publisher"], $_POST['check_list'], $_POST["category"], $_POST["subcategory"]);var_dump($_POST);
+    !isset($_GET['submitGame']) ?: $AdminController->insertGame($_POST["title"], $_POST["desc"], $_POST["price"], $_POST["image"], $_POST["release_date"], $_POST["developper"], $_POST["publisher"], $_POST['check_list'], $_POST["category"], $_POST["subcategory"]);
+
+    !isset($_GET['updateGame']) ?: $AdminController->updateGame($_POST["title"], $_POST["desc"], $_POST["price"], $_POST["image"], $_POST["release_date"], $_POST["developper"], $_POST["publisher"], $_POST['check_list'], $_POST["category"], $_POST["subcategory"], $_POST['id']) ;
 
 
-    !isset($_GET['showGame']) ?: $adminShowGame->selectGames();
+    !isset($_GET['showGame']) ?: $AdminModel->displayGames();
 
-
+    !isset($_GET['deleteGame']) ?: $AdminModel->deleteGame($_POST['id']);
 
 
 ?>
