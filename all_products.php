@@ -46,7 +46,7 @@
                 }
             }
 
-            $pages['numPage'][$numPage] = '<p class="changePage" id="page' . $numPage . '">' . $numPage . '</p>';
+            $pages['numPage'][$numPage] = '<p class="changePage" id="page' . $numPage . '">' . $numPage  ;
 
             $numPage++;
         }
