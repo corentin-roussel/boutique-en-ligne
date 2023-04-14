@@ -2,9 +2,6 @@ let buttonAddFormGame = document.querySelector("#addFormGame");
 let buttonShowGames = document.querySelector("#showGames")
 let placeAddGame = document.querySelector("#placeAddGame");
 let placeShowGame = document.querySelector("#placeShowGames");
-let update_game;
-let delete_game;
-let update_place;
 
 
 
@@ -33,15 +30,22 @@ const displayForm = (form, place) => {
     place.innerHTML = form;
 }
 
-const displayErrorGame = async(json) => {
+const displayErrorGame = (json) => {
     const error_field = document.querySelector("#error-field");
     error_field.innerHTML = "";
+
+    const error_title = document.querySelector("#error-title");
+    error_title.innerHTML = "";
 
     const error_desc = document.querySelector("#error-desc");
     error_desc.innerHTML = "";
 
     const error_price = document.querySelector("#error-price");
     error_price.innerHTML = "";
+
+    const error_checkbox = document.querySelector("#error-checkbox");
+    error_checkbox.innerHTML = "";
+
 
     if(json["priceCheck"])
     {
@@ -64,9 +68,24 @@ const displayErrorGame = async(json) => {
         field_error.className = "error";
         error_field.appendChild(field_error);
     }
+    if(json['titleTaken'])
+    {
+        const title_error = document.createElement("small");
+        title_error.innerHTML = json['titleTaken'];
+        title_error.className = "error";
+        error_title.appendChild(title_error);
+    }
+    if(json['checkboxError'])
+    {
+        const checkbox_error = document.createElement("small");
+        checkbox_error.innerHTML = json['checkboxError'];
+        checkbox_error.className = "error";
+        error_checkbox.appendChild(checkbox_error);
+    }
     if(json['okAddGame'])
     {
         alert(json['okAddGame'])
+        return "display"
     }
 
 }
@@ -77,7 +96,7 @@ const displayAllGame = async() => {
     const response = await fetch("admin_back.php?showGame=1");
     const result = await response.json();
 
-    displayGame(result, placeShowGame);
+    return displayGame(result, placeShowGame);
 }
 
 const displayPrice = (price) => {
@@ -86,39 +105,40 @@ const displayPrice = (price) => {
 
 const displayGame = (game, place) =>{
     placeShowGame.innerHTML = "";
-    let button = [];
-    for(values of game)
+    for(const val of game)
     {
+
+
         const div_place_game = document.createElement("div");
         div_place_game.setAttribute("class", "div_place_game")
         place.appendChild(div_place_game);
 
 
         const image_game = document.createElement("img");
-        image_game.setAttribute("src", values.image);
+        image_game.setAttribute("src", val.image);
         image_game.setAttribute("class", "image_game");
         div_place_game.appendChild(image_game);
 
         const title_game = document.createElement("h2");
         title_game.setAttribute("class", "title_game");
-        title_game.innerHTML = values.title;
+        title_game.innerHTML = val.title;
         div_place_game.appendChild(title_game);
 
         const desc_game = document.createElement("p");
         desc_game.setAttribute("class", "desc_game");
-        desc_game.innerHTML = values.description;
+        desc_game.innerHTML = val.description;
         div_place_game.appendChild(desc_game);
 
         const price_game = document.createElement("p");
         price_game.setAttribute("class", "price_game");
-        let final_price = displayPrice(values.price);
+        let final_price = displayPrice(val.price);
         price_game.innerHTML = final_price + "€";
         div_place_game.append(price_game);
 
         const div_platform = document.createElement("div");
         div_platform.setAttribute("class", "div_platform")
         let platform_game;
-        for(index of values.platforms)
+        for(index of val.platforms)
         {
             platform_game = document.createElement("p");
             platform_game.setAttribute("class", "platform_game");
@@ -127,24 +147,60 @@ const displayGame = (game, place) =>{
         }
         div_place_game.appendChild(div_platform);
 
-        update_game =document.createElement("button");
-        update_game.setAttribute("value", values.id)
+
+
+        const update_game = document.createElement("button");
+        update_game.setAttribute("value", val.id)
         update_game.setAttribute("class", "button_update");
         update_game.innerHTML = "Update";
+        update_game.addEventListener("click", async() => {
+            placeAddGame.innerHTML = "";
+            let update_place = document.querySelectorAll(".update_place");
+            if(update_place !== undefined)
+            {
+                for(formPlace of update_place)
+                {
+                    formPlace.innerHTML = "";
+                }
+            }
+            let formUpdate = await fetchUpdateFrom(update_game.value);
+                displayForm(formUpdate, update_game.nextSibling.nextSibling);
+
+            let formSubmitGame = document.querySelector("#formGame");
+
+            formSubmitGame.addEventListener("submit", async(e) => {
+                let update = await updateGame(e, formSubmitGame, update_game.value);
+
+                if(update === "display")
+                {
+                    await displayAllGame();
+                }
+            })
+        })
         div_place_game.appendChild(update_game);
 
-        delete_game =document.createElement("button");
-        delete_game.setAttribute("value", values.id)
+        const delete_game =document.createElement("button");
+        delete_game.setAttribute("value", val.id)
         delete_game.setAttribute("class", "button_delete");
         delete_game.innerHTML = "Delete";
+        delete_game.addEventListener("click", async() => {
+            if(confirm('Are you sure you want to delete this game ??') === true)
+            {
+                deleteGame(delete_game.value);
+                await displayAllGame();
+                alert("Your game has been deleted")
+
+            }
+        })
         div_place_game.appendChild(delete_game);
 
-        update_place = document.createElement("div");
-        update_place.setAttribute("id", values.id);
-        update_place.setAttribute("class", "update_place")
+        const update_place = document.createElement("div");
+        update_place.setAttribute("id", val.id);
+        update_place.setAttribute("class", "update_place");
         div_place_game.appendChild(update_place);
     }
 }
+
 
 
 
@@ -181,7 +237,7 @@ const updateGame = async(e, form, id) => {
     })
     const json = await response.json();
 
-    await displayErrorGame(json);
+    return displayErrorGame(json);
 }
 
 
@@ -190,6 +246,8 @@ buttonAddFormGame.addEventListener('click', async() => {
     let formGame =  await fetchFormGame();
     displayForm(formGame, placeAddGame);
     let formSubmitGame = document.querySelector("#formGame");
+
+    let update_place = document.querySelectorAll(".update_place");
     if(update_place !== undefined)
     {
         for(formPlace of update_place)
@@ -203,57 +261,15 @@ buttonAddFormGame.addEventListener('click', async() => {
         await submitGame(e, formSubmitGame);
         if(placeShowGame.innerHTML.length > 10 )
         {
-            update_game = document.querySelectorAll(".button_update");
-            delete_game = document.querySelectorAll(".button_delete");
-            update_place = document.querySelectorAll(".update_place");
-            await displayAllGame();
+           await displayAllGame();
         }
     })
 
 })
 
 buttonShowGames.addEventListener('click', async() => {
-    let button = await displayAllGame();
-    update_game = document.querySelectorAll(".button_update");
-    delete_game = document.querySelectorAll(".button_delete");
-    update_place = document.querySelectorAll(".update_place");
+    await displayAllGame();
 
-
-    for(let j = 0; j < update_game.length; j++)
-    {
-        update_game[j].addEventListener("click", async () => {
-            placeAddGame.innerHTML = "";
-            for(let x = 0; x < update_place.length; x++)
-            {
-                update_place[x].innerHTML = "";
-            }
-            let formUpdate = await fetchUpdateFrom(update_game[j].value);
-            displayForm(formUpdate, update_game[j].nextSibling.nextSibling);
-            let formSubmitGame = document.querySelector("#formGame");
-
-            formSubmitGame.addEventListener("submit", async(e) => {
-                await updateGame(e, formSubmitGame, update_game[j].value);
-                await displayAllGame();
-            })
-
-
-
-        })
-    }
-
-    for(let i = 0; i < delete_game.length; i++)
-    {
-
-        delete_game[i].addEventListener("click", () => {
-            if(confirm('Are you sure you want to delete this game ??') === true)
-            {
-                deleteGame(delete_game[i].value);
-                displayAllGame();
-                alert("Your game has been deleted")
-            }
-
-        })
-    }
 })
 
 

@@ -8,9 +8,9 @@ use App\Model\AdminModel;
 $AdminController = new  AdminControllerGame();
 $AdminModel = new AdminModel();
 
-$AdminModel->fetchLastGame();
+$AdminController->fetchLastGame();
 
-$getPlatform = $AdminModel->getPlatform();
+$getPlatform = $AdminController->getPlatform();
 
 
 if(isset($_GET['formAddGame'])):
@@ -18,9 +18,10 @@ if(isset($_GET['formAddGame'])):
 <?php if(isset($_GET['updateGame'])) { $getValue = $AdminModel->searchGameById($_POST['id_update']); $compatId = $AdminModel->findCompatibility($_POST['id_update']);} ?>
 
 <form id="formGame" method="post">
+    <div id="error-field"></div>
     <label for="title">Title</label>
     <input type="text" name="title" id="title" value="<?php if(isset($_GET['updateGame'])) { echo $getValue['title'];} ?>">
-    <div id="error-field"></div>
+    <div id="error-title"></div>
 
     <label for="desc">Description</label>
     <textarea name="desc" id="desc" cols="30" rows="10" ><?php if(isset($_GET['updateGame'])) { echo $getValue['description'];} ?></textarea>
@@ -46,6 +47,7 @@ if(isset($_GET['formAddGame'])):
         <label for="platform"><?php echo $platform['platform'] ?></label>
         <input type="checkbox" name="check_list[]" class="platform" value="<?php echo $platform['id'] ?>" <?php if(isset($_GET['updateGame'])) {foreach($compatId as $checkbox) { if($platform['id'] == $checkbox['id_platform']) { echo "checked";} }} ?>
     <?php endforeach;  ?>
+    <div id="error-checkbox"></div>
 
     <label for="category">Category</label>
     <select name="category" id="category">
@@ -70,9 +72,9 @@ if(isset($_GET['formAddGame'])):
     !isset($_GET['updateGame']) ?: $AdminController->updateGame($_POST["title"], $_POST["desc"], $_POST["price"], $_POST["image"], $_POST["release_date"], $_POST["developper"], $_POST["publisher"], $_POST['check_list'], $_POST["category"], $_POST["subcategory"], $_POST['id']) ;
 
 
-    !isset($_GET['showGame']) ?: $AdminModel->displayGames();
+    !isset($_GET['showGame']) ?: $AdminController->displayGames();
 
-    !isset($_GET['deleteGame']) ?: $AdminModel->deleteGame($_POST['id']);
+    !isset($_GET['deleteGame']) ?: $AdminController->deleteGame($_POST['id']);
 
 
 ?>

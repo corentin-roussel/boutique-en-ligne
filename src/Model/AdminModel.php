@@ -91,6 +91,15 @@ class AdminModel {
 
     }
 
+    public function checkIfTitleIsSet($title):int
+    {
+        $req = $this->conn->prepare('SELECT product.title FROM product WHERE title=:title');
+        $req->execute(array(
+            ":title" => $title
+        ));
+        return $req->rowCount();
+    }
+
 //    public function findCompatibilityById($id)
 //    {
 //        $req = $this->conn->prepare("SELECT id_game, id_platform FROM compatibility INNER JOIN platform WHERE id_game=:id_game");
@@ -122,6 +131,8 @@ class AdminModel {
     }
 
     public function deleteGame($id) {
+
+        var_dump($id);
         $req = $this->conn->prepare("DELETE FROM product WHERE id = :id ");
         $req->execute(array(
             ":id" =>$id

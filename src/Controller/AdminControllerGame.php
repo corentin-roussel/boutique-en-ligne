@@ -9,26 +9,6 @@ use App\Model\AdminModel;
 
 class AdminControllerGame {
 
-    private ?int $id;
-
-    private ?string $title;
-
-    private ?string $desc;
-
-    private ?int $price;
-
-    private ?string $image;
-
-    private ?string $date;
-
-    private ?string $publisher;
-
-    private ?string $developper;
-
-    private ?int $category;
-
-    private ?int $sub_category;
-
 
     public function insertGame($title, $desc, $price, $image, $date, $developper, $publisher, $checkboxArray, $category, $sub_category):void
     {
@@ -55,16 +35,18 @@ class AdminControllerGame {
             return true;
         }
 
+        $AdminModel = new AdminModel();
+        $checkTitle = $AdminModel->checkIfTitleIsSet($title);
 
 
 
-        if(preg_match("#^[0-9]*$#" , $price) && grapheme_strlen($desc) > 100 && mempty($title, $desc, $price, $image, $date, $publisher, $developper, $category, $sub_category))
+
+        if(preg_match("#^[0-9]*$#" , $price) && grapheme_strlen($desc) > 100 && mempty($title, $desc, $price, $image, $date, $publisher, $developper, $category, $sub_category && $checkTitle === 0 && $checkboxArray !== null))
         {
             $AdminModel = new AdminModel();
             $AdminModel->reqInsertGame($title, $desc, $priceInt, $image, $date, $developper, $publisher, $categoryInt, $sub_categoryInt);
 
             $this->setPlatform($checkboxArray);
-
 
             $messages['okAddGame'] = "You're game has been added to the product list";
         }
@@ -81,6 +63,15 @@ class AdminControllerGame {
             {
                 $messages['emptyValues'] = "Fill all the field please";
             }
+            if($checkTitle != 0)
+            {
+                $messages['titleTaken'] = "The game you are trying to insert is already in the database";
+            }
+            if($checkboxArray == null)
+            {
+                $messages['checkboxError'] = "Please check at least one platform";
+            }
+
 
         }
         $json = json_encode($messages, JSON_PRETTY_PRINT);
@@ -112,10 +103,11 @@ class AdminControllerGame {
             return true;
         }
 
+        $AdminModel = new AdminModel();
+        $checkTitle = $AdminModel->checkIfTitleIsSet($title);
 
 
-
-        if(preg_match("#^[0-9]*$#" , $price) && grapheme_strlen($desc) > 100 && mempty($title, $desc, $price, $image, $date, $publisher, $developper, $category, $sub_category))
+        if(preg_match("#^[0-9]*$#" , $price) && grapheme_strlen($desc) > 100 && mempty($title, $desc, $price, $image, $date, $publisher, $developper, $category, $sub_category) && $checkTitle === 0)
         {
             $AdminModel = new AdminModel();
             $AdminModel->updateById($title, $desc, $priceInt, $image, $date, $developper, $publisher, $categoryInt, $sub_categoryInt,$id);
@@ -123,9 +115,6 @@ class AdminControllerGame {
             $AdminModel->deleteCompat($id);
 
             $this->setPlatform($checkboxArray);
-
-
-
 
             $messages['okAddGame'] = "You're game has been updated";
         }
@@ -141,6 +130,10 @@ class AdminControllerGame {
             if(!mempty($title, $desc, $price, $image, $date, $publisher, $developper, $category, $sub_category))
             {
                 $messages['emptyValues'] = "Fill all the field please";
+            }
+            if($checkTitle != 0)
+            {
+                $messages['titleTaken'] = "The game you are trying to insert is already in the database";
             }
 
         }
@@ -161,110 +154,34 @@ class AdminControllerGame {
         }
     }
 
-
-
-    /**
-     * @return int|null
-     */
-    public function getId(): ?int
+    public function fetchLastGame()
     {
-        return $this->id;
+        $AdminModel = new AdminModel();
+        $AdminModel->fetchLastGame();
     }
 
-    /**
-     * @return string|null
-     */
-    public function getTitle(): ?string
+    public function getPlatform():array
     {
-        return $this->title;
+        $AdminModel = new AdminModel();
+        return $AdminModel->getPlatform();
     }
 
-    /**
-     * @return string|null
-     */
-    public function getDesc(): ?string
+    public function displayGames()
     {
-        return $this->desc;
+        $AdminModel = new AdminModel();
+        $AdminModel->displayGames();
     }
 
-    /**
-     * @return int|null
-     */
-    public function getPrice(): ?int
+    public function deleteGame($id)
     {
-        return $this->price;
-    }
+        $intId = (int)$id;
 
-    /**
-     * @return string|null
-     */
-    public function getImage(): ?string
-    {
-        return $this->image;
-    }
+        if(gettype($intId) == 'integer')
+        {
+            $AdminModel = new AdminModel();
+            $AdminModel->deleteGame($intId);
+        }
 
-    /**
-     * @return string|null
-     */
-    public function getDate(): ?string
-    {
-        return $this->date;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getDevelopper(): ?string
-    {
-        return $this->developper;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getPublisher(): ?string
-    {
-        return $this->publisher;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getCategory(): ?int
-    {
-        return $this->category;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getSubCategory(): ?int
-    {
-        return $this->sub_category;
-    }
-
-    /**
-     * @param int|null $price
-     */
-    public function setPrice(?int $price): void
-    {
-        $this->price = $price;
-    }
-
-    /**
-     * @param int|null $category
-     */
-    public function setCategory(?int $category): void
-    {
-        $this->category = $category;
-    }
-
-    /**
-     * @param int|null $sub_category
-     */
-    public function setSubCategory(?int $sub_category): void
-    {
-        $this->sub_category = $sub_category;
     }
 
 }
