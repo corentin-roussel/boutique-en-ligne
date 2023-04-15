@@ -178,6 +178,13 @@ class AdminModel {
         echo json_encode($allGame, JSON_PRETTY_PRINT);
     }
 
+    public function getCategory($table)
+    {
+        $req = $this->conn->prepare("SELECT * FROM $table");
+        $req->execute();
+        return $req->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function GetAllRoles() {
 
         $sql = "SELECT * FROM role";

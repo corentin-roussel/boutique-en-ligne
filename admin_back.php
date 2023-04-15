@@ -12,6 +12,10 @@ $AdminController->fetchLastGame();
 
 $getPlatform = $AdminController->getPlatform();
 
+$getCategory = $AdminController->getCategory();
+
+$getSubCategory = $AdminController->getSubCategory();
+
 
 if(isset($_GET['formAddGame'])):
 ?>
@@ -49,14 +53,19 @@ if(isset($_GET['formAddGame'])):
     <?php endforeach;  ?>
     <div id="error-checkbox"></div>
 
+
     <label for="category">Category</label>
     <select name="category" id="category">
-        <option value="1">Action</option>
+    <?php foreach($getCategory as $key => $category): ?>
+        <option value="<?php echo $category['id'] ?>"> <?php echo $category['category'] ?></option>
+    <?php endforeach; ?>
     </select>
 
     <label for="subcategory">Sub-scategory</label>
     <select name="subcategory" id="subcategory">
-        <option value="2">Aventure</option>
+        <?php foreach($getSubCategory as $key => $subcategory): ?>
+            <option value="<?php echo $subcategory['id'] ?>"> <?php echo $subcategory['subcategory'] ?></option>
+        <?php endforeach; ?>
     </select>
 
     <input type="submit" id="submitGame" name="submitGame">

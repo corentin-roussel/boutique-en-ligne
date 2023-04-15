@@ -103,11 +103,9 @@ class AdminControllerGame {
             return true;
         }
 
-        $AdminModel = new AdminModel();
-        $checkTitle = $AdminModel->checkIfTitleIsSet($title);
 
 
-        if(preg_match("#^[0-9]*$#" , $price) && grapheme_strlen($desc) > 100 && mempty($title, $desc, $price, $image, $date, $publisher, $developper, $category, $sub_category) && $checkTitle === 0)
+        if(preg_match("#^[0-9]*$#" , $price) && grapheme_strlen($desc) > 100 && mempty($title, $desc, $price, $image, $date, $publisher, $developper, $category, $sub_category))
         {
             $AdminModel = new AdminModel();
             $AdminModel->updateById($title, $desc, $priceInt, $image, $date, $developper, $publisher, $categoryInt, $sub_categoryInt,$id);
@@ -130,10 +128,6 @@ class AdminControllerGame {
             if(!mempty($title, $desc, $price, $image, $date, $publisher, $developper, $category, $sub_category))
             {
                 $messages['emptyValues'] = "Fill all the field please";
-            }
-            if($checkTitle != 0)
-            {
-                $messages['titleTaken'] = "The game you are trying to insert is already in the database";
             }
 
         }
@@ -170,6 +164,18 @@ class AdminControllerGame {
     {
         $AdminModel = new AdminModel();
         $AdminModel->displayGames();
+    }
+
+    public function getCategory()
+    {
+        $AdminModel = new AdminModel();
+        return $AdminModel->getCategory("category");
+    }
+
+    public function getSubCategory()
+    {
+        $AdminModel = new AdminModel();
+        return $AdminModel->getCategory("subcategory");
     }
 
     public function deleteGame($id)
