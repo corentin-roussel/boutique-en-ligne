@@ -51,7 +51,7 @@ class AdminModel {
 
     public function searchGameById($id):array
     {
-        $req = $this->conn->prepare("SELECT *,product.id, 
+        $req = $this->conn->prepare("SELECT *,product.id AS product_id, 
                                     product.title,
                                     product.description,
                                     product.price,

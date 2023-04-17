@@ -17,9 +17,10 @@ $getCategory = $AdminController->getCategory();
 $getSubCategory = $AdminController->getSubCategory();
 
 
+
 if(isset($_GET['formAddGame'])):
 ?>
-<?php if(isset($_GET['updateGame'])) { $getValue = $AdminModel->searchGameById($_POST['id_update']); $compatId = $AdminModel->findCompatibility($_POST['id_update']);} ?>
+<?php if(isset($_GET['updateGame'])) { $getValue = $AdminModel->searchGameById($_POST['id_update']);/*var_dump($getValue)*/; $compatId = $AdminModel->findCompatibility($_POST['id_update']);} ?>
 
 <form id="formGame" method="post">
     <div id="error-field"></div>
@@ -49,7 +50,7 @@ if(isset($_GET['formAddGame'])):
 
     <?php foreach ($getPlatform as $key => $platform):  ?>
         <label for="platform"><?php echo $platform['platform'] ?></label>
-        <input type="checkbox" name="check_list[]" class="platform" value="<?php echo $platform['id'] ?>" <?php if(isset($_GET['updateGame'])) {foreach($compatId as $checkbox) { if($platform['id'] == $checkbox['id_platform']) { echo "checked";} }} ?>
+        <input type="checkbox" name="check_list[]" class="platform" value="<?php echo $platform['id'] ?>" <?php if(isset($_GET['updateGame'])) {foreach($compatId as $checkbox) { if($platform['id'] == $checkbox['id_platform']) { echo "checked";} }} ?>/>
     <?php endforeach;  ?>
     <div id="error-checkbox"></div>
 
@@ -57,14 +58,14 @@ if(isset($_GET['formAddGame'])):
     <label for="category">Category</label>
     <select name="category" id="category">
     <?php foreach($getCategory as $key => $category): ?>
-        <option value="<?php echo $category['id'] ?>"> <?php echo $category['category'] ?></option>
+        <option value="<?php echo $category['id']; ?>" <?php if(isset($_GET['updateGame'])) { if ($category['id'] === $getValue['id_category']) {echo "selected";}} ?> > <?php echo $category['category'];  ?></option>
     <?php endforeach; ?>
     </select>
 
     <label for="subcategory">Sub-scategory</label>
     <select name="subcategory" id="subcategory">
-        <?php foreach($getSubCategory as $key => $subcategory): ?>
-            <option value="<?php echo $subcategory['id'] ?>"> <?php echo $subcategory['subcategory'] ?></option>
+        <?php foreach($getSubCategory as $key => $subCategory): ?>
+            <option value="<?php echo $subCategory['id']; ?>" <?php if(isset($_GET['updateGame'])) { if ($subCategory['id'] === $getValue['id_subcategory']) {echo "selected";}} ?>> <?php echo $subCategory['subcategory'] ?></option>
         <?php endforeach; ?>
     </select>
 

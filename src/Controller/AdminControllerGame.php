@@ -112,7 +112,8 @@ class AdminControllerGame {
 
             $AdminModel->deleteCompat($id);
 
-            $this->setPlatform($checkboxArray);
+
+            $this->updatePlatform($checkboxArray, $id);
 
             $messages['okAddGame'] = "You're game has been updated";
         }
@@ -145,6 +146,18 @@ class AdminControllerGame {
             $intPlatform = (int)$platform;
 
             $AdminModel->insertPlatform($id_game['id'], $intPlatform);
+        }
+    }
+
+    public function updatePlatform(array $arrayCheckbox, $id):void {
+
+        $AdminModel = new AdminModel();
+
+        foreach($arrayCheckbox as $key => $platform)
+        {
+            $intPLatform = (int)$platform;
+
+            $AdminModel->insertPlatform($id, $intPLatform);
         }
     }
 
