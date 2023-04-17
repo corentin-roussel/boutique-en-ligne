@@ -11,7 +11,8 @@
     else {
 ?>
         <a href="index.php">Home</a>
-        <a href="all_product.php">All products</a>
+        <a href="authentification.php">Authenticate</a>
+        <a href="all-product.php">All products</a>
         <a href="platform.php">Platform</a>
         <a href="admin.php">Admin</a>
 <?php

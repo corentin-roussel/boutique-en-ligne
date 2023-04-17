@@ -1,17 +1,9 @@
 <?php
 
-    if(session_status() == PHP_SESSION_NONE){ session_start();}
+if (session_status() == PHP_SESSION_NONE){ session_start();}
+require_once ("autoloader.php");
 
-    require_once ("autoloader.php");
 
-    use App\Controller\AdminControllerGame;
-
-        $AdminController = new AdminControllerGame();
-
-    if(isset($_GET['submitGame']))
-    {
-        $AdminController->insertGame($_POST["title"], $_POST["desc"], $_POST["price"], $_POST["image"], $_POST["release_date"], $_POST["developper"], $_POST["publisher"], $_POST["category"], $_POST["subcategory"]);
-    }
 
 
     use App\Controller\AdminControllerUser;
@@ -78,9 +70,10 @@
 
     if(isset($_SESSION) && $_SESSION['user']['role'] === 'admin' || $_SESSION['user']['role'] === 'moderator') :
     
+
 ?>
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
    <?php require_once("_include/head.php") ?>
@@ -111,6 +104,12 @@
         <div id="placeAddGame">
 
         </div>
+
+        <button class="button" id="showGames">Show Games</button>
+
+        <div id="placeShowGames">
+
+        </div>
     </main>
     <footer>
 
@@ -118,4 +117,6 @@
 </body>
 </html>
 
-<?php endif ?>
+<?php   else: header("location: forbidden.php");
+        endif;?>
+
