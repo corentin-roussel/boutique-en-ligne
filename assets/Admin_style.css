@@ -45,7 +45,7 @@
 
 }
 
-.container-title-platform{
+.container-title{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -69,7 +69,25 @@
 
 }
 
+.container-btn-category{
+
+    display: flex;
+    flex-direction: row ;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    border: 1px solid black;
+    margin-top: 3%;
+
+}
+
 .container-btn-plateforme button{
+    margin-left: 1.5%;
+    padding: 1%;
+
+}
+
+.container-btn-category button{
     margin-left: 1.5%;
     padding: 1%;
 
@@ -86,9 +104,25 @@
     margin-bottom: 1.5%;
 }
 
+.form-add-category{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    border: 1px solid black;
+    margin-top: 1.5%;
+    margin-bottom: 1.5%;
+}
+
+
 table{
     border: 1px solid black;
     width: 100%;
     border-collapse: collapse;
 }
+/* table tbody tr{
+    display: flex;
+    flex-direction: row;
+} */
 

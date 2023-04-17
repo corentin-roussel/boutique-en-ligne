@@ -1,16 +1,16 @@
 <?php 
  namespace App\model;
 
-require_once('./src/model/Model.php');
+ use App\model\Model;
 
 class PlateformModel extends Model
 
 {
 
 
-    public function __construc()
+    public function __construct()
     {
-        //empty
+        parent::__construct();
     }
 
     public function insertPlateform(string $plateform): void
@@ -21,13 +21,20 @@ class PlateformModel extends Model
 
     }
 
-    public static function updatePlateform()
-    {
-
+    public function showPlateform(){
+        $stmt = $this->pdo->prepare('SELECT * FROM platform');
+        $stmt->execute();
+        $result = $stmt->fetchAll($this->pdo::FETCH_ASSOC);
+        return $result;
     }
 
-    public static function deletePlateform()
+
+    public function deletePlateform(int $id)
     {
+    
+    $stmt = $this->pdo->prepare('DELETE FROM platform WHERE id=:id ');
+    $stmt->bindParam(':id',$id);
+    $stmt->execute();
 
     }
 }
