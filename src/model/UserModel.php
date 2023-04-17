@@ -3,6 +3,8 @@
 namespace App\Model;
 
 use PDO;
+use PDOException;
+
 class UserModel
 {
 
@@ -10,6 +12,8 @@ class UserModel
 
     public function __construct()
     {
+
+
 
         $db_username = 'root';
         $db_password = '';
@@ -19,7 +23,7 @@ class UserModel
             $this->conn = new PDO('mysql:host=localhost;dbname=boutique_en_ligne;charset=utf8', $db_username, $db_password);
 
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch (\PDOException $e) {
+        } catch (PDOException $e) {
 
             echo "Error : " . $e->getMessage();
         }
@@ -54,7 +58,7 @@ class UserModel
     public function GetUserData($login)
     {
 
-        $sql = "SELECT *,user.id FROM user INNER JOIN role ON user.id_role = role.id WHERE login=:login";
+        $sql = "SELECT * , user.id FROM user INNER JOIN role ON user.id_role = role.id WHERE login=:login";
         $req = $this->conn->prepare($sql);
         $req->execute(array(':login' => $login));
         $tab = $req->fetch(PDO::FETCH_ASSOC);
@@ -86,44 +90,5 @@ class UserModel
         return 'okDel';
     }
 }
-
-
-/*
-
-public function LoginRowCount($login) {
-
-    $sql = "SELECT * FROM utilisateurs WHERE login=:login";
-
-    $req = $this->conn->prepare($sql);
-    $req->execute(array(':login' => $login));
-    $row = $req->rowCount();
-
-    return $row;
-
-}
-
-public function UpdateLogin($sessionId, $login) {
-
-    $sqlLog = "UPDATE user SET login = :login WHERE id = :sessionId";
-
-    $req = $this->conn->prepare($sqlLog);
-    $req->execute(array(':login' => $login, ':sessionId' => $sessionId));
-
-    return 'okLog';
-
-}
-
-public function UpdatePassword($sessionId, $hash) {
-
-    $sqlPass = "UPDATE user SET password = :hash WHERE id = :sessionId";
-
-    $req = $this->conn->prepare($sqlPass);
-    $req->execute(array(':hash' => $hash, ':sessionId' => $sessionId));
-
-    return 'okPass';
-
-}
-
-*/
 
 ?>

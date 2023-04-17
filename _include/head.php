@@ -7,3 +7,4 @@
     <script defer src="./scripts/adminCat.js"></script>
     <!-- LINK CSS -->
     <link rel="stylesheet" href="./assets/Admin_style.css">
+<link rel="stylesheet" href="style.css" type="text/css">
