@@ -30,6 +30,14 @@ class ProductController {
 
     }
 
+    public function GetDataOneProduct($id) {
+
+        $data = $this->model->GetDataOneProduct($id);
+        
+        return $data;
+
+    }
+
 }
 
 ?>

@@ -47,6 +47,18 @@ class ProductModel {
 
     }
 
+    public function GetDataOneProduct($id) {
+
+        $sql = "SELECT *,product.id, SUBSTRING(description, 1,200) AS 'short_description' FROM product INNER JOIN category ON product.id_category = category.id INNER JOIN subcategory ON product.id_subcategory = subcategory.id WHERE product.id = :id";
+        $req = $this->conn->prepare($sql);
+        $req->execute([':id' => $id]);
+
+        $tab = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        return $tab;
+
+    }
+
 }
 
 ?>
