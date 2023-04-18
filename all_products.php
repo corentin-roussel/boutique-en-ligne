@@ -38,6 +38,7 @@
                     $pages[$numPage][$j] =
                     '<div class="oneGame">
                         <a href="product.php?id=' . $productsTable[$j]['id'] . '"><img src="' . $productsTable[$j]['image'] . '" alt="" /></a>
+
                         <div class="titrePrix">
                             <a href="product.php?id=' . $productsTable[$j]['id'] . '">' . $productsTable[$j]['title'] . '</a>
                             <a href="product.php?id=' . $productsTable[$j]['id'] . '"><p>' . $productsTable[$j]['price'] . '</p></a>
