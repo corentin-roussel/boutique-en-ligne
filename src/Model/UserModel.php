@@ -74,8 +74,16 @@ class UserModel
 
         $sql = "SELECT * , user.id FROM user INNER JOIN role ON user.id_role = role.id WHERE login=:login";
         $req = $this->conn->prepare($sql);
-        $req->execute(array(':login' => $login));
+        $req->execute([':login' => $login
+        ]);
         $tab = $req->fetch(PDO::FETCH_ASSOC);
+
+        $sqlCart = "SELECT id FROM cart WHERE id_user = :idUser";
+        $reqCart = $this->conn->prepare($sqlCart);
+        $reqCart->execute([':idUser' => $tab['id']]);
+        $tempTab = $reqCart->fetch(PDO::FETCH_ASSOC);
+
+        $tab['actualCart'] = $tempTab['id'];
 
         return $tab;
     }
