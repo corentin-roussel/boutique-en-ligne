@@ -52,6 +52,20 @@ class UserModel
             ':id_role' => 1
         ));
 
+        $sqlIdUser = "SELECT id FROM user WHERE login = :login";
+        $reqIdUser = $this->conn->prepare($sqlIdUser);
+        $reqIdUser->execute([':login' => $login]);
+        $idUser = $reqIdUser->fetchAll(PDO::FETCH_ASSOC);
+
+        $date = date('Y-m-d H:i:s');
+
+        $sqlCart = "INSERT INTO cart (id_user, date_creation, is_paid) VALUES (:idUser, :dateCrea, :isPaid)";
+        $reqCart = $this->conn->prepare($sqlCart);
+        $reqCart->execute([':idUser' => $idUser[0]['id'],
+                           ':dateCrea' => $date,
+                           ':isPaid' => false
+        ]);
+
         return 'okSignup';
     }
 
@@ -60,8 +74,16 @@ class UserModel
 
         $sql = "SELECT * , user.id FROM user INNER JOIN role ON user.id_role = role.id WHERE login=:login";
         $req = $this->conn->prepare($sql);
-        $req->execute(array(':login' => $login));
+        $req->execute([':login' => $login
+        ]);
         $tab = $req->fetch(PDO::FETCH_ASSOC);
+
+        $sqlCart = "SELECT id FROM cart WHERE id_user = :idUser";
+        $reqCart = $this->conn->prepare($sqlCart);
+        $reqCart->execute([':idUser' => $tab['id']]);
+        $tempTab = $reqCart->fetch(PDO::FETCH_ASSOC);
+
+        $tab['actualCart'] = $tempTab['id'];
 
         return $tab;
     }
@@ -90,5 +112,6 @@ class UserModel
         return 'okDel';
     }
 }
+
 
 ?>
