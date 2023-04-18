@@ -15,16 +15,40 @@ class CartController
 
     }
 
-    public function AddProduct($id, $quantity, $platformId) {
+    public function AddProduct($id, $quantity, $platform, $cartId) {
 
-        if($quantity < 1 && $quantity > 50) {
+        $quantity = intval($quantity);
 
-            $message = $this->model->AddProduct($id, $quantity, $platformId);
+        if($id !== "" && $quantity !== "" && $platform !== "" && $cartId !== "") {
 
-            return $message;
+            if($quantity >= 1 && $quantity <= 50) {
 
+                $message = $this->model->AddProduct($id, $quantity, $platform, $cartId);
+
+            }else{
+
+                $message = "Please choose a quantity between 1 and 50";
+            }
+        
+        }else{
+
+            if($quantity === "") {
+
+                $message = "Please choose a quantity";
+            }
+
+            if($platform === "") {
+
+                $message = "Please choose a platform";
+            }
+
+            if($quantity !== "" && $platform !== "") {
+
+                $message = "There was an issue with the server, please try later";
+            }
         }
 
+        echo $message;
     }
 
 }

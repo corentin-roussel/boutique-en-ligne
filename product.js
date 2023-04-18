@@ -36,6 +36,8 @@ window.addEventListener('load', async() => {
 
     displayProductData(dataProduct);
 
+    const selectsButton = document.getElementById('selectsButton');
+
     const selectPlatform = document.getElementById('selectPlatform');
     
     const quantitePlus = document.getElementById('quantitePlus');
@@ -49,6 +51,9 @@ window.addEventListener('load', async() => {
     const paraDescription = document.getElementById('paraDescription');
 
     const cartButton = document.getElementById('cartButton');
+    
+    const divCartMessage = document.createElement('div');
+    selectsButton.appendChild(divCartMessage);
 
     titreAbout.addEventListener('click', () => {
 
@@ -90,12 +95,13 @@ window.addEventListener('load', async() => {
         }
     })
 
-    cartButton.addEventListener('click', () => {
+    cartButton.addEventListener('click', async() => {
 
-        const response = fetch('product.php?addToCart=' + getURLId() + '&quantity=' + numOf + '&platformId=' + selectPlatform.value);
-        const resultCart = response.text();
+        const response = await fetch('product.php?addToCart=' + getURLId() + '&quantity=' + numOf + '&platformId=' + selectPlatform.value);
+        const resultCart = await response.text();
 
-        console.log(resultCart);
+        divCartMessage.innerHTML = "";
+        divCartMessage.innerHTML = resultCart;
 
     })
 })

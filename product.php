@@ -17,7 +17,7 @@
 
         foreach ($resultTab as $result) {
 
-            $resultat = $resultat . '<option value="' . $result['id'] . '">' . $result[$table] . '</option>'; 
+            $resultat = $resultat . '<option value="' . $result[$table] . '">' . $result[$table] . '</option>'; 
 
         }
 
@@ -66,13 +66,14 @@
                     <p>Quantity</p>
 
                     <span id="quantityChoice">
-                        <i class="fa-solid fa-circle-plus" id="quantitePlus"></i>
-                        <p id="quantiteNum">1</p>
                         <i class="fa-solid fa-circle-minus" id="quantiteMoins"></i>
+                        <p id="quantiteNum">1</p>
+                        <i class="fa-solid fa-circle-plus" id="quantitePlus"></i>
                     </span>
                 </span>
 
                 <button id="cartButton"><i class="fa-solid fa-cart-plus"></i></button>
+                <div id="cartMessage></div>
             </div>
         </div>';
 
@@ -106,11 +107,7 @@
     use App\Controller\CartController;
     $cart = new CartController;
 
-    if(isset($_GET['addToCart'])) {
-
-        $cart->AddProduct($_GET['addToCart'], $_GET['quantity'], $_GET['platformId'])
-
-    }
+    !isset($_GET['addToCart']) ?: ($message = $cart->AddProduct($_GET['addToCart'], $_GET['quantity'], $_GET['platformId'], $_SESSION['user']['actualCart'])) .(die());
 
 ?>
 
