@@ -30,6 +30,7 @@ class ProductController {
 
     }
 
+
     public function getPreorderGame():array
     {
         return $this->model->preorderGames();
@@ -67,6 +68,16 @@ class ProductController {
         }
         return $game;
     }
+
+    public function GetDataOneProduct($id)
+    {
+
+        $data = $this->model->GetDataOneProduct($id);
+
+        return $data;
+    }
+
+
 
 }
 
