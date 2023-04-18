@@ -55,6 +55,15 @@
                 <h2>Try Something New</h2>
                 <a href="all_products.php"><h4>See more</h4></a>
             </article>
+            <article id="display-rand-games">
+                <?php
+                    foreach($ProductController->getRandGames() as $key => $games)
+                    {
+                        echo $games;
+                    }
+
+                ?>
+            </article>
         </section>
     </main>
     <footer>

@@ -71,7 +71,7 @@ class ProductModel {
 
     public function randomGames()
     {
-        $req = $this->conn->prepare("SELECT product.id as product_id,
+        $req = $this->conn->prepare("SELECT product.id,
                                     product.title,
                                     product.price,
                                     product.image FROM product ORDER BY RAND() DESC LIMIT 9");

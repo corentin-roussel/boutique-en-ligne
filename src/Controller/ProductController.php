@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Model\ProductModel;
 
+
+
 class ProductController {
 
     private $model;
@@ -40,11 +42,12 @@ class ProductController {
     {
         foreach($this->model->randomGames() as $key => $games)
         {
-            $game[] = '<div class="new-released-game">
-                        <a href="game.php?id='. $games['id'] .'"><img src="'. $games['image'] .'" class="img-rand-games" alt="" /></a>
+            $game_price = substr_replace($games['price'], ".", -2, 0) . "€";
+            $game[] = '<div class="rand-game">
+                        <a href="product.php?id='. $games['id'] .'"><img src="'. $games['image'] .'" class="img-rand-games" alt="" /></a>
                         <div class="new-rand-games-title-price">
-                            <a href="game.php?id=' . $games['id'] . '">' . $games['title'] . '</a>
-                            <p>' . $games['price'] . '</p>
+                            <a href="product.php?id=' . $games['id'] .'"class="rand-link"><p class="rand-text">' . $games['title'] . '</p></a>
+                            <p>' . $game_price . '</p>
                         </div>
                     </div>';
         }
@@ -59,9 +62,9 @@ class ProductController {
         {
             $game_price = substr_replace($games['price'], ".", -2, 0) . "€";
             $game[] = '<div class="new-released-game">
-                        <a href="game.php?id='. $games['id'] .'" class="link-games" ><img src="'. $games['image'] .'" class="img-released-games" alt=""/></a>
+                        <a href="product.php?id='. $games['id'] .'" class="link-games" ><img src="'. $games['image'] .'" class="img-released-games" alt=""/></a>
                         <div class="new-released-games-title-price">
-                            <a href="game.php?id=' . $games['id'] . '" class="new-released-text">' . $games['title'] . '</a>
+                            <a href="product.php?id=' . $games['id'] . '" class="link-released-games" ><p class="new-released-text">' . $games['title'] . '</p></a>
                             <p class="new-released-price">' . $game_price . '</p>
                         </div>
                     </div>';
