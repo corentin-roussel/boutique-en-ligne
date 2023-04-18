@@ -52,6 +52,20 @@ class UserModel
             ':id_role' => 1
         ));
 
+        $sqlIdUser = "SELECT id FROM user WHERE login = :login";
+        $reqIdUser = $this->conn->prepare($sqlIdUser);
+        $reqIdUser->execute([':login' => $login]);
+        $idUser = $reqIdUser->fetchAll(PDO::FETCH_ASSOC);
+
+        $date = date('Y-m-d H:i:s');
+
+        $sqlCart = "INSERT INTO cart (id_user, date_creation, is_paid) VALUES (:idUser, :dateCrea, :isPaid)";
+        $reqCart = $this->conn->prepare($sqlCart);
+        $reqCart->execute([':idUser' => $idUser[0]['id'],
+                           ':dateCrea' => $date,
+                           ':isPaid' => false
+        ]);
+
         return 'okSignup';
     }
 
@@ -90,5 +104,6 @@ class UserModel
         return 'okDel';
     }
 }
+
 
 ?>
