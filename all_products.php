@@ -37,7 +37,7 @@
                     $productsTable[$j]['price'] = substr_replace($productsTable[$j]['price'], ".", -2, 0) . "€";
                     $pages[$numPage][$j] =
                     '<div class="oneGame">
-                        <img src="' . $productsTable[$j]['image'] . '" alt="" />
+                        <img src="' . $productsTable[$j]['image'] . '" class="img-all-products" alt="" />
                         <div class="titrePrix">
                             <a href="game.php?id=' . $productsTable[$j]['id'] . '">' . $productsTable[$j]['title'] . '</a>
                             <p>' . $productsTable[$j]['price'] . '</p>

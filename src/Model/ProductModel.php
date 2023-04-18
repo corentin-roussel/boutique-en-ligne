@@ -1,18 +1,20 @@
 <?php
 
 namespace App\Model;
+use Cassandra\Date;
 use PDO;
+use PDOException;
 
 class ProductModel {
 
-    private $conn;
+    private ?PDO $conn;
 
     public function __construct()
     {
         try {
             $this->conn = new PDO('mysql:host=localhost;dbname=boutique_en_ligne', "root", "");
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch (\PDOException $e) {
+        } catch (PDOException $e) {
             print "Error!: " . $e->getMessage() . "<br/>";
             die();
         }
@@ -45,6 +47,50 @@ class ProductModel {
 
         return $tab;
 
+    }
+
+    public function preorderGames():array {
+
+        $req = $this->conn->prepare("SELECT 
+                                    product.id,
+                                    product.title,
+                                    product.price,
+                                    product.image,
+                                    product.release_date
+                                    FROM product 
+                                    WHERE release_date BETWEEN CURDATE() AND DATE_SUB(CURDATE(), INTERVAL -6 MONTH) 
+                                    ORDER BY product.release_date DESC");
+        $req->execute([
+
+        ]);
+        echo json_encode($req->fetchAll(PDO::FETCH_ASSOC), JSON_PRETTY_PRINT);
+        die();
+
+    }
+
+    public function randomGames()
+    {
+        $req = $this->conn->prepare("SELECT product.id as product_id,
+                                    product.title,
+                                    product.price,
+                                    product.image FROM product ORDER BY RAND() DESC LIMIT 9");
+        $req->execute();
+        return $req->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function newReleasedGames():array {
+
+        $req = $this->conn->prepare("SELECT
+                                    product.id ,
+                                    product.title,
+                                    product.price,
+                                    product.image
+                                    FROM product WHERE release_date BETWEEN DATE_SUB(CURDATE(), INTERVAL 3 MONTH) AND CURDATE() ORDER BY product.release_date DESC LIMIT 5");
+
+        $req->execute([
+
+        ]);
+        return $req->fetchAll(PDO::FETCH_ASSOC);
     }
 
 }
