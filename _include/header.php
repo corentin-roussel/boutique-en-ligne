@@ -19,7 +19,6 @@
         <a href="authentification.php">Authenticate</a>
         <a href="all-products.php">All products</a>
         <a href="platform.php">Platform</a>
-        <a href="admin.php">Admin</a>
 <?php
     endif;
 ?>

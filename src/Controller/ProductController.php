@@ -47,7 +47,7 @@ class ProductController {
                         <a href="product.php?id='. $games['id'] .'"><img src="'. $games['image'] .'" class="img-rand-games" alt="" /></a>
                         <div class="new-rand-games-title-price">
                             <a href="product.php?id=' . $games['id'] .'"class="rand-link"><p class="rand-text">' . $games['title'] . '</p></a>
-                            <p>' . $game_price . '</p>
+                            <p class="rand-price">' . $game_price . '</p>
                         </div>
                     </div>';
         }

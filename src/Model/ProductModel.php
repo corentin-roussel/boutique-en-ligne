@@ -74,7 +74,7 @@ class ProductModel {
         $req = $this->conn->prepare("SELECT product.id,
                                     product.title,
                                     product.price,
-                                    product.image FROM product ORDER BY RAND() DESC LIMIT 9");
+                                    product.image FROM product ORDER BY RAND() DESC LIMIT 8");
         $req->execute();
         return $req->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -91,6 +91,20 @@ class ProductModel {
         $req->execute([
 
         ]);
+        return $req->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function bestsellersGames():array {
+        $req = $this->conn->prepare("SELECT sold.sold,
+                                            sold.id_game,
+                                            product.title,
+                                            product.img,
+                                            product.price,
+                                            item_cart.quantity FROM sold 
+                                                INNER JOIN product ON product.id = sold.id_game 
+                                                INNER JOIN item_cart ON product.id = item_cart.id_game 
+                                                               ORDER BY sold.sold DESC LIMIT 5");
+        $req->execute();
         return $req->fetchAll(PDO::FETCH_ASSOC);
     }
 
