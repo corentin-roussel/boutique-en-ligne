@@ -121,6 +121,18 @@ class ProductModel {
 
     }
 
+    public function GetAllByLetters($search) {
+
+        $sql = "SELECT * FROM product WHERE title LIKE :search";
+
+        $req = $this->conn->prepare($sql);
+        $req->execute([':search' => "%" . $search . "%"]);
+
+        $tab = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        return $tab;
+
+    }
 
 }
 

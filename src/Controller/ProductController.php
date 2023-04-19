@@ -80,7 +80,13 @@ class ProductController {
         return $data;
     }
 
+    public function GetAllByLetters($letters) {
 
+        $liste = $this->model->GetAllByLetters($letters);
+
+        return $liste;
+
+    }
 
 }
 

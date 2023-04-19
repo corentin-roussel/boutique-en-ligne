@@ -101,7 +101,7 @@ window.addEventListener('load', async() => {
     displayGames(selectPlatform.value, selectCategory.value, selectSubcategory.value, pageNum);
     let changePage = await displayPagination(selectPlatform.value, selectCategory.value, selectSubcategory.value, pageNum);
 
-    changePage[0].className = changePage[0].className + ' actualPage'
+    changePage[0].className = changePage[0].className + ' actualPage';
 
     const previousPage = document.getElementById('previousPage');
 
