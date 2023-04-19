@@ -1,6 +1,8 @@
 <?php
     if(session_status() == PHP_SESSION_NONE){ session_start();}
+
     require_once ("autoloader.php");
+
 
     use App\Controller\ProductController;
 

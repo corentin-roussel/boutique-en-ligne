@@ -2,12 +2,14 @@
 
 namespace App\Model;
 use PDO;
-class AdminModel {
+class AdminModel{
 
     public ?PDO $conn;
 
     public function __construct()
     {
+
+        // parent::__construct();
         try {
             $this->conn = new \PDO('mysql:host=localhost;dbname=boutique_en_ligne', "root", "");
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -252,6 +254,70 @@ class AdminModel {
         $req->execute(array(':idUser' => $idUser));
 
         return "User deleted successfully";
+
+    }
+
+    public function insertCat(string $cat) :void
+    {
+        $stmt = $this->conn->prepare('INSERT INTO category(category) VALUES(:cat)');
+        $stmt->bindParam(':cat',$cat);
+        $stmt->execute();
+    }
+
+    /** 
+    
+    @param string $cat
+
+    */
+
+    public function insertSubCat(string $subcat) :void
+    {
+        $stmt = $this->conn->prepare('INSERT INTO subcategory(subcategory) VALUES(:subcat)');
+        $stmt->bindParam(':subcat',$subcat);
+        $stmt->execute();
+
+    }
+
+    public function showCat() :array 
+    {   
+        // var_dump($this->conn);
+        $stmt = $this->conn->prepare('SELECT * FROM category');
+        $stmt->execute();
+        $array = $stmt->fetchAll($this->conn::FETCH_ASSOC);
+        return $array;  
+    }
+
+    public function showSubCat() :array
+
+    {
+        $stmt = $this->conn->prepare('SELECT * FROM subcategory');
+        $stmt->execute();
+        $array = $stmt->fetchAll($this->conn::FETCH_ASSOC);
+        return $array;
+    }
+
+    public function insertPlateform(string $plateform): void
+    {
+        $stmt = $this->conn->prepare('INSERT INTO platform(platform) VALUES(:content)');
+        $stmt->bindParam(':content',$plateform);
+        $stmt->execute();
+
+    }
+
+    public function showPlateform(){
+        $stmt = $this->conn->prepare('SELECT * FROM platform');
+        $stmt->execute();
+        $result = $stmt->fetchAll($this->conn::FETCH_ASSOC);
+        return $result;
+    }
+
+
+    public function deletePlateform(int $id)
+    {
+    
+    $stmt = $this->conn->prepare('DELETE FROM platform WHERE id=:id ');
+    $stmt->bindParam(':id',$id);
+    $stmt->execute();
 
     }
 

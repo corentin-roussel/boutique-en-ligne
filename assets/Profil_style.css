@@ -1,0 +1,27 @@
+.container-title{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.container-title h1{
+    text-align: center;
+}
+
+.container-profil{
+    display: flex;
+    flex-direction: row;
+    border: 1px solid blue;
+    width: 100%;
+}
+.container-profil-left{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+}
+
+.container-profil-left form{
+    display: flex;
+    flex-direction: column;
+}
+

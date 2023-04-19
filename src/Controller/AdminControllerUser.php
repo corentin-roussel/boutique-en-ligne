@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Model\AdminModel;
 
-class AdminControllerUser {
+class AdminControllerUser{
 
     private $model;
 
