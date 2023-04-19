@@ -25,23 +25,21 @@
         <?php require_once ('_include/header.php') ?>
     </header>
     <main>
-        <section id="carousel">
-            <article id="controls">
-                <button id="prev">
-                    PREV
-                </button>
-                <button id="next">
-                    NEXT
-                </button>
-            </article>
+        <section class="carousel">
+            <button id="prev">
+                &#9666
+            </button>
+            <button id="next">
+                &#9656;
+            </button>
             <a href="" id="carousel-link">
                 <img src="" alt="" id="carousel-img">
             </a>
         </section>
-        <section>
-            <article>
-                <h2>New Released Games</h2>
-                <a href="all_products.php"><h4>See more</h4></a>
+        <section class="flex-released-games">
+            <article class="display-title">
+                <h2 class="title">New Released Games</h2>
+                <a class="link" href="all_products.php"><h4>See more</h4></a>
             </article>
             <article class="display-new-released-games">
                 <?php
@@ -53,9 +51,9 @@
             </article>
         </section>
         <section>
-            <article>
-                <h2>Try Something New</h2>
-                <a href="all_products.php"><h4>See more</h4></a>
+            <article class="display-title">
+                <h2 class="title">Try Something New</h2>
+                <a class="link" href="all_products.php"><h4>See more</h4></a>
             </article>
             <article id="display-rand-games">
                 <?php
@@ -65,6 +63,15 @@
                     }
 
                 ?>
+            </article>
+        </section>
+        <section>
+            <article>
+                <h2>Best Sellers</h2>
+                <a href="product.php"><h4>See more</h4></a>
+            </article>
+            <article>
+
             </article>
         </section>
     </main>
