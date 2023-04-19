@@ -20,7 +20,9 @@
     padding: 0;
     box-sizing: border-box;
 }
-
+body::-webkit-scrollbar{
+    display: none;
+}
 
 /*******************************ALL PRODUCTS*******************************/
 .image_game {
@@ -119,33 +121,23 @@
 }
 
 .carousel #prev {
-    position: absolute;
-    top: 50%;
-    right: 85%;
-    transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    background-color: #555;
-    color: white;
-    font-size: 15px;
-    padding: 6px 12px;
+    position:absolute;
+    top:calc(50% - 1em);
+    left: 0;
+    padding: 2%;
+    background-color: #323232;
     border: none;
-    cursor: pointer;
-    border-radius: 5px;
+    border-radius: 7px;
 }
 
 .carousel #next {
-    position: absolute;
-    top: 50%;
-    left: 95%;
-    transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    background-color: #555;
-    color: white;
-    font-size: 15px;
-    padding: 6px 12px;
+    position:absolute;
+    top:calc(50% - 1em);
+    right: 0;
+    padding: 2%;
+    background-color: #323232;
     border: none;
-    cursor: pointer;
-    border-radius: 5px;
+    border-radius: 8px;
 }
 
 

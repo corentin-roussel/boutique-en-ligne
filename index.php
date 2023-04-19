@@ -24,14 +24,12 @@
     </header>
     <main>
         <section class="carousel">
-            <article class="controls">
-                <button id="prev">
-                    &#9666
-                </button>
-                <button id="next">
-                    &#9656;
-                </button>
-            </article>
+            <button id="prev">
+                &#9666
+            </button>
+            <button id="next">
+                &#9656;
+            </button>
             <a href="" id="carousel-link">
                 <img src="" alt="" id="carousel-img">
             </a>
