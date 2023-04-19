@@ -9,6 +9,13 @@ use App\Model\AdminModel;
 class AdminControllerGame {
     
 
+    private $model;
+
+    public function __construct()
+    {
+        $this->model = new AdminModel();
+    }
+
 
     public function insertGame($title, $desc, $price, $image, $date, $developper, $publisher, $checkboxArray, $category, $sub_category):void
     {
@@ -35,16 +42,15 @@ class AdminControllerGame {
             return true;
         }
 
-        $AdminModel = new AdminModel();
-        $checkTitle = $AdminModel->checkIfTitleIsSet($title);
+
+        $checkTitle = $this->model->checkIfTitleIsSet($title);
 
 
 
 
         if(preg_match("#^[0-9]*$#" , $price) && grapheme_strlen($desc) > 100 && mempty($title, $desc, $price, $image, $date, $publisher, $developper, $category, $sub_category && $checkTitle === 0 && $checkboxArray !== null))
         {
-            $AdminModel = new AdminModel();
-            $AdminModel->reqInsertGame($title, $desc, $priceInt, $image, $date, $developper, $publisher, $categoryInt, $sub_categoryInt);
+            $this->model->reqInsertGame($title, $desc, $priceInt, $image, $date, $developper, $publisher, $categoryInt, $sub_categoryInt);
 
             $this->setPlatform($checkboxArray);
 
@@ -103,18 +109,16 @@ class AdminControllerGame {
             return true;
         }
 
-        $AdminModel = new AdminModel();
-        $checkTitle = $AdminModel->checkIfTitleIsSet($title);
 
 
-        if(preg_match("#^[0-9]*$#" , $price) && grapheme_strlen($desc) > 100 && mempty($title, $desc, $price, $image, $date, $publisher, $developper, $category, $sub_category) && $checkTitle === 0)
+        if(preg_match("#^[0-9]*$#" , $price) && grapheme_strlen($desc) > 100 && mempty($title, $desc, $price, $image, $date, $publisher, $developper, $category, $sub_category))
         {
-            $AdminModel = new AdminModel();
-            $AdminModel->updateById($title, $desc, $priceInt, $image, $date, $developper, $publisher, $categoryInt, $sub_categoryInt,$id);
+            $this->model->updateById($title, $desc, $priceInt, $image, $date, $developper, $publisher, $categoryInt, $sub_categoryInt,$id);
 
-            $AdminModel->deleteCompat($id);
+            $this->model->deleteCompat($id);
 
-            $this->setPlatform($checkboxArray);
+
+            $this->updatePlatform($checkboxArray, $id);
 
             $messages['okAddGame'] = "You're game has been updated";
         }
@@ -131,10 +135,6 @@ class AdminControllerGame {
             {
                 $messages['emptyValues'] = "Fill all the field please";
             }
-            if($checkTitle != 0)
-            {
-                $messages['titleTaken'] = "The game you are trying to insert is already in the database";
-            }
 
         }
         $json = json_encode($messages, JSON_PRETTY_PRINT);
@@ -143,33 +143,51 @@ class AdminControllerGame {
 
     public function setPlatform(array $arrayCheckbox):void {
 
-        $AdminModel = new AdminModel();
-        $id_game = $AdminModel->fetchLastGame();
+
+        $id_game = $this->model->fetchLastGame();
 
 
         foreach ($arrayCheckbox as $key => $platform){
             $intPlatform = (int)$platform;
 
-            $AdminModel->insertPlatform($id_game['id'], $intPlatform);
+            $this->model->insertPlatform($id_game['id'], $intPlatform);
+        }
+    }
+
+    public function updatePlatform(array $arrayCheckbox, $id):void {
+
+        foreach($arrayCheckbox as $key => $platform)
+        {
+            $intPLatform = (int)$platform;
+
+            $this->model->insertPlatform($id, $intPLatform);
         }
     }
 
     public function fetchLastGame()
     {
-        $AdminModel = new AdminModel();
-        $AdminModel->fetchLastGame();
+        $this->model->fetchLastGame();
     }
 
     public function getPlatform():array
     {
-        $AdminModel = new AdminModel();
-        return $AdminModel->getPlatform();
+        return $this->model->getPlatform();
     }
 
     public function displayGames()
     {
+        $this->model->displayGames();
+    }
+
+    public function getCategory()
+    {
         $AdminModel = new AdminModel();
-        $AdminModel->displayGames();
+        return $this->model->getCategory("category");
+    }
+
+    public function getSubCategory()
+    {
+        return $this->model->getCategory("subcategory");
     }
 
     public function deleteGame($id)
@@ -178,8 +196,7 @@ class AdminControllerGame {
 
         if(gettype($intId) == 'integer')
         {
-            $AdminModel = new AdminModel();
-            $AdminModel->deleteGame($intId);
+            $this->model->deleteGame($intId);
         }
 
     }

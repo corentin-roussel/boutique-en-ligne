@@ -187,8 +187,8 @@ const displayGame = (game, place) =>{
             if(confirm('Are you sure you want to delete this game ??') === true)
             {
                 deleteGame(delete_game.value);
-                await displayAllGame();
                 alert("Your game has been deleted")
+                await displayAllGame();
 
             }
         })
