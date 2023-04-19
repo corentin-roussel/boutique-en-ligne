@@ -38,6 +38,14 @@ class ProductController {
 
     }
 
+    public function GetAllByLetters($letters) {
+
+        $liste = $this->model->GetAllByLetters($letters);
+
+        return $liste;
+
+    }
+
 }
 
 ?>

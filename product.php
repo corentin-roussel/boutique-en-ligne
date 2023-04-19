@@ -73,7 +73,6 @@
                 </span>
 
                 <button id="cartButton"><i class="fa-solid fa-cart-plus"></i></button>
-                <div id="cartMessage></div>
             </div>
         </div>';
 
