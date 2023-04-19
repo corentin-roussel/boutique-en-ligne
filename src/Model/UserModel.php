@@ -12,9 +12,6 @@ class UserModel
 
     public function __construct()
     {
-
-
-
         $db_username = 'root';
         $db_password = '';
 
