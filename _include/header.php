@@ -9,31 +9,35 @@
         
         $searchResult = $product->GetAllByLetters($_GET['search']);
 
-        $searchResult[0]['price'] = substr_replace($searchResult[0]['price'], ".", -2, 0) . "€";
-        
-        $pages = [];
-        
-        $numPage = 0;
+        if(isset($searchResult[0]) && $searchResult[0] != "") {    
+            
+            $pages = [];
+            
+            $numPage = 0;
 
-        for ($i=0; $i < sizeof($searchResult); $i+=6) {
+            for ($i=0; $i < sizeof($searchResult); $i+=6) {
 
-            $numPage++;
+                $numPage++;
 
-            for ($j=$i; $j < $i+6; $j++) {
-                
-                if(isset($searchResult[$j])) {
-                    $pages[$numPage][$j] =
-                    '<div class="oneGame">
-                        <a href="product.php?id=' . $searchResult[$j]['id'] . '"><img src="' . $searchResult[$j]['image'] . '" alt="" /></a>
-                        <div class="titrePrix">
-                            <a href="product.php?id=' . $searchResult[$j]['id'] . '">' . $searchResult[$j]['title'] . '</a>
-                            <a href="product.php?id=' . $searchResult[$j]['id'] . '"><p>' . $searchResult[$j]['price'] . '</p></a>
-                        </div>
-                    </div>';
+                for ($j=$i; $j < $i+6; $j++) {
+                    
+                    if(isset($searchResult[$j])) {
+
+                        $pages[$numPage][$j] =
+                        '<div class="oneGame">
+                            <a href="product.php?id=' . $searchResult[$j]['id'] . '"><img src="' . $searchResult[$j]['image'] . '" alt="" /></a>
+                            <div class="titrePrix">
+                                <a href="product.php?id=' . $searchResult[$j]['id'] . '">' . $searchResult[$j]['title'] . '</a>
+                                <a href="product.php?id=' . $searchResult[$j]['id'] . '"><p>' . substr_replace($searchResult[$j]['price'], '.', -2, 0) . '€' . '</p></a>
+                            </div>
+                        </div>';
+                    }
                 }
-            }
 
-            $pages['numPage'][$numPage] = '<p class="changePage" id="page' . $numPage . '">' . $numPage  ;
+                $pages['numPage'][$numPage] = '<p class="changePageSearch" id="page' . $numPage . '">' . $numPage  ;
+            }
+        }else{
+            $pages['noResult'] = "There is no product that match your search";
         }
 
         $json = json_encode($pages, JSON_PRETTY_PRINT);
@@ -53,4 +57,4 @@
 <?php if(isset($_SESSION['user']) && $_SESSION['user']['role'] === 'admin') : ?> <a href="admin.php">Admin</a> <?php endif ?>
 
 <input type="text" name="searchBar" id="searchBar">
-<i class="fa-solid fa-magnifying-glass"></i>
+<i class="fa-solid fa-magnifying-glass" id="iconSearch"></i>
