@@ -1,6 +1,6 @@
-window.addEventListener("load", () => {
-  displayTableCat();
-  displayFormCat();
+window.addEventListener("load", async () => {
+ await  displayTableCat();
+  await displayFormCat();
 });
 
 const containerParentCat = document.querySelector(".form-add-category");

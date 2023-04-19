@@ -2,7 +2,8 @@
 
 namespace App\Controller;
 
-use App\model\PlateformModel;
+use App\Model\AdminModel;
+use App\Model\PlateformModel;
 
 
 class PlateformController
@@ -21,7 +22,7 @@ class PlateformController
     {
         $content = htmlspecialchars(trim($content));
         $messages = [];
-        $model = new PlateformModel();
+        $model = new AdminModel();
 
         if (empty($content)) {
             $messages['check_empty'] = "This input is empty";
@@ -41,7 +42,7 @@ class PlateformController
 
     public function deletePlat(array $idArrayCheck)
     {
-        $model = new PlateformModel();
+        $model = new AdminModel();
         
         foreach($idArrayCheck as $key => $platforme){
             $intPlatform = (int)$platforme;

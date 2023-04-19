@@ -1,10 +1,10 @@
 <?php
 require_once("autoloader.php");
 
-use App\model\PlateformModel;
+use App\Model\AdminModel;
 use App\Controller\PlateformController;
 
-$show_plateform = new PlateformModel();
+$show_plateform = new AdminModel();
 $deleteModel = new PlateformController();
 $plateform = $show_plateform->showPlateform();
 

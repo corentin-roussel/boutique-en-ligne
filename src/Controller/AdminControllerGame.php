@@ -2,12 +2,12 @@
 
 namespace App\Controller;
 
-
-
+// var_dump("App\Model\AdminModel");
 
 use App\Model\AdminModel;
 
 class AdminControllerGame {
+    
 
 
     public function insertGame($title, $desc, $price, $image, $date, $developper, $publisher, $checkboxArray, $category, $sub_category):void

@@ -2,20 +2,15 @@
 
 require_once('./autoloader.php');
 
-use App\model\CategoryModel;
-use App\Controller\CategoryController;
+use App\Model\AdminModel;
 
-$controllerCat = new CategoryModel();
+$controllerCat = new AdminModel();
 $showTabCat = $controllerCat->showCat();
 $showTabSubCat = $controllerCat->showSubCat();
-var_dump($showTabSubCat);
+// var_dump($showTabSubCat);
 
 
 // var_dump($showTabCat);
-
-
-
-
 
 ?>
 

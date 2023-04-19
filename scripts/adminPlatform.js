@@ -1,5 +1,5 @@
-window.addEventListener("load", () => {
-  displayPlat();
+window.addEventListener("load", async () => {
+   await displayPlat();
 });
 
 const containeTablePlat = document.querySelector(".container-table-plat");

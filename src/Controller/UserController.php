@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Controller;
-
 use App\Model\UserModel;
 
 
@@ -10,6 +9,7 @@ class UserController
 
     public function __construct()
     {
+
     }
 
     public function Register(?string $login, ?string $email, ?string $password, ?string $passwordConfirm)
@@ -73,7 +73,7 @@ class UserController
         if ($row == 1) {
 
             $userDataDb = $model->GetUserData($login);
-
+            var_dump($userDataDb);
 
             if(password_verify($password, $userDataDb['password'])) {
 

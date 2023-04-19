@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Controller\PlateformModel;
+use App\Model\AdminModel;
 use App\model\CategoryModel;
 
 class CategoryController
@@ -11,7 +12,7 @@ class CategoryController
 
     public function __construct()
     {
-        // empty
+        
     }
     /**
      @param $content string
@@ -20,7 +21,7 @@ class CategoryController
     {
         $content = htmlspecialchars((trim($content)));
         $messages = []; //for stock mess in JSON
-        $insertModelCat = new CategoryModel();
+        $insertModelCat = new AdminModel();
 
         if (empty($content)) {
 
@@ -38,7 +39,7 @@ class CategoryController
     {
         $content = htmlspecialchars((trim($content)));
         $messages = []; //for stock mess in JSON
-        $insertModelCat = new CategoryModel();
+        $insertModelCat = new AdminModel();
 
         if (empty($content)) {
 
