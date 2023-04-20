@@ -4,7 +4,7 @@ if (session_status() == PHP_SESSION_NONE){ session_start();}
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <?php require_once '_include/head.php' ?>
     <script src="authentification.js" defer></script>

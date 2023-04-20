@@ -36,7 +36,7 @@ if (isset($_GET['addSub'])) {
 
 
 if (isset($_GET['submitGame'])) {
-    $AdminController->insertGame($_POST["title"], $_POST["desc"], $_POST["price"], $_POST["image"], $_POST["release_date"], $_POST["developper"], $_POST["publisher"],$_POST['check_list'] , $_POST["category"], $_POST["subcategory"]);
+    $AdminController->insertGame($_POST["title"], $_POST["desc"], $_POST["price"], $_POST["image"], $_POST["release_date"], $_POST["developper"], $_POST["publisher"], $_POST['check_list'], $_POST["category"], $_POST["subcategory"]);
 }
 
 
@@ -115,6 +115,8 @@ if (isset($_SESSION) && $_SESSION['user']['role'] === 'admin' || $_SESSION['user
         <?php require_once("_include/head.php") ?>
         <script defer src="admin_game.js"></script>
         <script defer src="admin_user.js"></script>
+        <script defer src="./scripts/adminPlatform.js"></script>
+        <script defer src="./scripts/adminCat.js"></script>
         <title>Admin</title>
     </head>
 

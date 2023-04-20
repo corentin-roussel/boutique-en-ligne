@@ -1,16 +1,14 @@
-window.addEventListener("load", async () => {
+window.addEventListener("DOMContentLoaded", async () => {
    await displayPlat();
 });
-
-const containeTablePlat = document.querySelector(".container-table-plat");
 const formPlateform = document.querySelector("#form-insert-plateform");
 const btnAddPlateform = document.querySelector("#add_plat");
+const containeTablePlat = document.querySelector(".container-table-plat");
 
 async function displayPlat() {
   const pageTable = await fetch("./plat_tab.php");
   const reponse = await pageTable.text();
   containeTablePlat.innerHTML = reponse;
-
   const checkBoxPlat = document.querySelectorAll(".check_plat");
   const formPlat = document.querySelector("#form_check_plat");
 
@@ -36,9 +34,9 @@ async function displayPlat() {
     if (!checkedValue) {
       alert("Please select a platform to remove");
     } else if (
-      checkedValue == 215 ||
-      checkedValue == 254 ||
-      checkedValue == 255
+      checkedValue == 3 ||
+      checkedValue == 2 ||
+      checkedValue == 1
     ) {
       alert("You can't remove this platform");
     } else {
@@ -105,3 +103,4 @@ formPlateform.addEventListener("submit", async (e) => {
   await addPlateform(form);
   console.log("form");
 });
+

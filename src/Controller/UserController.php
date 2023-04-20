@@ -75,7 +75,7 @@ class UserController
 
 
             $userDataDb = $this->model->GetUserData($login);
-
+            // var_dump($userDataDb);
 
             if(password_verify($password, $userDataDb['password'])) {
 
