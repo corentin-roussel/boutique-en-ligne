@@ -8,7 +8,7 @@ $showInfoUser = new ProfilController();
 $getData = $showInfoUser->showInfosProfil();
 
 // var_dump($_GET);
-var_dump($_POST);
+// var_dump($_POST);
 ?>
 
 
@@ -29,6 +29,7 @@ var_dump($_POST);
     <input type="date" name="date">
     <label for="phone"></label>
     <input type="text" name="phone" placeholder="Phone Number" >
+    <p id="mess_form"></p>
     <button type="subit" name="submit_form_profil">Submit</button>
 </form>
 
