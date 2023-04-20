@@ -71,6 +71,104 @@ class CartModel
 
     }
 
+    public function GetCartContent($cart) {
+
+        $sql = "SELECT *, item_cart.id, product.price AS game_price, item_cart.price AS price FROM item_cart INNER JOIN cart ON item_cart.id_cart = cart.id INNER JOIN product ON item_cart.id_game = product.id WHERE id_cart = :idCart";
+
+        $req = $this->conn->prepare($sql);
+        $req->execute([':idCart' => $cart]);
+        $cartContent = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        return $cartContent;
+
+    }
+
+    public function DeleteItemOneLine($idItemLine) {
+
+        $sqlGetPrice = "SELECT price FROM item_cart WHERE id = :id";
+        $reqGetPrice = $this->conn->prepare($sqlGetPrice);
+        $reqGetPrice->execute([':id' => $idItemLine]);
+
+        $priceOneLine = $reqGetPrice->fetch(PDO::FETCH_ASSOC);
+
+
+        $sqlGetPriceCart = "SELECT total_price , cart.id AS cartId FROM item_cart INNER JOIN cart ON item_cart.id_cart = cart.id WHERE item_cart.id = :id";
+        $reqGetPriceCart = $this->conn->prepare($sqlGetPriceCart);
+        $reqGetPriceCart->execute([':id' => $idItemLine]);
+
+        $priceOneCart = $reqGetPriceCart->fetch(PDO::FETCH_ASSOC);
+        
+
+        $newCartPrice = $priceOneCart['total_price'] - $priceOneLine['price'];
+        $cartId = $priceOneCart['cartId'];;
+
+        $sqlChangeCartPrice = "UPDATE cart SET total_price = :newPrice WHERE id = :cartId";
+        $reqChangeCartPrice = $this->conn->prepare($sqlChangeCartPrice);
+        $reqChangeCartPrice->execute([':newPrice' => $newCartPrice,
+                                      ':cartId' => $cartId
+        ]);
+
+
+        $sqlDelete = "DELETE FROM item_cart WHERE id = :id";
+
+        $reqDelete = $this->conn->prepare($sqlDelete);
+        $reqDelete->execute([':id' => $idItemLine]);
+
+        $message = "The item was successfully deleted from your cart";
+
+        return $message;
+
+    }
+
+    public function ChangeQuantity($quantity, $itemId) {
+
+        $sqlGetPriceLine = "SELECT price FROM item_cart WHERE id = :id";
+        $reqGetPriceLine = $this->conn->prepare($sqlGetPriceLine);
+        $reqGetPriceLine->execute([':id' => $itemId]);
+
+        $priceOneLine = $reqGetPriceLine->fetch(PDO::FETCH_ASSOC);
+
+
+        $sqlGetPrice = "SELECT product.price FROM item_cart INNER JOIN product ON item_cart.id_game = product.id WHERE item_cart.id = :id";
+        $reqGetPrice = $this->conn->prepare($sqlGetPrice);
+        $reqGetPrice->execute([':id' => $itemId]);
+
+        $priceOneItem = $reqGetPrice->fetch(PDO::FETCH_ASSOC);
+
+
+        $sqlGetPriceCart = "SELECT total_price , cart.id AS cartId FROM item_cart INNER JOIN cart ON item_cart.id_cart = cart.id WHERE item_cart.id = :id";
+        $reqGetPriceCart = $this->conn->prepare($sqlGetPriceCart);
+        $reqGetPriceCart->execute([':id' => $itemId]);
+
+        $priceOneCart = $reqGetPriceCart->fetch(PDO::FETCH_ASSOC);
+
+
+        // !!!!!!! IF MOINS !!!!!!! //
+        
+
+        $newCartPrice = $priceOneCart['total_price'] - $priceOneItem['price'];
+        $cartId = $priceOneCart['cartId'];;
+
+        $sqlChangeCartPrice = "UPDATE cart SET total_price = :newPrice WHERE id = :cartId";
+        $reqChangeCartPrice = $this->conn->prepare($sqlChangeCartPrice);
+        $reqChangeCartPrice->execute([':newPrice' => $newCartPrice,
+                                      ':cartId' => $cartId
+        ]);
+
+
+        $changePrice = $priceOneLine['price'] - $priceOneItem['price'];
+
+        $sql = "UPDATE item_cart SET quantity = :quantity, price = :price WHERE id = :id";
+        $req = $this->conn->prepare($sql);
+        $req->execute([':quantity' => $quantity,
+                       ':price' => $changePrice,
+                       ':id' => $itemId
+        ]);
+
+        return $changePrice;
+
+    }
+
 }
 
 ?>

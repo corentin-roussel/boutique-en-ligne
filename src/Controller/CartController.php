@@ -51,6 +51,30 @@ class CartController
         echo $message;
     }
 
+    public function GetCartContent($cart) {
+
+        $content = $this->model->GetCartContent($cart);
+
+        return $content;
+
+    }
+
+    public function DeleteItem($idItemLine) {
+
+        $result = $this->model->DeleteItemOneLine($idItemLine);
+
+        echo $result;
+
+    }
+
+    public function ChangeQuantity($quantity, $itemId) {
+
+        $newPrice = $this->model->ChangeQuantity($quantity, $itemId);
+
+        return $newPrice;
+
+    }
+
 }
 
 ?>
