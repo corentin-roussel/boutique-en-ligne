@@ -17,6 +17,7 @@
 <html lang="en">
 <head>
     <?php require_once ('_include/head.php') ?>
+    <script defer src="search.js"></script>
     <script src="index.js" defer></script>
     <title>Accueil</title>
 </head>

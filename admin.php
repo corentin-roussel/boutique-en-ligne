@@ -115,6 +115,8 @@ if (isset($_SESSION) && $_SESSION['user']['role'] === 'admin' || $_SESSION['user
         <?php require_once("_include/head.php") ?>
         <script defer src="admin_game.js"></script>
         <script defer src="admin_user.js"></script>
+        <script defer src="scripts/adminPlatform.js"></script>
+        <script defer src="scripts/adminCat.js"></script>
         <title>Admin</title>
     </head>
 

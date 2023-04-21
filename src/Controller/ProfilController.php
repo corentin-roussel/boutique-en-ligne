@@ -22,7 +22,6 @@ class ProfilController{
         $pass = htmlspecialchars(trim($pass));
         $confpass = htmlspecialchars(trim($confpass));
         $email = htmlspecialchars(trim($email));
-        $date = new DateTime($date);
         $model = new ProfilModel();
         $messages = [];
 
