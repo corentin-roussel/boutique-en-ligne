@@ -20,9 +20,6 @@ const fetchFormPayment = async() => {
     const response = await fetch("payment_back.php?formPayment")
     const form = await response.text();
 
-
-    console.log(form)
-
     return form;
 }
 
@@ -51,6 +48,66 @@ const getAdressById = async() => {
     displayAdress(getAdress, shipping);
 }
 
+const buyCart = async(e, form) => {
+
+    e.preventDefault();
+
+    let formData = new FormData(form)
+
+    const response = await fetch('payment_back.php?updateCart=ok', {
+        method: "POST",
+        body: formData
+    })
+    const updateCart = await response.json();
+
+    let adress = document.querySelector("#shipping")
+
+    displayError(updateCart);
+}
+
+const displayError = (json) => {
+
+    const adress_error = document.querySelector("#error_adress");
+    adress_error.innerHTML = "";
+
+
+    const cardNumber_error = document.querySelector("#error-card-number");
+    cardNumber_error.innerHTML = "";
+
+
+    const cardExpiration_error = document.querySelector("#error-expiration-date");
+    cardExpiration_error.innerHTML = "";
+
+
+    const cardAuth_error = document.querySelector("#error-cvv");
+    cardAuth_error.innerHTML = "";
+
+
+    const cardName_error = document.querySelector("#error-card-name");
+    cardName_error.innerHTML = "";
+
+
+    if(json['errorAdress']) {
+        adress_error.innerHTML = json['errorAdress'];
+    }
+    if(json['errorCardNumber']) {
+        cardNumber_error.innerHTML = json['errorCardNumber'];
+    }
+    if(json['errorCardExpiration'])
+    {
+        cardExpiration_error.innerHTML = json['errorCardExpiration'];
+    }
+    if(json['errorCardAuth'])
+    {
+        cardAuth_error.innerHTML = json['errorCardAuth'];
+    }
+    if(json['errorCardName'])
+    {
+        cardName_error.innerHTML = json['errorCardName'];
+    }
+
+}
+
 const displayAdress = (json, place) => {
 
     const title_place = document.createElement("h3");
@@ -60,7 +117,7 @@ const displayAdress = (json, place) => {
 
     for(display of json)
     {
-
+        console.log(display)
 
         const div_display = document.createElement("div");
         div_display.setAttribute("class", "flex-adress");
@@ -81,15 +138,10 @@ const displayAdress = (json, place) => {
         adress.setAttribute("class", "adress");
         info.appendChild(adress);
 
-        const postal_code = document.createElement("p")
-        postal_code.value = display.postal_code;
-        postal_code.setAttribute("class", "postal_code");
-        info.appendChild(adress);
-
         const city = document.createElement("p")
-        adress.innerHTML = display.adress;
-        adress.setAttribute("class", "adress");
-        info.appendChild(adress);
+        city.innerHTML = display.city + "," + display.postal_code;
+        city.setAttribute("class", "adress");
+        info.appendChild(city);
 
 
         const country = document.createElement("p")
@@ -114,6 +166,9 @@ const displayAdress = (json, place) => {
 
 
     }
+    const error_adress = document.createElement("small");
+    error_adress.setAttribute("id", "error_adress");
+    place.appendChild(error_adress);
 }
 
 const displaySummary = (place, summary) => {
@@ -184,8 +239,11 @@ window.addEventListener("load", async() => {
     let button_buy = await fetchInputBuy();
     displayForm(buy, button_buy)
 
-    let button_bought = document.querySelector("#buy");
-    button_bought.addEventListener()
+    let form_bought = document.querySelector("#payment");
+
+    form_bought.addEventListener("submit", (e) => {
+        buyCart(e, form_bought);
+    })
 
 })
 

@@ -1,4 +1,10 @@
 <?php
+
+require_once ("autoloader.php");
+if (session_status() == PHP_SESSION_NONE){ session_start();}
+
+
+
 ?>
 
 
@@ -18,7 +24,7 @@
         <section id="shipping_method">
 
         </section>
-
+        <a href="shipping_info.php"><< Create a new adress</a>
         <h1>Payment Method</h1>
         <section id="payment_method">
 
