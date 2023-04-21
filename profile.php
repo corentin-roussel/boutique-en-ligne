@@ -2,7 +2,8 @@
 
 
 (session_start() == PHP_SESSION_NONE) ?: session_start();
-var_dump($_SESSION);
+// var_dump($_SESSION);
+
 require_once('autoloader.php');
 
 use App\Controller\ProfilController;

@@ -65,7 +65,6 @@
 <html lang="en">
 <head>
    <?php require_once("_include/head.php") ?>
-    <script src="https://kit.fontawesome.com/1241fb6252.js" crossorigin="anonymous"></script>
     <script defer src="all_products.js"></script>
     <script defer src="search.js"></script>
     <title>All products</title>

@@ -22,6 +22,9 @@ class ProfilController{
         $pass = htmlspecialchars(trim($pass));
         $confpass = htmlspecialchars(trim($confpass));
         $email = htmlspecialchars(trim($email));
+
+        // $date = new DateTime($date);
+
         $model = new ProfilModel();
         $messages = [];
 
@@ -35,11 +38,20 @@ class ProfilController{
             $_SESSION['user']['login'] = $login;
             $_SESSION['user']['email'] = $email;
 
-            $messages['updateData'] = "Your profil is update";
-        }elseif(isset($firstname) && isset($lastname) && isset($date) && isset($phone)){
+            $messages['updataDATA'] = "Your profil is update";
+        }
+        
+        if(!empty($firstname) && !empty($lastname) && !empty($date) && !empty($phone)){
             $model->insertProfil($firstname,$lastname,$date,$phone);
-            $messages['updateData'] = "Your profil is update";
+            $_SESSION['user']['firstname'] = $firstname;
+            $_SESSION['user']['lastname'] = $lastname;
+            $_SESSION['user']['phone_number'] = $phone;
 
+            $messages['updateFULLDATA'] = "Your profil is update";
+
+        }
+         if(empty($login) && empty($pass) && empty($confpass) && empty($email) && empty($firstname) && empty($lastname) && empty($date) && empty($phone) ){
+            $messages['noSub'] = "Please insert data in your field";
         }
 
         $messJSON = json_encode($messages,JSON_PRETTY_PRINT);

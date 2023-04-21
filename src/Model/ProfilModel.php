@@ -24,9 +24,11 @@ class ProfilModel{
     public function showInfoProfil() :array
 
     {
-        $stmt = $this->connect->prepare('SELECT * FROM user');
+        $id = $_SESSION['user']['id'];
+        $stmt = $this->connect->prepare('SELECT * FROM user WHERE id = :id');
+        $stmt->bindParam('id',$id);
         $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
 
@@ -45,14 +47,18 @@ class ProfilModel{
     public function insertProfil(?string $firstname,?string $lastname,?string $date,?string $phone){
 
         $stmt = $this->connect->prepare("INSERT INTO user(firstname,lastname,birth_date,phone_number) VALUES(:firstname,:lastname,:date,:phone)");
+
+           
+        $id = $_SESSION['user']['id'];
+        $stmt = $this->connect->prepare("UPDATE user SET firstname = :firstname,lastname = :lastname ,birth_date = :date, phone_number = :phone WHERE id = :id");
+
         $stmt->bindParam(':firstname',$firstname);
         $stmt->bindParam(':lastname',$lastname);
         $stmt->bindParam(':date',$date);
         $stmt->bindParam(':phone',$phone);
+        $stmt->bindParam(':id',$id);
         $result = $stmt->execute();
         var_dump($result);
         
     }
 }
-
-?>
