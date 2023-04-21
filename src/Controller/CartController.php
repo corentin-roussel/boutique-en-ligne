@@ -7,7 +7,7 @@ use App\Model\CartModel;
 class CartController
 {
 
-    private $model;
+    private ?object $model;
 
     public function __construct() {
 
@@ -15,7 +15,8 @@ class CartController
 
     }
 
-    public function AddProduct($id, $quantity, $platform, $cartId) {
+    public function AddProduct(?int $id, ?int $quantity, ?string $platform, ?int $cartId)
+    {
 
         $quantity = intval($quantity);
 
@@ -51,7 +52,8 @@ class CartController
         echo $message;
     }
 
-    public function GetCartContent($cart) {
+    public function GetCartContent(?int $cart)
+    {
 
         $content = $this->model->GetCartContent($cart);
 
@@ -59,7 +61,8 @@ class CartController
 
     }
 
-    public function DeleteItem($idItemLine) {
+    public function DeleteItem(?int $idItemLine)
+    {
 
         $result = $this->model->DeleteItemOneLine($idItemLine);
 
@@ -67,7 +70,8 @@ class CartController
 
     }
 
-    public function ChangeQuantity($quantity, $itemId, $plusMinus) {
+    public function ChangeQuantity(?int $quantity, ?int $itemId, ?string $plusMinus)
+    {
 
         $newPrice = $this->model->ChangeQuantity($quantity, $itemId, $plusMinus);
 

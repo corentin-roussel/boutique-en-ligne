@@ -18,7 +18,6 @@
         foreach ($resultTab as $result) {
 
             $resultat = $resultat . '<option value="' . $result[$table] . '">' . $result[$table] . '</option>'; 
-
         }
 
         return $resultat;
@@ -48,11 +47,9 @@
                     <p>' . $data[0]['short_description'] . '...</p>
 
                     <a href="#decriptionProduct">Read more</a>
-
                 </div>
 
                 <p>' . $data[0]['price'] . '</p>
-
             </div>
 
             <div id="selectsButton">
@@ -72,8 +69,8 @@
                     </span>
                 </span>
 
-                <button id="cartButton"><i class="fa-solid fa-cart-plus"></i></button>
-            </div>
+                '; if(isset($_SESSION['user'])) {$displayProduct['part1'] = $displayProduct['part1'] . '<button id="cartButton"><i class="fa-solid fa-cart-plus"></i></button>';}else{$displayProduct['part1'] = $displayProduct['part1'] . '<button id="cartButton" disabled="disabled"><i class="fa-solid fa-cart-plus"></i></button>';};
+            $displayProduct['part1'] = $displayProduct['part1'] . '</div>
         </div>';
 
         $displayProduct['part2'] = '
