@@ -67,11 +67,11 @@ class CartController
 
     }
 
-    public function ChangeQuantity($quantity, $itemId) {
+    public function ChangeQuantity($quantity, $itemId, $plusMinus) {
 
-        $newPrice = $this->model->ChangeQuantity($quantity, $itemId);
+        $newPrice = $this->model->ChangeQuantity($quantity, $itemId, $plusMinus);
 
-        return $newPrice;
+        echo substr_replace($newPrice, ".", -2, 0) . "€";
 
     }
 

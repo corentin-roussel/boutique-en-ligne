@@ -120,7 +120,7 @@ class CartModel
 
     }
 
-    public function ChangeQuantity($quantity, $itemId) {
+    public function ChangeQuantity($quantity, $itemId, $plusMinus) {
 
         $sqlGetPriceLine = "SELECT price FROM item_cart WHERE id = :id";
         $reqGetPriceLine = $this->conn->prepare($sqlGetPriceLine);
@@ -143,11 +143,19 @@ class CartModel
         $priceOneCart = $reqGetPriceCart->fetch(PDO::FETCH_ASSOC);
 
 
-        // !!!!!!! IF MOINS !!!!!!! //
-        
+        $cartId = $priceOneCart['cartId'];
 
-        $newCartPrice = $priceOneCart['total_price'] - $priceOneItem['price'];
-        $cartId = $priceOneCart['cartId'];;
+        if($plusMinus === 'minus') {
+
+            $newCartPrice = $priceOneCart['total_price'] - $priceOneItem['price'];
+            $changePrice = $priceOneLine['price'] - $priceOneItem['price'];
+
+        }elseif($plusMinus === 'plus') {
+
+            $newCartPrice = $priceOneCart['total_price'] + $priceOneItem['price'];
+            $changePrice = $priceOneLine['price'] + $priceOneItem['price'];
+        }
+
 
         $sqlChangeCartPrice = "UPDATE cart SET total_price = :newPrice WHERE id = :cartId";
         $reqChangeCartPrice = $this->conn->prepare($sqlChangeCartPrice);
@@ -155,8 +163,6 @@ class CartModel
                                       ':cartId' => $cartId
         ]);
 
-
-        $changePrice = $priceOneLine['price'] - $priceOneItem['price'];
 
         $sql = "UPDATE item_cart SET quantity = :quantity, price = :price WHERE id = :id";
         $req = $this->conn->prepare($sql);
