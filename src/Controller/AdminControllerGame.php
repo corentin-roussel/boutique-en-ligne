@@ -17,6 +17,23 @@ class AdminControllerGame {
     }
 
 
+    public function mempty($title, $desc, $price, $image, $date, $developper, $publisher , $category, $sub_category)
+    {
+        foreach(func_get_args() as $values)
+        {
+            $values = htmlspecialchars(trim($values));
+
+            if(!empty($values))
+            {
+                continue;
+            }else
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public function insertGame($title, $desc, $price, $image, $date, $developper, $publisher, $checkboxArray, $category, $sub_category):void
     {
         $messages = [];
@@ -25,22 +42,7 @@ class AdminControllerGame {
         $categoryInt= (int)$category;
         $sub_categoryInt= (int)$sub_category;
 
-        function mempty($title, $desc, $price, $image, $date, $developper, $publisher , $category, $sub_category)
-        {
-            foreach(func_get_args() as $values)
-            {
-                $values = htmlspecialchars(trim($values));
 
-                if(!empty($values))
-                {
-                    continue;
-                }else
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
 
 
         $checkTitle = $this->model->checkIfTitleIsSet($title);
@@ -48,7 +50,7 @@ class AdminControllerGame {
 
 
 
-        if(preg_match("#^[0-9]*$#" , $price) && grapheme_strlen($desc) > 100 && mempty($title, $desc, $price, $image, $date, $publisher, $developper, $category, $sub_category && $checkTitle === 0 && $checkboxArray !== null))
+        if(preg_match("#^[0-9]*$#" , $price) && grapheme_strlen($desc) > 100 && $this->mempty($title, $desc, $price, $image, $date, $publisher, $developper, $category, $sub_category && $checkTitle === 0 && $checkboxArray !== null))
         {
             $this->model->reqInsertGame($title, $desc, $priceInt, $image, $date, $developper, $publisher, $categoryInt, $sub_categoryInt);
 
@@ -65,7 +67,7 @@ class AdminControllerGame {
             {
                 $messages['lengthDesc'] = "The length of the description must be above 100 characters";
             }
-            if(!mempty($title, $desc, $price, $image, $date, $publisher, $developper, $category, $sub_category))
+            if(!$this->mempty($title, $desc, $price, $image, $date, $publisher, $developper, $category, $sub_category))
             {
                 $messages['emptyValues'] = "Fill all the field please";
             }
@@ -92,26 +94,10 @@ class AdminControllerGame {
         $categoryInt= (int)$category;
         $sub_categoryInt= (int)$sub_category;
 
-        function mempty($title, $desc, $price, $image, $date, $developper, $publisher , $category, $sub_category)
-        {
-            foreach(func_get_args() as $values)
-            {
-                $values = htmlspecialchars(trim($values));
-
-                if(!empty($values))
-                {
-                    continue;
-                }else
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
 
 
 
-        if(preg_match("#^[0-9]*$#" , $price) && grapheme_strlen($desc) > 100 && mempty($title, $desc, $price, $image, $date, $publisher, $developper, $category, $sub_category))
+        if(preg_match("#^[0-9]*$#" , $price) && grapheme_strlen($desc) > 100 && $this->mempty($title, $desc, $price, $image, $date, $publisher, $developper, $category, $sub_category))
         {
             $this->model->updateById($title, $desc, $priceInt, $image, $date, $developper, $publisher, $categoryInt, $sub_categoryInt,$id);
 
@@ -131,7 +117,7 @@ class AdminControllerGame {
             {
                 $messages['lengthDesc'] = "The length of the description must be above 100 characters";
             }
-            if(!mempty($title, $desc, $price, $image, $date, $publisher, $developper, $category, $sub_category))
+            if(!$this->mempty($title, $desc, $price, $image, $date, $publisher, $developper, $category, $sub_category))
             {
                 $messages['emptyValues'] = "Fill all the field please";
             }

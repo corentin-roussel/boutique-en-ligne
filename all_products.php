@@ -66,6 +66,7 @@
 <head>
    <?php require_once("_include/head.php") ?>
     <script defer src="all_products.js"></script>
+    <script defer src="search.js"></script>
     <title>All products</title>
 </head>
 <body>
