@@ -93,4 +93,43 @@ class PaymentModel
         return $req->fetch(PDO::FETCH_ASSOC);
     }
 
+    public function insertSoldGames($getitemCart) {
+
+        foreach ($getitemCart as $item)
+        $sold = $this->connect->prepare("SELECT sold.id_game FROM sold WHERE id_game=:id_game");
+        $sold->execute([
+            ":id_game" => $item['id_game']
+        ]);
+        $game_sold = $sold->fetch(PDO::FETCH_ASSOC);
+        $game_exist = $sold->rowCount();
+
+        if($game_exist === 1)
+        {
+            $req = $this->connect->prepare("UPDATE sold SET sold=:sold WHERE id_game=:id_game");
+            $req->execute([
+                "sold" => (int)$item['quantity'] + (int)$game_sold ,
+                ":id_game" => $item['id_game']
+            ]);
+        }
+        else
+        {
+            $req = $this->connect->prepare("INSERT INTO sold VALUES (id_game, sold) AS (:id_game, :sold)");
+            $req->execute([
+                ":id_game" => $item['id_game'],
+                "sold" => $item['quantity']
+            ]);
+        }
+
+    }
+
+    public function getItemCart($id_actual_cart) {
+        $req = $this->connect->prepare("SELECT item_cart.id_game,
+                                        item_cart.quantity FROM item_cart WHERE id_cart=:id_cart");
+        $req->execute([
+            ":id_cart" => $id_actual_cart
+        ]);
+
+        return $req->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 }

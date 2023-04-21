@@ -15,6 +15,7 @@ class PaymentController
 
         $messages = [];
 
+        $cardAuthInt=(int)$cardAuth;
 
         $cardNumberRep = str_replace(" ", "", $cardNumber);
         $cardNumberInt = (int)$cardNumberRep;
@@ -26,7 +27,7 @@ class PaymentController
         $date = date("Y-m-d H:i:s");
 
 
-        if(is_int($idAdress) && is_int($cardNumberInt) && strlen(($cardNumberRep)) == 16 && is_int($cardExpirationInt) && grapheme_strlen($cardExpirationRep) == 4 && is_int($cardAuth) && grapheme_strlen((string)$cardAuth) == 3 && isset($cardName))
+        if(is_int($idAdress) && is_int($cardNumberInt) && strlen(($cardNumberRep)) == 16 && is_int($cardExpirationInt) && grapheme_strlen($cardExpirationRep) == 4 && is_int($cardAuthInt) && grapheme_strlen((string)$cardAuth) == 3 && isset($cardName))
         {
 
             $this->model->cartBought($idAdress, $date, $id_cart);
@@ -48,14 +49,14 @@ class PaymentController
             {
                 $messages['errorCardNumber'] = "Please verify you card number is correct";
             }
-            if(!is_int($cardExpirationInt) || grapheme_strlen((string)$cardExpirationRep) != 4)
+            if(!is_int($cardExpirationInt) || strlen((string)$cardExpirationRep) != 4)
             {
                 $messages['errorCardExpiration'] = "Please verify your card expiration date is correct";
             }
-            if(!is_int($cardAuth) || grapheme_strlen((string)$cardAuth) != 3)
+            if(!is_int($cardAuthInt) || strlen((string)$cardAuthInt) != 3)
             {
 
-                $messages['errorCardAuth'] = "Please verify that the 3 digits behind your card is correct";
+                $messages['errorCardAuth'] = "Please verify that the 3 digits behind your card are correct";
             }
             if(empty($cardName))
             {

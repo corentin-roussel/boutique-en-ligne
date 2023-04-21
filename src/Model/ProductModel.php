@@ -31,6 +31,19 @@ class ProductModel {
         return $tab;
     }
 
+    public function getPlatformProduct($id_game):array {
+        $req = $this->conn->prepare("SELECT compatibility.id_platform,
+                                                platform.platform
+                                                FROM compatibility 
+                                                    INNER JOIN platform 
+                                                        ON compatibility.id_platform = platform.id 
+                                                WHERE id_game=:id_game");
+        $req->execute([
+            ":id_game" => $id_game
+        ]);
+        return $req->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function GetProductByFilter($platform, $category, $subcategory) {
 
         $sqlParam = [];

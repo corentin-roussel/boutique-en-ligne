@@ -24,6 +24,12 @@ class ProductController {
 
     }
 
+    public function getPlatformProduct($id_game):array {
+
+        return $this->model->getPlatformProduct($id_game);
+
+    }
+
     public function GetProductByFilter($platform, $category, $subcategory) {
 
         $products = $this->model->GetProductByFilter($platform, $category, $subcategory);
