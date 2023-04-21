@@ -1,0 +1,29 @@
+.oneGame {
+    width: 18vw;
+    background-color: black;
+}
+
+.oneGame img {
+    width: 18vw;
+    height: 10vw;
+    border-radius: 7px;
+}
+
+#displayArticles {
+    width: fit-content;
+    background-color: aqua;
+    
+}
+
+.titrePrix {
+    display: flex;
+    justify-content: space-between;
+}
+
+#displayArticles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-column-gap: 6px;
+    grid-row-gap: 12px;
+}

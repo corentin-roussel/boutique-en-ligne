@@ -29,12 +29,14 @@
         
         $numPage = 1;
 
-        for ($i=0; $i < sizeof($productsTable); $i+=15) {
+        for ($i=0; $i < sizeof($productsTable); $i+=18) {
 
-            for ($j=$i; $j < $i+15; $j++) {
+            for ($j=$i; $j < $i+18; $j++) {
                 
                 if(isset($productsTable[$j])) {
                     $productsTable[$j]['price'] = substr_replace($productsTable[$j]['price'], ".", -2, 0) . "€";
+                    strlen($productsTable[$j]['title']) < 20 ?: $productsTable[$j]['title'] = substr($productsTable[$j]['title'], 0, 20) . "..." ;
+
                     $pages[$numPage][$j] =
                     '<div class="oneGame">
                         <a href="product.php?id=' . $productsTable[$j]['id'] . '"><img src="' . $productsTable[$j]['image'] . '" alt="" /></a>
@@ -67,6 +69,7 @@
    <?php require_once("_include/head.php") ?>
     <script defer src="all_products.js"></script>
     <script defer src="search.js"></script>
+    <link rel="stylesheet" href="assets/all_products.css">
     <title>All products</title>
 </head>
 <body>

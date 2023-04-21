@@ -62,7 +62,7 @@
                             <p>' . $game['total_price'] . '</p>
                         </div>
 
-                        <a href="buy.php"><button>Go to payment ></button></a>
+                        <a href="payments.php"><button>Go to payment ></button></a>
                     </div>';
                 }
 
