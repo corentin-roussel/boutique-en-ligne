@@ -12,8 +12,6 @@ const displayGamesSearch = async(search, pageNum) => {
 
     mainSearch.innerHTML = "";
 
-    console.log(tabHTML);
-
     if (tabHTML['noResult']) {
 
         const paraNoResult = document.createElement('p');
@@ -108,19 +106,11 @@ mainSearch.style.display = "none";
 
 
 searchBar.addEventListener('focus', () => {
-
     iconSearch.className = 'fa-solid fa-xmark';
-
-    console.log(iconSearch);
-
 })
 
 searchBar.addEventListener('focusout', () => {
-
     iconSearch.className = 'fa-solid fa-magnifying-glass';
-
-    console.log(iconSearch);
-
 })
 
 searchBar.addEventListener('keyup', async() => {
@@ -136,11 +126,7 @@ searchBar.addEventListener('keyup', async() => {
     displayPaginationSearch(searchBar.value);
 
     searchBar.addEventListener('focusout', () => {
-    
         iconSearch.className = 'fa-solid fa-xmark';
-    
-        console.log(iconSearch);
-    
     })
 
     iconSearch.addEventListener('click', () => {
