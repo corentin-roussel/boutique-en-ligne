@@ -58,7 +58,7 @@ main {
 #selectsButton {
     display: flex;
     justify-content: space-around;
-    margin: 8vh 2vw;
+    margin: 8vw 2vw;
     width: 96vw;
 }
 
@@ -117,13 +117,13 @@ main {
 
 #titreDescription, #titreAbout {
     width: 48vw;
-    height: 12vh;
+    height: 15vw;
     background-color: var(--color-ultra-dark);
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 0.8em;
-    margin-top: 4vh;
+    margin-top: 5vw;
 }
 
 #titreDescription {
@@ -148,10 +148,10 @@ main {
     background-color: var(--color-very-dark);
     border-radius: 0px 0px 7px 7px;
     text-align: center;
-    line-height: 5.3vh;
+    line-height: 6.5vw;
 }
 
 #paraAbout {
     padding: 10vw 8vw 12vw 8vw;
-    line-height: 15vh;
+    line-height: 17vw;
 }
