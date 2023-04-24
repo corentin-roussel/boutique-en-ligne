@@ -48,11 +48,11 @@ class PaymentController
             {
                 $messages['errorCardNumber'] = "Please verify you card number is correct";
             }
-            if(!is_int($cardExpirationInt) || grapheme_strlen((string)$cardExpirationRep) != 4)
+            if(!is_int($cardExpirationInt) || strlen((string)$cardExpirationRep) != 4)
             {
                 $messages['errorCardExpiration'] = "Please verify your card expiration date is correct";
             }
-            if(!is_int($cardAuth) || grapheme_strlen((string)$cardAuth) != 3)
+            if(!is_int($cardAuth) || strlen((string)$cardAuth) != 3)
             {
 
                 $messages['errorCardAuth'] = "Please verify that the 3 digits behind your card is correct";

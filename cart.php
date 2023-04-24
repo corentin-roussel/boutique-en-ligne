@@ -134,7 +134,9 @@
     </header>
 
     <main>
+        <h2>Cart</h2>
         <div id="displayCartContent"></div>
+        <h2>Summary</h2>
         <div id="displayCartPriceBuy"></div>
         <div id="displayInspired"></div>
     </main>
