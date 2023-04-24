@@ -69,3 +69,32 @@ window.addEventListener("load", async (e) => {
     let array = await getArray();
     displayImage(e, array ,previous ,next , link, img);
 })
+
+const hamburger = document.querySelector('.hamburger');
+const navMenu = document.querySelector('.nav-menu');
+const navLinks = document.querySelectorAll('.nav-menu ul li a');
+const btnClose = document.querySelector('.btn-close')
+// const body = document.querySelector('body');
+
+hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    navMenu.classList.toggle('active');
+    body.classList.toggle('active');
+});
+
+navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+        body.classList.remove('active');
+    });
+});
+
+btnClose.addEventListener('click',()=>{
+    navMenu.classList.remove('active');
+    body.classList.remove('active');
+    // console.log('lol');
+
+})
+
+
