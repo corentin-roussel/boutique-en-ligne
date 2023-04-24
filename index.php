@@ -3,7 +3,6 @@
 
     require_once ("autoloader.php");
 
-
     use App\Controller\ProductController;
 
     $ProductController = new ProductController();
@@ -19,7 +18,7 @@
     <?php require_once ('_include/head.php') ?>
     <script defer src="search.js"></script>
     <script src="index.js" defer></script>
-    <title>Accueil</title>
+    <title>Home</title>
 </head>
 <body>
     <header>
@@ -62,17 +61,21 @@
                     {
                         echo $games;
                     }
-
                 ?>
             </article>
         </section>
-        <section>
-            <article>
-                <h2>Best Sellers</h2>
-                <a href="product.php"><h4>See more</h4></a>
+        <section class="flex-released-games">
+            <article class="display-title">
+                <h2 class="title">Best Sellers</h2>
+                <a class="link" href="product.php"><h4>See more</h4></a>
             </article>
-            <article>
-
+            <article class="display-new-released-games">
+                <?php
+                    foreach($ProductController->getBestSellerGames() as $games)
+                    {
+                        echo $games;
+                    }
+                ?>
             </article>
         </section>
     </main>

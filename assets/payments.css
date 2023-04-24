@@ -1,0 +1,138 @@
+:root {
+    --color: #ff5400;
+    --color-link-hover: #ffa700;
+    --color-very-light: #b7b7b7;
+    --color-light: #999;
+    --color-medium-light: #6d6d6d;
+    --color-medium: #3d3d3d;
+    --color-medium-dark: #323232;
+    --color-dark: #272727;
+    --color-very-dark: #1d1d1d;
+    --color-ultra-dark: #101010;
+}
+
+
+.title-payment {
+    align-self: baseline;
+    margin: 0.5rem;
+}
+
+.flex-all {
+    display: flex;
+    flex-direction: column;
+}
+
+#shipping_method {
+    background-color: var(--color-dark);
+    width: 100%;
+    border-radius: 7px;
+    padding: 1rem;
+}
+
+.flex-payment {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    align-self: center;
+}
+
+.flex-adress {
+    display: flex;
+    justify-content: space-between;
+}
+
+.div_info {
+    margin: 1rem;
+}
+
+
+
+.input {
+    align-self: center;
+    margin: 1rem;
+}
+
+.adress {
+    color: #FFFFFF;
+}
+
+.country {
+    color: #FFFFFF;
+}
+.title_place {
+    color: #FFFFFF;
+    align-self: start;
+}
+
+#payment_method {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    background-color: var(--color-dark);
+    border-radius: 7px;
+    padding: 1rem;
+}
+
+.text-payment {
+    color: #FFFFFF;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+#payment {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-medium);
+    padding: 0.5rem;
+    border-radius: 7px;
+}
+
+.input-payment {
+    padding: 0.5rem;
+    background-color: var(--color-light);
+    border-radius: 7px;
+    border: 2px solid var(--color-medium);
+}
+
+.display-input {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+
+.input-little {
+    width: 85%;
+    padding: 0.5rem;
+    background-color: var(--color-light);
+    border-radius: 7px;
+    border: 2px solid var(--color-medium);
+}
+
+.flex-form {
+    display: flex;
+
+}
+
+
+.flex-price {
+    display: flex;
+}
+
+.flex-platform {
+    display: flex;
+}
+
+.display-summary {
+    display: flex;
+    width: 80%;
+}
+
+.img-summary {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 5/3;
+}

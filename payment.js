@@ -44,7 +44,6 @@ const getAdressById = async() => {
 
     const response = await fetch("payment_back.php?shippingAdress=ok")
     const getAdress = await response.json();
-    console.log(getAdress);
     displayAdress(getAdress, shipping);
 }
 
@@ -60,9 +59,7 @@ const buyCart = async(e, form) => {
     })
     const updateCart = await response.json();
 
-    let adress = document.querySelector("#shipping")
-
-    displayError(updateCart);
+    return displayError(updateCart);
 }
 
 const displayError = (json) => {
@@ -105,6 +102,12 @@ const displayError = (json) => {
     {
         cardName_error.innerHTML = json['errorCardName'];
     }
+    if(json['okCart'])
+    {
+        return json['okCart'];
+    }
+
+
 
 }
 
@@ -117,7 +120,6 @@ const displayAdress = (json, place) => {
 
     for(display of json)
     {
-        console.log(display)
 
         const div_display = document.createElement("div");
         div_display.setAttribute("class", "flex-adress");
@@ -182,8 +184,9 @@ const displaySummary = (place, summary) => {
         const div_image = document.createElement("div");
         div_display.appendChild(div_image);
 
-        const image = document.createElement("image");
+        const image = document.createElement("img");
         image.setAttribute("class", "img-summary")
+        image.setAttribute("src", display.image)
         div_image.appendChild(image)
 
         const div_container = document.createElement("div");
@@ -231,7 +234,6 @@ window.addEventListener("load", async() => {
 
     displayForm(payment, form);
 
-
     await getAdressById();
 
     await summaryGames();
@@ -241,9 +243,25 @@ window.addEventListener("load", async() => {
 
     let form_bought = document.querySelector("#payment");
 
-    form_bought.addEventListener("submit", (e) => {
-        buyCart(e, form_bought);
-    })
+    form_bought.addEventListener("submit", async(e) => {
 
+           if(await buyCart(e, form_bought) === "okCart")
+           {
+               window.location.href = "order_summary.php";
+           }
+
+
+
+
+    })
 })
+
+
+
+if(window.location.href === "http://localhost/boutique-en-ligne/order_summary.php")
+{
+    setTimeout(() => {
+        window.location.href = 'index.php'
+    }, 10000);
+}
 

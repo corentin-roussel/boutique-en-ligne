@@ -12,6 +12,7 @@ if (session_status() == PHP_SESSION_NONE){ session_start();}
 <html lang="en">
 <head>
     <?php require_once('_include/head.php') ?>
+    <link rel="stylesheet" href="assets/payments.css">
     <script defer src="payment.js"></script>
     <title>Payment</title>
 </head>
@@ -19,24 +20,29 @@ if (session_status() == PHP_SESSION_NONE){ session_start();}
     <header>
 
     </header>
-    <main>
-        <h1>Shipping Method</h1>
-        <section id="shipping_method">
+    <main class="flex-all">
+        <section class="flex-payment">
+            <h1 class="title-payment">Shipping Method</h1>
+            <article id="shipping_method">
 
+            </article>
+            <a href="shipping_info.php"><< Create a new adress</a>
         </section>
-        <a href="shipping_info.php"><< Create a new adress</a>
-        <h1>Payment Method</h1>
-        <section id="payment_method">
+        <section class="flex-payment">
+            <h1 class="title-payment">Payment Method</h1>
+            <article id="payment_method">
 
+            </article>
         </section>
+        <section class="flex-payment">
+            <h1 class="title-payment">Summary</h1>
+            <article id="summary_game">
 
-        <h1>Summary</h1>
-        <section id="summary_game">
-
+            </article>
         </section>
-        <section id="button_buy">
+        <article id="button_buy">
 
-        </section>
+        </article>
     </main>
     <footer>
 

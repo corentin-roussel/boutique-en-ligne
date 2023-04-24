@@ -54,6 +54,6 @@
 <a href="all_products.php">All products</a>
 <a href="platform.php">Platform</a>
 <?php if(isset($_SESSION['user']) && $_SESSION['user']['role'] === 'admin') : ?> <a href="admin.php">Admin</a> <?php endif ?>
-
+<?php if(isset($_SESSION['user'])): ?><a href="disconnect.php">Disconnect</a><?php endif; ?>
 <input type="text" name="searchBar" id="searchBar">
 <i class="fa-solid fa-magnifying-glass" id="iconSearch"></i>

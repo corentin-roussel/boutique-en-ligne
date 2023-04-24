@@ -13,7 +13,7 @@ class PaymentController
 
     public function verifFormPayment(?int $idAdress, ?string $cardNumber, ?string $cardExpiration, ?string $cardAuth, ?string $cardName, ?int $id_cart, ?int $id_user) {
 
-        $messages = [];
+
 
         $cardAuthInt=(int)$cardAuth;
 
@@ -25,10 +25,13 @@ class PaymentController
 
 
         $date = date("Y-m-d H:i:s");
+        $messages = [];
 
-
-        if(is_int($idAdress) && is_int($cardNumberInt) && strlen(($cardNumberRep)) == 16 && is_int($cardExpirationInt) && grapheme_strlen($cardExpirationRep) == 4 && is_int($cardAuthInt) && grapheme_strlen((string)$cardAuth) == 3 && isset($cardName))
+        if(is_int($idAdress) && is_int($cardNumberInt) && strlen(($cardNumberRep)) == 16 && is_int($cardExpirationInt) && grapheme_strlen($cardExpirationRep) == 4 && is_int($cardAuthInt) && grapheme_strlen((string)$cardAuth) == 3 && isset($cardName) && isset($messages))
         {
+            $games_cart = $this->model->getItemCart($id_cart);
+
+            $this->model->insertSoldGames($games_cart);
 
             $this->model->cartBought($idAdress, $date, $id_cart);
 
@@ -38,7 +41,8 @@ class PaymentController
 
             $_SESSION['user']['actualCart'] = $id_actual_cart['id'];
 
-            header("location: order_summary.php");
+            $messages['okCart'] = "okCart";
+
         }
         else {
             if(empty($idAdress))
@@ -63,8 +67,8 @@ class PaymentController
                 $messages['errorCardName'] = "Please enter the name on your credit card";
             }
 
-            echo json_encode($messages, JSON_PRETTY_PRINT);
         }
+            echo json_encode($messages, JSON_PRETTY_PRINT);
 
     }
 

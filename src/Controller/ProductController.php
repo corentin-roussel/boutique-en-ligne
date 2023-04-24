@@ -60,6 +60,47 @@ class ProductController {
         return $game;
     }
 
+    public function getBestSellerGames():array {
+        foreach($this->model->bestsellersGames() as $games)
+        {
+            $game_price = substr_replace($games['price'], ".", -2, 0) . "€";
+            $game[] = '<div class="new-released-game">
+                        <a href="product.php?id='. $games['id_game'] .'"><img src="'. $games['image'] .'" class="img-released-games" alt="" /></a>
+                        <div class="new-released-games-title-price">
+                            <a href="product.php?id=' . $games['id_game'] .'"class="link-released-games"><p class="new-released-text">' . $games['title'] . '</p></a>
+                            <p class="new-released-price">' . $game_price . '</p>
+                        </div>
+                    </div>';
+        }
+        return $game;
+    }
+
+    public function getLastCartPaid($id_user) {
+        return $this->model->getLastCartPaid($id_user);
+
+    }
+
+    public function displayItemCart($id_cart) {
+        foreach($this->model->displayItemCart($id_cart) as $cart)
+        {
+            $cart_price = substr_replace($cart['price'], ".", -2, 0) . "€";
+            $carts[] = '<div class="order-cart">
+                        <img src="'. $cart['image'] .'" class="img-order" alt="" />
+                        <div class="flex-order">
+                            <div class="flex-price">
+                                <p class="text-left">' .$cart['title'] . '</p>
+                                <p class="text-right">' .$cart['quantity']. '</p>
+                            </div>
+                            <div class="flex-platform">
+                                <p class="text-left">' . $cart['platform'] . '</p>
+                                <p class="text-right">' . $cart_price . '</p>
+                            </div>
+                        </div>
+                    </div>';
+        }
+
+        return $carts;
+    }
     public function getNewReleasedGames():array
     {
 

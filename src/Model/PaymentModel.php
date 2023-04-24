@@ -95,31 +95,28 @@ class PaymentModel
 
     public function insertSoldGames($getitemCart) {
 
-        foreach ($getitemCart as $item)
-        $sold = $this->connect->prepare("SELECT sold.id_game FROM sold WHERE id_game=:id_game");
-        $sold->execute([
-            ":id_game" => $item['id_game']
-        ]);
-        $game_sold = $sold->fetch(PDO::FETCH_ASSOC);
-        $game_exist = $sold->rowCount();
-
-        if($game_exist === 1)
-        {
-            $req = $this->connect->prepare("UPDATE sold SET sold=:sold WHERE id_game=:id_game");
-            $req->execute([
-                "sold" => (int)$item['quantity'] + (int)$game_sold ,
+        foreach ($getitemCart as $item) {
+            $sold = $this->connect->prepare("SELECT sold.id_game FROM sold WHERE id_game=:id_game");
+            $sold->execute([
                 ":id_game" => $item['id_game']
             ]);
-        }
-        else
-        {
-            $req = $this->connect->prepare("INSERT INTO sold VALUES (id_game, sold) AS (:id_game, :sold)");
-            $req->execute([
-                ":id_game" => $item['id_game'],
-                "sold" => $item['quantity']
-            ]);
-        }
+            $game_sold = $sold->fetch(PDO::FETCH_ASSOC);
+            $game_exist = $sold->rowCount();
 
+            if($game_exist === 1) {
+                $req = $this->connect->prepare("UPDATE sold SET sold=:sold WHERE id_game=:id_game");
+                $req->execute([
+                    ":sold" => (int)$item['quantity'] + (int)$game_sold,
+                    ":id_game" => $item['id_game']
+                ]);
+            } else {
+                $req = $this->connect->prepare("INSERT INTO sold  (id_game, sold) VALUES (:id_game, :sold)");
+                $req->execute([
+                    ":id_game" => $item['id_game'],
+                    ":sold" => $item['quantity']
+                ]);
+            }
+        }
     }
 
     public function getItemCart($id_actual_cart) {
