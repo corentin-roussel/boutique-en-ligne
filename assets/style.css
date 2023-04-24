@@ -40,6 +40,13 @@ body::-webkit-scrollbar{
 }
 /*******************************INDEX*******************************/
 
+header{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    border: 1px solid black;
+    /* background-color: blue; */
+}
 .flex-released-games {
     display: flex;
     flex-direction: column;
@@ -204,6 +211,5 @@ body::-webkit-scrollbar{
     border-radius: 7px;
     aspect-ratio: 5/3;
 }
-
 
 

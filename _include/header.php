@@ -48,6 +48,9 @@
     }
 
 ?>
+
+
+
 <a href="index.php">Home</a>
 <?php if(!isset($_SESSION['user'])) : ?> <a href="authentification.php">Authenticate</a> <?php endif ?>
 <?php if(isset($_SESSION['user'])) : ?> <a href="profile.php">Profile</a> <?php endif ?>
