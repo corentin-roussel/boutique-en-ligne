@@ -57,3 +57,5 @@
 
 <input type="text" name="searchBar" id="searchBar">
 <i class="fa-solid fa-magnifying-glass" id="iconSearch"></i>
+
+
