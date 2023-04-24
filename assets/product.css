@@ -1,0 +1,157 @@
+body {
+    background-color: var(--color-dark);
+}
+
+main {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#productImage {
+    width: 96vw;
+    height: 63vw;
+    border-radius: 7px;
+    aspect-ratio: 5/3;
+}
+
+.priceDesktop {
+    display: none;
+}
+
+.titrePrixMobile > h2, .priceMobile {
+    background-color: var(--color-very-dark);
+    color: var(--color-very-light);
+    font-size: 1em;
+    border-radius: 7px;
+    padding: 3px 10px;
+}
+
+.titrePrixMobile {
+    display: flex;
+    justify-content: space-between;
+}
+
+.titrePrixMobile, #selectsButton, #productImage {
+    margin: 10px 2vw;
+}
+
+.shortDescr, #titreShortDescr > a {
+    display: none;
+}
+
+#selectPlatform {
+    color: white;
+}
+
+#quantity, #quantityChoice {
+    display: flex;
+    align-items: center;
+}
+
+#quantityChoice > i {
+    color: var(--color-light);
+    margin: 0 0.8em;
+}
+
+#selectsButton {
+    display: flex;
+    justify-content: space-around;
+    margin: 8vh 2vw;
+    width: 96vw;
+}
+
+#selectPlatform, #quantity > *, #quantity > * > * {
+    background-color: var(--color-very-dark);
+}
+
+#selectPlatform, #quantity, #cartButton {
+    border-radius: 7px;
+    border: 1px solid var(--color-medium-light);
+    background-color: var(--color-very-dark);
+    padding: 0.3em;
+    height: 30px;
+}
+
+#selectPlatform {
+    width: 30vw;
+}
+
+#selectPlatform > option {
+    font-size: 0.9em;
+}
+
+#quantity {
+    width: 45vw;
+}
+
+#quantity, #cartButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#quantity > * , #quantity > * > * {
+    font-size: 0.9em;
+}
+
+#quantity > p {
+    margin: 0 0 0 1em;
+}
+
+#cartButton {
+    width: 35px;
+    background-color: var(--color-medium-light);
+}
+
+#cartButton > i {
+    background-color: var(--color-medium-light);
+    color: var(--color);
+    font-size: large;
+}
+
+#titresDescriptionAbout {
+    display: flex;
+}
+
+#titreDescription, #titreAbout {
+    width: 48vw;
+    height: 12vh;
+    background-color: var(--color-ultra-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8em;
+    margin-top: 4vh;
+}
+
+#titreDescription {
+    border-radius: 7px 0px 0px 0px;
+}
+
+#titreAbout {
+    border-radius: 0px 7px 0px 0px;
+}
+
+.focusTitre {
+    color: var(--color);
+    background-color: var(--color-very-dark) !important;
+}
+
+#titresDescriptionAbout, #paraDescription, #paraAbout {
+    margin: 0 2vw;
+}
+
+#paraDescription, #paraAbout {
+    padding: 10vw 9vw 12vw 9vw;
+    background-color: var(--color-very-dark);
+    border-radius: 0px 0px 7px 7px;
+    text-align: center;
+    line-height: 5.3vh;
+}
+
+#paraAbout {
+    padding: 10vw 8vw 12vw 8vw;
+    line-height: 15vh;
+}
