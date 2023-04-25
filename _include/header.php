@@ -57,3 +57,5 @@
 <?php if(isset($_SESSION['user'])): ?><a href="disconnect.php">Disconnect</a><?php endif; ?>
 <input type="text" name="searchBar" id="searchBar">
 <i class="fa-solid fa-magnifying-glass" id="iconSearch"></i>
+
+

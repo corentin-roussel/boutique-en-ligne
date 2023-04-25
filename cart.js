@@ -14,10 +14,6 @@ const displayGames = async() => {
 
     const divCartContent = document.getElementById('displayCartContent');
 
-    const titreCart = document.createElement('h2');
-    titreCart.innerHTML = "Cart";
-    main.insertBefore(titreCart, divCartContent);
-
     const divAllGames = document.createElement('div');
     divAllGames.className = 'divAllGames';
     divAllGames.innerHTML = "";
@@ -120,10 +116,6 @@ const displayPrice = async() => {
     const divCartPriceBuy = document.getElementById('displayCartPriceBuy');
 
     const main = document.getElementsByTagName('main')[0];
-
-    const titrePrice = document.createElement('h2');
-    titrePrice.innerHTML = "Sumary";
-    main.insertBefore(titrePrice, divCartPriceBuy);
 
     console.log(content);
 

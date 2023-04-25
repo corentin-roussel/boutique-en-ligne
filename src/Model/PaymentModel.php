@@ -6,6 +6,7 @@
 
 class PaymentModel
 {
+    private ?PDO $connect;
 
     public function __construct()
     {

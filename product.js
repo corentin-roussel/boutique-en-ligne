@@ -53,7 +53,11 @@ window.addEventListener('load', async() => {
     const cartButton = document.getElementById('cartButton');
     
     const divCartMessage = document.createElement('div');
-    selectsButton.appendChild(divCartMessage);
+    divCartMessage.id = "message";
+    selectsButton.parentElement.appendChild(divCartMessage);
+
+    
+    titreDescription.className = titreAbout.className + " focusTitre";
 
     titreAbout.addEventListener('click', () => {
 
@@ -61,6 +65,10 @@ window.addEventListener('load', async() => {
 
             paraAbout.style.display = 'block';
             paraDescription.style.display = 'none';
+
+            titreDescription.classList.remove('focusTitre');
+            titreAbout.classList.remove('focusTitre');
+            titreAbout.className = titreAbout.className + " focusTitre";
 
         }
 
@@ -72,6 +80,10 @@ window.addEventListener('load', async() => {
 
             paraAbout.style.display = 'none';
             paraDescription.style.display = 'block';
+
+            titreDescription.classList.remove('focusTitre');
+            titreAbout.classList.remove('focusTitre');
+            titreDescription.className = titreAbout.className + " focusTitre";
 
         }
 

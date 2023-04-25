@@ -49,6 +49,7 @@ class PaymentController
             {
                 $messages['errorCardNumber'] = "Please verify you card number is correct";
             }
+
             if(!ctype_digit($cardExpirationRep) || strlen($cardExpirationRep) != 4)
             {
                 $messages['errorCardExpiration'] = "Please verify your card expiration date is correct";
