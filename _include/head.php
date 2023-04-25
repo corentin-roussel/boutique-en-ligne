@@ -5,8 +5,8 @@
 
 
 <!-- LINK CSS -->
-<link rel="stylesheet" href="./assets/Admin_style.css">
-<link rel="stylesheet" href="./assets/style.css" type="text/css">
+<!--<link rel="stylesheet" href="./assets/Admin_style.css">-->
+<!--<link rel="stylesheet" href="./assets/style.css" type="text/css">-->
 <!-- LINK API FONT -->
 <script src="https://kit.fontawesome.com/1241fb6252.js" crossorigin="anonymous"></script>
 <!-- LINK JS -->

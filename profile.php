@@ -25,6 +25,7 @@ if(isset($_GET['other'])){
 <head>
     <?php require_once("_include/head.php") ?>
     <script defer src="./scripts/profile.js"></script>
+    <link rel="stylesheet" href="./assets/style.css">
     <link rel="stylesheet" href="./assets/Profil_style.css">
     <title>GameVault - Profile</title>
 </head>
@@ -33,17 +34,18 @@ if(isset($_GET['other'])){
 
     <?php require_once('_include/header.php') ?>
 
-    <div class="container-title">
-        <h1>Profil</h1>
-    </div>
 
-
+<main>
     <div class="container-profil">
         <div class="container-profil-left">
+
         </div>
         <div class="container-profil-right">
+
         </div>
     </div>
+</main>
+
 
 </body>
 

@@ -69,8 +69,8 @@ if (isset($_GET['getAll'])) {
 
 
     <div class="user-info">
-      <a href="#" class="cart"><i class="fas fa-shopping-cart"></i></a>
-    <?php if (!isset($_SESSION['user'])) : ?>   <a href="#" class="login">Connect</a><?php endif ?>
+      <a href="cart.php" class="cart"><i class="fas fa-shopping-cart"></i></a>
+    <?php if (!isset($_SESSION['user'])) : ?>   <a href="authentification.php" class="login">Connect</a><?php endif ?>
     </div>
     <nav class="nav-menu">
       <button class="btn-close"><span class="hamburger-icon fa fa-times"></span>

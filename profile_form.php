@@ -12,24 +12,27 @@ $getData = $showInfoUser->showInfosProfil();
 ?>
 
 
+    <h1 class="title-form">Profil</h1>
 <form action="" method="POST" id="form_profil">
-    <label for="login"></label>
-    <input type="text" name="login" id="login_profil" placeholder="<?= $_SESSION['user']['login']?>">
-    <label for="password"></label>
-    <input type="password" name="new_pass" placeholder="New-password" >
-    <label for="conf_pass"></label>
-    <input type="password" name="conf_pass" placeholder="Confirmation password" >
-    <label for="email"></label>
-    <input type="text " name="email" placeholder="<?= $_SESSION['user']['email']?>" >
-    <label for="firstname"></label>
-    <input type="text" name="firstname" placeholder="FirstName" >
-    <label for="lastname"></label>
-    <input type="text" name="lastname" placeholder="LastName" >
-    <label for="birthday"></label>
-    <input type="date" name="date">
-    <label for="phone"></label>
-    <input type="text" name="phone" placeholder="Phone Number" >
+
+
+    <input class="input" type="text" name="login" id="login_profil" value="<?= $_SESSION['user']['login']?>">
+
+    <input class="input" type="password" name="new_pass" placeholder="New-password" >
+
+    <input class="input" type="password" name="conf_pass" placeholder="Confirmation password" >
+
+    <input class="input" type="text " name="email" value="<?= $_SESSION['user']['email']?>" >
+
+    <input class="input" type="text" name="firstname" placeholder="FirstName" >
+
+    <input class="input" type="text" name="lastname" placeholder="LastName" >
+
+    <input class="input" type="date" name="date">
+
+    <input class="input" type="text" name="phone" placeholder="Phone Number" >
+
     <p id="mess_form"></p>
-    <button type="subit" name="submit_form_profil">Submit</button>
+    <button class="button" type="subit" name="submit_form_profil">Submit</button>
 </form>
 

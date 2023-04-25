@@ -7,13 +7,14 @@ if (session_status() == PHP_SESSION_NONE){ session_start();}
 <html lang="fr">
 <head>
     <?php require_once '_include/head.php' ?>
+    <link rel="stylesheet" href="assets/connect.css">
     <script src="authentification.js" defer></script>
     <title>Authenticate</title>
 </head>
 
 <body>
 
-    <header><a href="index.php"><h1>GAME VAULT</h1></a></header>
+    <header id="header"><a href="index.php"><img class="logo" src="_img/newnewlogo.png" alt=""></a></header>
 
     <main id="main">
 
@@ -21,17 +22,15 @@ if (session_status() == PHP_SESSION_NONE){ session_start();}
 
             <form action="" method="POST" id="signinForm" class="form">
 
-                <h2>Sign in</h2>
+                <h2 class="title-form">Sign in</h2>
 
-                <label for="login">Login</label>
-                <input type="text" name="login" id="login" placeholder="login" required />
+                <input class="input" type="text" name="login" id="login" placeholder="login" required />
                 <div id="errorLogin" class="error"></div>
 
-                <label for="password">Password</label>
-                <input type="password" name="password" id="password" placeholder="Enter your password" required />
+                <input class="input" type="password" name="password" id="password" placeholder="Password" required />
                 <div id="errorPass" class="error"></div>
 
-                <button type="submit">Submit</button>
+                <button class="button" type="submit">Submit</button>
 
             </form>
 
