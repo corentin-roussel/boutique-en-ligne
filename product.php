@@ -42,14 +42,19 @@
 
                 <div id="titreShortDescr">
 
-                    <h2>' . $data[0]['title'] . '</h2>
+                    <div class="titrePrixMobile">
 
-                    <p>' . $data[0]['short_description'] . '...</p>
+                        <h2>' . $data[0]['title'] . '</h2>
+
+                        <p class="priceMobile">' . $data[0]['price'] . '</p>
+                    </div>
+
+                    <p class="shortDescr">' . $data[0]['short_description'] . '...</p>
 
                     <a href="#decriptionProduct">Read more</a>
                 </div>
 
-                <p>' . $data[0]['price'] . '</p>
+                <p class="priceDesktop">' . $data[0]['price'] . '</p>
             </div>
 
             <div id="selectsButton">
@@ -59,15 +64,15 @@
                     . $options .
                 '</select>
 
-                <span>
+                <div id="quantity">
                     <p>Quantity</p>
 
-                    <span id="quantityChoice">
+                    <div id="quantityChoice">
                         <i class="fa-solid fa-circle-minus" id="quantiteMoins"></i>
                         <p id="quantiteNum">1</p>
                         <i class="fa-solid fa-circle-plus" id="quantitePlus"></i>
-                    </span>
-                </span>
+                    </div>
+                </div>
 
                 '; if(isset($_SESSION['user'])) {$displayProduct['part1'] = $displayProduct['part1'] . '<button id="cartButton"><i class="fa-solid fa-cart-plus"></i></button>';}else{$displayProduct['part1'] = $displayProduct['part1'] . '<button id="cartButton" disabled="disabled"><i class="fa-solid fa-cart-plus"></i></button>';};
             $displayProduct['part1'] = $displayProduct['part1'] . '</div>
@@ -113,6 +118,7 @@
    <?php require_once("_include/head.php") ?>
     <script src="https://kit.fontawesome.com/1241fb6252.js" crossorigin="anonymous"></script>
     <script defer src="product.js"></script>
+    <link rel="stylesheet" href="assets/product.css">
     <title>Products</title>
 </head>
 <body>
