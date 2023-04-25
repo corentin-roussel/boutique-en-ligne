@@ -1,5 +1,5 @@
 .searchMain {
-    background-color: var(--color-very-dark);
+    background-color: var(--color-ultra-dark);
     min-height: 92vh;
     display: flex;
     flex-direction: column;
@@ -32,6 +32,7 @@
 .oneGame a {
     text-decoration: none;
     color: var(--color-very-light);
+    background-color: var(--color-ultra-dark);
 }
 
 .titrePrix {
