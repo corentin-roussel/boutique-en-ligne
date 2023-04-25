@@ -53,6 +53,7 @@ window.addEventListener('load', async() => {
     const cartButton = document.getElementById('cartButton');
     
     const divCartMessage = document.createElement('div');
+    divCartMessage.id = "message";
     selectsButton.parentElement.appendChild(divCartMessage);
 
     
