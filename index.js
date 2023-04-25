@@ -98,3 +98,18 @@ btnClose.addEventListener('click',()=>{
 })
 
 
+window.addEventListener('resize', function() {
+    // Get the "example-div" element
+    var exampleDiv = document.querySelector('.container-search');
+  
+    // Check if the screen width is less than 768 pixels
+    if (window.innerWidth < 769) {
+      // Remove the "example-class" class from the element
+      exampleDiv.classList.add('.container-search');
+    } else {
+      // Add the "example-class" class back to the element if it was removed
+      exampleDiv.classList.remove('.container-search');
+    }
+  });
+  
+

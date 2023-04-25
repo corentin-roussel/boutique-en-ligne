@@ -57,10 +57,16 @@ if (isset($_GET['getAll'])) {
       <span class="hamburger-icon"></span>
       <span class="hamburger-icon"></span>
     </button>
-    <img class="logo" src="./_img/newnewlogo.png" alt="logo">
-    <form class="search-form">
-      <input type="text" name="searchBar" id="searchBar" placeholder="Search...">
-    </form>
+
+
+    <div class="container-search">
+      <a href="./index.php"> <img class="logo" src="./_img/newnewlogo.png" alt="logo"></a>
+      <form class="search-form">
+        <input type="text" name="searchBar" id="searchBar" placeholder="Search...">
+      </form>
+    </div>
+
+
     <div class="user-info">
       <a href="#" class="cart"><i class="fas fa-shopping-cart"></i></a>
     <?php if (!isset($_SESSION['user'])) : ?>   <a href="#" class="login">Connect</a><?php endif ?>

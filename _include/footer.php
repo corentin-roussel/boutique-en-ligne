@@ -2,7 +2,7 @@
     <div class="footer-container">
 
         <div class="footer-logo-container">
-            <img class="footer-logo" src="./_img/newnewlogo.png" alt="logo">
+            <a href="./index.php"><img class="footer-logo" src="./_img/newnewlogo.png" alt="logo"></a>
         </div>
 
         <div class="social-media-container">
@@ -24,7 +24,7 @@
      </div>
 
     <div class="plat-container">
-        <small>- La Plateforme - </small> 
+        <!-- <small>- La Plateforme - </small>  -->
     </div>
 
 </footer>
