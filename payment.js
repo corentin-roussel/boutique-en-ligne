@@ -173,6 +173,10 @@ const displayAdress = (json, place) => {
     place.appendChild(error_adress);
 }
 
+
+const displayPrice = (price) => {
+    return price / 100;
+}
 const displaySummary = (place, summary) => {
     for(display of summary)
     {
@@ -180,14 +184,6 @@ const displaySummary = (place, summary) => {
         div_display.setAttribute("class", "display-summary")
         place.appendChild(div_display)
 
-
-        const div_image = document.createElement("div");
-        div_display.appendChild(div_image);
-
-        const image = document.createElement("img");
-        image.setAttribute("class", "img-summary")
-        image.setAttribute("src", display.image)
-        div_image.appendChild(image)
 
         const div_container = document.createElement("div");
         div_container.setAttribute("class", "flex-element")
@@ -203,7 +199,7 @@ const displaySummary = (place, summary) => {
         div_name_price.appendChild(name)
 
         const price = document.createElement("p");
-        price.innerHTML = display.price
+        price.innerHTML = displayPrice(display.price) + "€";
         price.setAttribute("class", "price-summary")
         div_name_price.appendChild(price)
 
@@ -218,7 +214,7 @@ const displaySummary = (place, summary) => {
         div_platform_quantity.appendChild(platform);
 
         const quantity = document.createElement("p");
-        quantity.innerHTML = display.quantity
+        quantity.innerHTML = "Qt : " + display.quantity
         quantity.setAttribute("class", "quantity-summary");
         div_platform_quantity.appendChild(quantity)
 
@@ -262,6 +258,6 @@ if(window.location.href === "http://localhost/boutique-en-ligne/order_summary.ph
 {
     setTimeout(() => {
         window.location.href = 'index.php'
-    }, 10000);
+    }, 8000);
 }
 

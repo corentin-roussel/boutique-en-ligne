@@ -89,7 +89,7 @@ class ProductController {
                         <div class="flex-order">
                             <div class="flex-price">
                                 <p class="text-left">' .$cart['title'] . '</p>
-                                <p class="text-right">' .$cart['quantity']. '</p>
+                                <p class="text-right">' .'Qt: ' . $cart['quantity']. '</p>
                             </div>
                             <div class="flex-platform">
                                 <p class="text-left">' . $cart['platform'] . '</p>

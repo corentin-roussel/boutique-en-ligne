@@ -6,7 +6,6 @@ use App\Model\AdminModel;
 
 
 $AdminController = new  AdminControllerGame();
-$AdminModel = new AdminModel();
 
 $AdminController->fetchLastGame();
 
@@ -20,7 +19,7 @@ $getSubCategory = $AdminController->getSubCategory();
 
 if(isset($_GET['formAddGame'])):
 ?>
-<?php if(isset($_GET['updateGame'])) { $getValue = $AdminModel->searchGameById($_POST['id_update']);/*var_dump($getValue)*/; $compatId = $AdminModel->findCompatibility($_POST['id_update']);} ?>
+<?php if(isset($_GET['updateGame'])) { $getValue = $AdminController->searchGameById($_POST['id_update']); $compatId = $AdminController->findCompatibility($_POST['id_update']);} ?>
 
 <form id="formGame" method="post">
     <div id="error-field"></div>

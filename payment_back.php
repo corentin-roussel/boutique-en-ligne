@@ -28,7 +28,6 @@ if(isset($_GET['updateCart']))
 
     $PaymentController->verifFormPayment($_POST['shipping'], $_POST['card-number'], $_POST['expiration-date'], $_POST['cvv'], $_POST['name'], $_SESSION['user']['actualCart'], $_SESSION['user']['id']);
 }
-
 ?>
 
 
@@ -60,10 +59,14 @@ if(isset($_GET['updateCart']))
 <?php endif; ?>
 
 <?php if(isset($_GET['buttonBuy'])): ?>
-<div>
-    <div>
+<div class="buy">
+    <div class="flex-buy">
         <p>TOTAL : </p>
-        <p><?php  $cartPrice = $PaymentController->getCart($_SESSION['user']['id']); echo $cartPrice['total_price']  ?></p>
+        <p><?php
+            $cartPrice = $PaymentController->getCart($_SESSION['user']['id']);
+            $game_price = substr_replace($cartPrice['total_price'], ".", -2, 0) . "€";
+            echo $game_price?>
+        </p>
     </div>
     <input form="payment" id="buy" type="submit" value="Buy!">
 </div>

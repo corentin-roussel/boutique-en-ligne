@@ -21,28 +21,34 @@ if (session_status() == PHP_SESSION_NONE){ session_start();}
 
     </header>
     <main class="flex-all">
-        <section class="flex-payment">
-            <h1 class="title-payment">Shipping Method</h1>
-            <article id="shipping_method">
+        <section class="flex-desktop">
+            <section class="flex-payment">
+                <h1 class="title-payment">Shipping Method</h1>
+                <article id="shipping_method">
+
+                </article>
+                <a class="link-adress" href="shipping_info.php"><< Create a new adress</a>
+            </section>
+            <section class="flex-payment">
+                <h1 class="title-payment">Payment Method</h1>
+                <article id="payment_method">
+
+                </article>
+            </section>
+
+
+        </section>
+        <section class="flex-bottom">
+            <section class="flex-payment">
+                <h1 class="title-payment">Summary</h1>
+                <article id="summary_game">
+
+                </article>
+            </section>
+            <article id="button_buy">
 
             </article>
-            <a href="shipping_info.php"><< Create a new adress</a>
         </section>
-        <section class="flex-payment">
-            <h1 class="title-payment">Payment Method</h1>
-            <article id="payment_method">
-
-            </article>
-        </section>
-        <section class="flex-payment">
-            <h1 class="title-payment">Summary</h1>
-            <article id="summary_game">
-
-            </article>
-        </section>
-        <article id="button_buy">
-
-        </article>
     </main>
     <footer>
 
