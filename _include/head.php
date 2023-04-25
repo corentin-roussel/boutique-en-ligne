@@ -16,4 +16,5 @@
 
 <link rel="stylesheet" href="style.css" type="text/css">
 <script src="https://kit.fontawesome.com/1241fb6252.js" crossorigin="anonymous"></script>
-
+<script src="search.js" defer></script>
+<link rel="stylesheet" href="assets/search.css" />

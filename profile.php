@@ -33,17 +33,21 @@ if(isset($_GET['other'])){
 
     <?php require_once('_include/header.php') ?>
 
-    <div class="container-title">
-        <h1>Profil</h1>
-    </div>
+    <main>
+        <div class="container-title">
+            <h1>Profil</h1>
+        </div>
 
 
-    <div class="container-profil">
-        <div class="container-profil-left">
+        <div class="container-profil">
+            <div class="container-profil-left">
+            </div>
+            <div class="container-profil-right">
+            </div>
         </div>
-        <div class="container-profil-right">
-        </div>
-    </div>
+    </main>
+    
+    <?php require_once('_include/footer.php') ?>
 
 </body>
 

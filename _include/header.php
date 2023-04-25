@@ -23,11 +23,15 @@
                     
                     if(isset($searchResult[$j])) {
 
+                        strlen($searchResult[$j]['title']) > 10 ? $searchResult[$j]['titleMobile'] = substr($searchResult[$j]['title'], 0, 10) . "..." : $searchResult[$j]['titleMobile'] = $searchResult[$j]['title'] ;
+                        strlen($searchResult[$j]['title']) > 20 ? $searchResult[$j]['titleDesktop'] = substr($searchResult[$j]['title'], 0, 20) . "..." : $searchResult[$j]['titleDesktop'] = $searchResult[$j]['title'] ;    
+
                         $pages[$numPage][$j] =
                         '<div class="oneGame">
                             <a href="product.php?id=' . $searchResult[$j]['id'] . '"><img src="' . $searchResult[$j]['image'] . '" alt="" /></a>
                             <div class="titrePrix">
-                                <a href="product.php?id=' . $searchResult[$j]['id'] . '">' . $searchResult[$j]['title'] . '</a>
+                            <a href="product.php?id=' . $searchResult[$j]['id'] . '" class="titleMobileSearch">' . $searchResult[$j]['titleMobile'] . '</a>
+                            <a href="product.php?id=' . $searchResult[$j]['id'] . '" class="titleDesktopSearch">' . $searchResult[$j]['titleDesktop'] . '</a>
                                 <a href="product.php?id=' . $searchResult[$j]['id'] . '"><p>' . substr_replace($searchResult[$j]['price'], '.', -2, 0) . '€' . '</p></a>
                             </div>
                         </div>';
