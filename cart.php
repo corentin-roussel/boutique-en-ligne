@@ -126,6 +126,7 @@
 <head>
    <?php require_once("_include/head.php") ?>
     <script defer src="cart.js"></script>
+    <link rel="stylesheet" href="./assets.css">
     <title>Cart</title>
 </head>
 <body>
