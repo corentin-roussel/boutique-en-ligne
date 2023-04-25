@@ -30,8 +30,7 @@
         $data[0]['price'] = substr_replace($data[0]['price'], ".", -2, 0) . "€";
         
         $displayProduct = [];
-        
-        $options = createOptionsSelect('platform');
+        $options = $product->getPlatformProduct($_GET['getDataProduct']);
         
         $displayProduct['part1'] = '
         <img src="' . $data[0]['image'] . '" alt="" id="productImage" />
@@ -60,9 +59,9 @@
             <div id="selectsButton">
 
                 <select name="platform" id="selectPlatform">
-                    <option value="">Platform</option>'
-                    . $options .
-                '</select>
+                    <option value="">Platform</option>';
+                    foreach ($options as $item) { $displayProduct['part1'] = $displayProduct['part1'] . '<option>' .$item["platform"]. '</option>';}
+                $displayProduct['part1'] = $displayProduct['part1'] . '</select>
 
                 <div id="quantity">
                     <p>Quantity</p>
