@@ -23,18 +23,26 @@ if (isset($_GET['getAll'])) {
       for ($j = $i; $j < $i + 6; $j++) {
 
         if (isset($searchResult[$j])) {
+          for ($j=$i; $j < $i+6; $j++) {
+              
+            if(isset($searchResult[$j])) {
 
-          $pages[$numPage][$j] =
-            '<div class="oneGame">
-                            <a href="product.php?id=' . $searchResult[$j]['id'] . '"><img src="' . $searchResult[$j]['image'] . '" alt="" /></a>
-                            <div class="titrePrix">
-                                <a href="product.php?id=' . $searchResult[$j]['id'] . '">' . $searchResult[$j]['title'] . '</a>
-                                <a href="product.php?id=' . $searchResult[$j]['id'] . '"><p>' . substr_replace($searchResult[$j]['price'], '.', -2, 0) . '€' . '</p></a>
-                            </div>
-                        </div>';
+              strlen($searchResult[$j]['title']) > 10 ? $searchResult[$j]['titleMobile'] = substr($searchResult[$j]['title'], 0, 10) . "..." : $searchResult[$j]['titleMobile'] = $searchResult[$j]['title'] ;
+              strlen($searchResult[$j]['title']) > 20 ? $searchResult[$j]['titleDesktop'] = substr($searchResult[$j]['title'], 0, 20) . "..." : $searchResult[$j]['titleDesktop'] = $searchResult[$j]['title'] ;    
+
+              $pages[$numPage][$j] =
+              '<div class="oneGame">
+                  <a href="product.php?id=' . $searchResult[$j]['id'] . '"><img src="' . $searchResult[$j]['image'] . '" alt="" /></a>
+                  <div class="titrePrix">
+                    <a href="product.php?id=' . $searchResult[$j]['id'] . '" class="titleMobileSearch">' . $searchResult[$j]['titleMobile'] . '</a>
+                    <a href="product.php?id=' . $searchResult[$j]['id'] . '" class="titleDesktopSearch">' . $searchResult[$j]['titleDesktop'] . '</a>
+                    <a href="product.php?id=' . $searchResult[$j]['id'] . '"><p>' . substr_replace($searchResult[$j]['price'], '.', -2, 0) . '€' . '</p></a>
+                  </div>
+              </div>';
+            }
+          }
         }
       }
-
       $pages['numPage'][$numPage] = '<p class="changePageSearch" id="page' . $numPage . '">' . $numPage;
     }
   } else {
@@ -63,7 +71,7 @@ if (isset($_GET['getAll'])) {
   <div class="container-search">
     <a href="./index.php"> <img class="logo" src="./_img/newnewlogo.png" alt="logo"></a>
     <form class="search-form">
-      <input type="text" name="searchBar" id="searchBar" placeholder="Search...">
+      <input type="text" name="searchBar" id="searchBar" placeholder="Search..."><i class="fa-solid fa-magnifying-glass" id="iconSearch"></i>
     </form>
   </div>
 
