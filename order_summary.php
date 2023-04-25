@@ -4,8 +4,14 @@ require_once ("autoloader.php");
 if (session_status() == PHP_SESSION_NONE){ session_start();}
 
 use App\Controller\PaymentController;
+use App\Controller\ProductController;
 
 $PaymentController = new PaymentController();
+
+$ProductController = new ProductController();
+
+$last_id_cart = $ProductController->getLastCartPaid($_SESSION['user']['id']);
+
 
 ?>
 
@@ -13,15 +19,26 @@ $PaymentController = new PaymentController();
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <?php require_once('_include/head.php'); ?>
+    <link rel="stylesheet" href="assets/order.css">
+    <script src="payment.js" defer></script>
+    <title>Order</title>
 </head>
-<body>
+<body class="order-summary">
     <main>
-        <h1>Your order is complete</h1>
+        <section class="flex-all">
+            <h1 class="text">Your order is complete</h1>
+            <h2 class="text">Here is your recap</h2>
+            <h3 class="text">N° of order <?php echo $last_id_cart['id'] ?></h3>
+            <div class="flex-cart">
+                <?php  foreach($ProductController->displayItemCart($last_id_cart['id']) as $cart)
+                {
+                    echo $cart;
+                }; ?>
+            </div>
+            <h3 class="text">You will be redirected to the home page</h3>
+            <h3 class="text">If you are not redirected click <a href="index.php">here</a></h3>
+        </section>
     </main>
 </body>
 </html>

@@ -75,9 +75,12 @@ class UserModel
         ]);
         $tab = $req->fetch(PDO::FETCH_ASSOC);
 
-        $sqlCart = "SELECT id FROM cart WHERE id_user = :idUser";
+        $sqlCart = "SELECT id FROM cart WHERE id_user = :idUser AND is_paid=:is_paid";
         $reqCart = $this->conn->prepare($sqlCart);
-        $reqCart->execute([':idUser' => $tab['id']]);
+        $reqCart->execute([
+            ':idUser' => $tab['id'],
+            ":is_paid" => false
+        ]);
         $tempTab = $reqCart->fetch(PDO::FETCH_ASSOC);
 
         $tab['actualCart'] = $tempTab['id'];

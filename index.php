@@ -5,8 +5,8 @@ if (session_status() == PHP_SESSION_NONE) {
 
 require_once("autoloader.php");
 
+    use App\Controller\ProductController;
 
-use App\Controller\ProductController;
 
 $ProductController = new ProductController();
 
@@ -25,7 +25,7 @@ if (isset($_GET['getArray'])) {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap" rel="stylesheet">
     <script src="index.js" defer></script>
-    <title>Accueil</title>
+    <title>Home</title>
 </head>
 
 <body>
@@ -68,22 +68,25 @@ if (isset($_GET['getArray'])) {
             </article>
             <article id="display-rand-games">
                 <?php
-                foreach ($ProductController->getRandGames() as $key => $games) {
-                    echo $games;
-                }
-
+                    foreach($ProductController->getRandGames() as $key => $games)
+                    {
+                        echo $games;
+                    }
                 ?>
             </article>
         </section>
-        <section>
-            <article>
-                <h2>Best Sellers</h2>
-                <a href="product.php">
-                    <h4>See more</h4>
-                </a>
+        <section class="flex-released-games">
+            <article class="display-title">
+                <h2 class="title">Best Sellers</h2>
+                <a class="link" href="product.php"><h4>See more</h4></a>
             </article>
-            <article>
-
+            <article class="display-new-released-games">
+                <?php
+                    foreach($ProductController->getBestSellerGames() as $games)
+                    {
+                        echo $games;
+                    }
+                ?>
             </article>
         </section>
     </main>

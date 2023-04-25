@@ -50,6 +50,7 @@ if (isset($_GET['getAll'])) {
 ?>
 
 
+
   <div class="header-container">
 
     <button class="hamburger">
@@ -86,3 +87,5 @@ if (isset($_GET['getAll'])) {
     </nav>
   </div>
   
+
+

@@ -31,6 +31,19 @@ class ProductModel {
         return $tab;
     }
 
+    public function getPlatformProduct($id_game):array {
+        $req = $this->conn->prepare("SELECT compatibility.id_platform,
+                                                platform.platform
+                                                FROM compatibility 
+                                                    INNER JOIN platform 
+                                                        ON compatibility.id_platform = platform.id 
+                                                WHERE id_game=:id_game");
+        $req->execute([
+            ":id_game" => $id_game
+        ]);
+        return $req->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function GetProductByFilter($platform, $category, $subcategory) {
 
         $sqlParam = [];
@@ -98,13 +111,44 @@ class ProductModel {
         $req = $this->conn->prepare("SELECT sold.sold,
                                             sold.id_game,
                                             product.title,
-                                            product.img,
-                                            product.price,
-                                            item_cart.quantity FROM sold 
-                                                INNER JOIN product ON product.id = sold.id_game 
-                                                INNER JOIN item_cart ON product.id = item_cart.id_game 
+                                            product.image,
+                                            product.price FROM sold 
+                                                INNER JOIN product 
+                                                    ON product.id = sold.id_game
                                                                ORDER BY sold.sold DESC LIMIT 5");
         $req->execute();
+        return $req->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getLastCartPaid($id_user):array {
+        $req = $this->conn->prepare("SELECT cart.id
+                                             FROM cart WHERE id_user=:id_user 
+                                                         AND is_paid=:is_paid 
+                                                       ORDER BY cart.id 
+                                                       DESC");
+        $req->execute([
+           ":id_user" => $id_user,
+            ":is_paid" => true
+        ]);
+        return $req->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function displayItemCart($id_cart) {
+        $req = $this->conn->prepare("SELECT product.title, 
+                                            product.image,
+                                            item_cart.quantity,
+                                            item_cart.price,
+                                            item_cart.platform FROM cart 
+                                                INNER JOIN item_cart 
+                                                    ON item_cart.id_cart = cart.id 
+                                                INNER JOIN product 
+                                                             ON product.id = item_cart.id_game 
+                                                               WHERE id_cart=:id_cart");
+
+        $req->execute([
+            ":id_cart" => $id_cart
+        ]);
+
         return $req->fetchAll(PDO::FETCH_ASSOC);
     }
 

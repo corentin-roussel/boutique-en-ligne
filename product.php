@@ -30,8 +30,7 @@
         $data[0]['price'] = substr_replace($data[0]['price'], ".", -2, 0) . "€";
         
         $displayProduct = [];
-        
-        $options = createOptionsSelect('platform');
+        $options = $product->getPlatformProduct($_GET['getDataProduct']);
         
         $displayProduct['part1'] = '
         <img src="' . $data[0]['image'] . '" alt="" id="productImage" />
@@ -42,32 +41,37 @@
 
                 <div id="titreShortDescr">
 
-                    <h2>' . $data[0]['title'] . '</h2>
+                    <div class="titrePrixMobile">
 
-                    <p>' . $data[0]['short_description'] . '...</p>
+                        <h2>' . $data[0]['title'] . '</h2>
+
+                        <p class="priceMobile">' . $data[0]['price'] . '</p>
+                    </div>
+
+                    <p class="shortDescr">' . $data[0]['short_description'] . '...</p>
 
                     <a href="#decriptionProduct">Read more</a>
                 </div>
 
-                <p>' . $data[0]['price'] . '</p>
+                <p class="priceDesktop">' . $data[0]['price'] . '</p>
             </div>
 
             <div id="selectsButton">
 
                 <select name="platform" id="selectPlatform">
-                    <option value="">Platform</option>'
-                    . $options .
-                '</select>
+                    <option value="">Platform</option>';
+                    foreach ($options as $item) { $displayProduct['part1'] = $displayProduct['part1'] . '<option>' .$item["platform"]. '</option>';}
+                $displayProduct['part1'] = $displayProduct['part1'] . '</select>
 
-                <span>
+                <div id="quantity">
                     <p>Quantity</p>
 
-                    <span id="quantityChoice">
+                    <div id="quantityChoice">
                         <i class="fa-solid fa-circle-minus" id="quantiteMoins"></i>
                         <p id="quantiteNum">1</p>
                         <i class="fa-solid fa-circle-plus" id="quantitePlus"></i>
-                    </span>
-                </span>
+                    </div>
+                </div>
 
                 '; if(isset($_SESSION['user'])) {$displayProduct['part1'] = $displayProduct['part1'] . '<button id="cartButton"><i class="fa-solid fa-cart-plus"></i></button>';}else{$displayProduct['part1'] = $displayProduct['part1'] . '<button id="cartButton" disabled="disabled"><i class="fa-solid fa-cart-plus"></i></button>';};
             $displayProduct['part1'] = $displayProduct['part1'] . '</div>
@@ -113,6 +117,7 @@
    <?php require_once("_include/head.php") ?>
     <script src="https://kit.fontawesome.com/1241fb6252.js" crossorigin="anonymous"></script>
     <script defer src="product.js"></script>
+    <link rel="stylesheet" href="assets/product.css">
     <title>Products</title>
 </head>
 <body>
