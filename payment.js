@@ -44,7 +44,6 @@ const getAdressById = async() => {
 
     const response = await fetch("payment_back.php?shippingAdress=ok")
     const getAdress = await response.json();
-    console.log(getAdress);
     displayAdress(getAdress, shipping);
 }
 
@@ -60,9 +59,7 @@ const buyCart = async(e, form) => {
     })
     const updateCart = await response.json();
 
-    let adress = document.querySelector("#shipping")
-
-    displayError(updateCart);
+    return displayError(updateCart);
 }
 
 const displayError = (json) => {
@@ -105,6 +102,12 @@ const displayError = (json) => {
     {
         cardName_error.innerHTML = json['errorCardName'];
     }
+    if(json['okCart'])
+    {
+        return json['okCart'];
+    }
+
+
 
 }
 
@@ -117,7 +120,6 @@ const displayAdress = (json, place) => {
 
     for(display of json)
     {
-        console.log(display)
 
         const div_display = document.createElement("div");
         div_display.setAttribute("class", "flex-adress");
@@ -171,6 +173,10 @@ const displayAdress = (json, place) => {
     place.appendChild(error_adress);
 }
 
+
+const displayPrice = (price) => {
+    return price / 100;
+}
 const displaySummary = (place, summary) => {
     for(display of summary)
     {
@@ -178,13 +184,6 @@ const displaySummary = (place, summary) => {
         div_display.setAttribute("class", "display-summary")
         place.appendChild(div_display)
 
-
-        const div_image = document.createElement("div");
-        div_display.appendChild(div_image);
-
-        const image = document.createElement("image");
-        image.setAttribute("class", "img-summary")
-        div_image.appendChild(image)
 
         const div_container = document.createElement("div");
         div_container.setAttribute("class", "flex-element")
@@ -200,7 +199,7 @@ const displaySummary = (place, summary) => {
         div_name_price.appendChild(name)
 
         const price = document.createElement("p");
-        price.innerHTML = display.price
+        price.innerHTML = displayPrice(display.price) + "€";
         price.setAttribute("class", "price-summary")
         div_name_price.appendChild(price)
 
@@ -215,7 +214,7 @@ const displaySummary = (place, summary) => {
         div_platform_quantity.appendChild(platform);
 
         const quantity = document.createElement("p");
-        quantity.innerHTML = display.quantity
+        quantity.innerHTML = "Qt : " + display.quantity
         quantity.setAttribute("class", "quantity-summary");
         div_platform_quantity.appendChild(quantity)
 
@@ -231,7 +230,6 @@ window.addEventListener("load", async() => {
 
     displayForm(payment, form);
 
-
     await getAdressById();
 
     await summaryGames();
@@ -241,9 +239,25 @@ window.addEventListener("load", async() => {
 
     let form_bought = document.querySelector("#payment");
 
-    form_bought.addEventListener("submit", (e) => {
-        buyCart(e, form_bought);
-    })
+    form_bought.addEventListener("submit", async(e) => {
 
+           if(await buyCart(e, form_bought) === "okCart")
+           {
+               window.location.href = "order_summary.php";
+           }
+
+
+
+
+    })
 })
+
+
+
+if(window.location.href === "http://localhost/boutique-en-ligne/order_summary.php")
+{
+    setTimeout(() => {
+        window.location.href = 'index.php'
+    }, 8000);
+}
 

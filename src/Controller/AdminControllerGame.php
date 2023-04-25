@@ -127,6 +127,13 @@ class AdminControllerGame {
         echo $json;
     }
 
+    public function searchGameById($id) {
+        return $this->model->searchGameById($id);
+    }
+    public function findCompatibility($id) {
+        return $this->model->findCompatibility($id);
+    }
+
     public function setPlatform(array $arrayCheckbox):void {
 
 
