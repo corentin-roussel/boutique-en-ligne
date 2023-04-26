@@ -97,7 +97,7 @@ class PaymentModel
     public function insertSoldGames($getitemCart) {
 
         foreach ($getitemCart as $item) {
-            $sold = $this->connect->prepare("SELECT sold.id_game FROM sold WHERE id_game=:id_game");
+            $sold = $this->connect->prepare("SELECT sold.id_game, sold.sold FROM sold WHERE id_game=:id_game");
             $sold->execute([
                 ":id_game" => $item['id_game']
             ]);
@@ -107,14 +107,14 @@ class PaymentModel
             if($game_exist === 1) {
                 $req = $this->connect->prepare("UPDATE sold SET sold=:sold WHERE id_game=:id_game");
                 $req->execute([
-                    ":sold" => (int)$item['quantity'] + (int)$game_sold,
+                    ":sold" => (int)$item['quantity'] + (int)$game_sold['sold'],
                     ":id_game" => $item['id_game']
                 ]);
             } else {
                 $req = $this->connect->prepare("INSERT INTO sold  (id_game, sold) VALUES (:id_game, :sold)");
                 $req->execute([
                     ":id_game" => $item['id_game'],
-                    ":sold" => $item['quantity']
+                    ":sold" => (int)$item['quantity']
                 ]);
             }
         }

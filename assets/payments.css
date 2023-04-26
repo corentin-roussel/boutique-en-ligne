@@ -11,6 +11,12 @@
     --color-ultra-dark: #101010;
 }
 
+*, ::after, ::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 
 .title-payment {
     align-self: baseline;
@@ -246,6 +252,10 @@
 .link-adress {
     color: #FFFFFF;
     cursor: pointer;
+}
+
+.name {
+    color: #FFFFFF;
 }
 
 @media (min-width: 1000px) {
