@@ -16,9 +16,9 @@
             <div class="container">
                 <p>Developed by Team LCM </p>
             </div>
-            <p> Léa Dubois <a href=""><i class="fa-brands fa-github"></i></a> </p>
-            <p>Corention Roussel <a href=""><i class="fa-brands fa-github"></i></a> </p>
-            <p>Mehdi Romdhani <a href=""><i class="fa-brands fa-github"></i></a> </p>
+            <p> Léa Dubois <a href="https://github.com/lea-dubois1" target="_blank"><i class="fa-brands fa-github"></i></a> </p>
+            <p>Corention Roussel <a href="https://github.com/corentin-roussel" target="_blank"><i class="fa-brands fa-github"></i></a> </p>
+            <p>Mehdi Romdhani <a href="https://github.com/mehdi-romdhani" target="_blank"><i class="fa-brands fa-github"></i></a> </p>
         </div>
 
      </div>

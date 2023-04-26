@@ -7,6 +7,7 @@
 
 <!-- <link rel="stylesheet" href="./assets/Admin_style.css"> -->
 <link rel="stylesheet" href="./assets/style.css" type="text/css">
+<link rel="stylesheet" href="./assets/search.css">
 <!--<link rel="stylesheet" href="./assets/Admin_style.css">-->
 <!--<link rel="stylesheet" href="./assets/style.css" type="text/css">-->
 
@@ -22,7 +23,7 @@
 <script src="index.js" defer></script>
 <script src="https://code.jquery.com/jquery-migrate-3.4.1.min.js" integrity="sha256-UnTxHm+zKuDPLfufgEMnKGXDl6fEIjtM+n1Q6lL73ok=" crossorigin="anonymous"></script>
 <script defer src="./scripts/adminPlatform.js"></script>
-<script defer src="./scripts/adminCat.js"></script> -->
+<script defer src="./scripts/adminCat.js"></script> 
 <script src="search.js" defer></script>
 <!-- LINK FAV-ICON -->
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
