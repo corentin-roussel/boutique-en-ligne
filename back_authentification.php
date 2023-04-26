@@ -14,25 +14,25 @@ if(session_status() == PHP_SESSION_NONE){ session_start();}
     
     <div id="divForm">
 
-        <form action="" method="POST" id="signupForm" class="form">
-            <h2>Sign up</h2>
+        <form action="" method="POST" id="signupForm" class="form-signup">
+            <h2 class="title-form">Sign up</h2>
 
-            <label for="login">Login</label>
-            <input type="text" name="login" placeholder="Login" required />
+
+            <input class="input" type="text" name="login" placeholder="Login" required />
             <div id="errorLogin" class="error"></div>
 
-            <label for="email">Email</label>
-            <input type="text" name="email" placeholder="Email" required />
+
+            <input class="input" type="text" name="email" placeholder="Email" required />
             <div id="errorEmail" class="error"></div>
 
-            <label for="password">Password</label>
-            <input type="password" name="password" placeholder="Password" required />
 
-            <label for="confpassword">Password confirmation</label>
-            <input type="password" name="passwordConfirm" placeholder="Confirm password" required />
+            <input class="input" type="password" name="password" placeholder="Password" required />
+            <div></div>
+
+            <input class="input" type="password" name="passwordConfirm" placeholder="Confirm password" required />
             <div id="errorPass" class="error"></div>
 
-            <button type="submit">Submit</button>
+            <button class="button" type="submit">Submit</button>
 
         </form>
 
@@ -47,17 +47,17 @@ if(session_status() == PHP_SESSION_NONE){ session_start();}
 
         <form action="" method="POST" id="signinForm" class="form">
 
-            <h2>Sign in</h2>
+            <h2 class="title-form">Sign in</h2>
 
-            <label for="login">Login</label>
-            <input type="text" name="login" id="login" placeholder="login" required />
+
+            <input class="input" type="text" name="login" id="login" placeholder="login" required />
             <div id="errorLogin" class="error"></div>
 
-            <label for="password">Password</label>
-            <input type="password" name="password" id="password" placeholder="Enter your password" required />
+
+            <input class="input" type="password" name="password" id="password" placeholder="Enter your password" required />
             <div id="errorPass" class="error"></div>
 
-            <button type="submit">Submit</button>
+            <button class="button" type="submit">Submit</button>
 
         </form>
 

@@ -117,6 +117,7 @@
    <?php require_once("_include/head.php") ?>
     <script src="https://kit.fontawesome.com/1241fb6252.js" crossorigin="anonymous"></script>
     <script defer src="product.js"></script>
+    <link rel="stylesheet" href="./assets/style.css">
     <link rel="stylesheet" href="assets/product.css" />
     <title>Products</title>
 </head>

@@ -87,7 +87,7 @@ class ProductModel {
         $req = $this->conn->prepare("SELECT product.id,
                                     product.title,
                                     product.price,
-                                    product.image FROM product ORDER BY RAND() DESC LIMIT 8");
+                                    product.image FROM product ORDER BY RAND() DESC LIMIT 12");
         $req->execute();
         return $req->fetchAll(PDO::FETCH_ASSOC);
     }

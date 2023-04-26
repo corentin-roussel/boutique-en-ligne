@@ -1,27 +1,78 @@
-.container-title{
-    display: flex;
+#main {
+    background-color: var(--color-dark);
+    min-height: 100vh;
     flex-direction: column;
+    align-items: center;
+}
+
+.container-profil {
+    display: flex;
+    justify-content: center;
     width: 100%;
 }
 
-.container-title h1{
-    text-align: center;
-}
-
-.container-profil{
+#form_profil {
     display: flex;
-    flex-direction: row;
-    border: 1px solid blue;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 550px;
     width: 100%;
 }
-.container-profil-left{
+
+.container-profil-left {
     display: flex;
     flex-direction: column;
-    border: 1px solid black;
+    margin-top: 5rem;
+    width: 80%;
 }
 
-.container-profil-left form{
+.title-form {
+    align-self: start;
+    color: #FFFFFF;
+}
+
+.flex-title {
+    justify-content: space-between;
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    color: #FFFFFF;
+
+}
+
+
+.input {
+    padding: 0.7rem;
+    border-radius: 7px;
+    border: 2px solid var(--color-medium-light);
+    background-color: var(--color-very-dark);
+    width: -webkit-fill-available;
+    color: #FFFFFF;
+}
+
+.button {
+    padding:0.7rem;
+    border-radius: 7px;
+    background-color: var(--color-medium-light);
+    border: none;
+    width: -webkit-fill-available;
+    color: #FFFFFF;
+    background-color: var(--color);
+}
+
+
+@media screen and (min-width: 700px)
+{
+    .container-profil-left {
+        width: 40%;
+    }
+}
+
+@media screen and (min-width: 1000px)
+{
+    .container-profil-left {
+        width: 25%;
+    }
 }
 
