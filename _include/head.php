@@ -7,6 +7,7 @@
 
 <!-- <link rel="stylesheet" href="./assets/Admin_style.css"> -->
 <link rel="stylesheet" href="./assets/style.css" type="text/css">
+<link rel="stylesheet" href="./assets/search.css">
 <!--<link rel="stylesheet" href="./assets/Admin_style.css">-->
 <!--<link rel="stylesheet" href="./assets/style.css" type="text/css">-->
 

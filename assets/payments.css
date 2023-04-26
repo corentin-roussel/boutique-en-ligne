@@ -1,3 +1,6 @@
+
+/*******************************ROOT*******************************/
+
 :root {
     --color: #ff5400;
     --color-link-hover: #ffa700;
@@ -11,12 +14,18 @@
     --color-ultra-dark: #101010;
 }
 
-*, ::after, ::before {
+
+
+
+
+* {
+    font-family: "Montserrat", sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/**************************************************************/
 
 .title-payment {
     align-self: baseline;
