@@ -13,16 +13,49 @@
   --color-ultra-dark: #101010;
 }
 
+
 /*******************************ALL PAGE*******************************/
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
 }
 body::-webkit-scrollbar {
   display: none;
 }
+.accueil {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  z-index: 9999;
+  opacity: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.accueil.anim-jouee {
+  animation: fadeOut 6s linear;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.logo {
+  margin: auto; 
+}
+
 
 /*******************************ALL PRODUCTS*******************************/
 .image_game {
@@ -428,7 +461,7 @@ body::-webkit-scrollbar {
   #cart-no-log:hover{
     color: red;
     cursor: not-allowed!important;
-
+  }
 
   .search-form i {
     display: flex;
@@ -543,7 +576,7 @@ body::-webkit-scrollbar {
     background-color: #000;
     transform: translateX(-200px);
     transition: all 0.3s ease-in-out;
-    z-index: 999; /* Ajout de z-index pour afficher le menu hamburger au-dessus des autres éléments */
+    z-index: 999; 
   }
   .nav-menu .btn-close {
     position: fixed;
@@ -706,6 +739,8 @@ footer {
   .social-media-container a {
     font-size: 18px;
     margin-right: 7px;
+    font-family: "Montserrat", sans-serif;
+
   }
 }
 

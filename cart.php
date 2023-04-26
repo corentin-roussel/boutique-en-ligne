@@ -73,7 +73,7 @@ if (isset($_GET['getCart'])) {
             $pageHTML['isEmpty'] = true;
 
             $pageHTML['displayGame'] =
-                '<i class="fa-solid fa-cart-shopping"></i>
+                '<i class="fa-solid fa-cart-shopping style="margin:15px""></i>
                 <p class="cartEmpty">Your cart is empty</p>
                 <p class="paraCartEmpty">You have added nothing into your cart <br/> Please browse our site to find incredible offer</p>';
 
@@ -93,7 +93,7 @@ if (isset($_GET['getCart'])) {
         $pageHTML['isEmpty'] = true;
 
         $pageHTML['displayGame'] =
-            '<i class="fa-solid fa-cart-shopping"></i>
+             '<i class="fas fa-shopping-cart" style="margin:15px"></i> 
             <p class="cartEmpty">You are not logged</p>
             <p class="paraCartEmpty">You cannot add games to your cart if you are not logged <br/> Please log in or register to add games to the cart</p>';
 

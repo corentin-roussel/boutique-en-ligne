@@ -81,7 +81,7 @@ if (isset($_GET['getAll'])) {
   <?php if (!isset($_SESSION['user'])) : ?><i class="fas fa-shopping-cart" id="cart-no-log"></i><?php endif ?>
   <?php if (isset($_SESSION['user'])) : ?> <a href="cart.php" class="cart"><i class="fas fa-shopping-cart"></i></a><?php endif ?>
 
-    <a href="cart.php" class="cart"><i class="fas fa-shopping-cart"></i></a>
+    <!-- <a href="cart.php" class="cart"><i class="fas fa-shopping-cart"></i></a> -->
     <?php if (!isset($_SESSION['user'])) : ?> <a href="./authentification.php" class="login">Connect</a><?php endif ?>
     <?php if (isset($_SESSION['user'])) : ?> <a href="./disconnect.php" class="login">Disconnect</a><?php endif ?>
 

@@ -28,6 +28,10 @@ if (isset($_GET['getArray'])) {
 </head>
 
 <body>
+<div class="accueil">
+  <!-- Contenu de l'écran d'accueil ici -->
+  <img src="./_img/new-logo-gmm.png" class="logo" alt="logo">
+</div>
     <header class="header">
         <?php require_once('_include/header.php') ?>
     </header>

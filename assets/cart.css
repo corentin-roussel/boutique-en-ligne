@@ -22,6 +22,13 @@ body {
   background-color: var(--color-dark);
 }
 
+.cartEmpty,
+.paraCartEmpty{
+  color:white;
+  margin: 15px;
+}
+
+
 @media screen and (max-width: 768px) {
   /* Container */
   .container-cart {
@@ -233,6 +240,10 @@ body {
     border: none;
     border-radius: 5px;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+  }
+  .priceBuy button:hover{
+    color: green;
+    cursor:pointer;
   }
 
   .priceBuy .price {
