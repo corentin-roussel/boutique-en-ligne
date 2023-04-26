@@ -19,7 +19,7 @@ if (isset($_GET['getArray'])) {
 
 <head>
     <?php require_once('_include/head.php') ?>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/index.css">
     <link rel="stylesheet" href="assets/style.css">
     <script defer src="search.js"></script>
     <script src="https://kit.fontawesome.com/index.js" crossorigin="anonymous"></script>

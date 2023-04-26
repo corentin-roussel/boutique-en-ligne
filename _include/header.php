@@ -77,7 +77,7 @@ if (isset($_GET['getAll'])) {
 
 
   <div class="user-info">
-    <a href="cart.phpy" class="cart"><i class="fas fa-shopping-cart"></i></a>
+    <a href="cart.php" class="cart"><i class="fas fa-shopping-cart"></i></a>
     <?php if (!isset($_SESSION['user'])) : ?> <a href="./authentification.php" class="login">Connect</a><?php endif ?>
     <?php if (isset($_SESSION['user'])) : ?> <a href="./disconnect.php" class="login">Disconnect</a><?php endif ?>
   </div>

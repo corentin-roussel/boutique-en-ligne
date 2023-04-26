@@ -33,11 +33,10 @@ if (session_status() == PHP_SESSION_NONE){ session_start();}
                 <button class="button" type="submit">Submit</button>
 
             </form>
-
         </div>
 
-        <p id="switchInscription">Not registered yet?</p>
-        <p id="switchConnexion" style="display: none"><< Back</p>
+            <p id="switchInscription">Not registered yet?</p>
+            <p id="switchConnexion" style="display: none;"><< Back</p>
 
     </main>
 
