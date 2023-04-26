@@ -270,6 +270,7 @@ body::-webkit-scrollbar {
     border: none;
     cursor: pointer;
     display: none;
+    padding-left: 19px;
   }
 
   .hamburger-icon {
@@ -366,9 +367,29 @@ body::-webkit-scrollbar {
   .search-form input[type="text"] {
     width: 500px;
   }
+  #cart-no-log{
+    font-size: 1.5rem;
+    color: #fff;
+    margin-right: 10px;
+    transition: all 0.3s ease;
+  }
+  #cart-no-log:hover{
+    color: red;
+    cursor: not-allowed!important;
+  }
 }
 
 @media (min-width: 769px) and (max-width: 1440px) {
+  .cart-no-log{
+    margin-right: 10px;
+
+  }
+  /* .cart-no-log:hover{
+    color: red;
+    
+  } */
+
+  
   .container-search {
     display: flex;
     flex-direction: row;

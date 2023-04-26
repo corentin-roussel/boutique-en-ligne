@@ -118,127 +118,123 @@ if (isset($_SESSION) && $_SESSION['user']['role'] === 'admin' || $_SESSION['user
 
         <script defer src="./scripts/adminPlatform.js"></script>
         <script defer src="./scripts/adminCat.js"></script>
+        <link rel="stylesheet" href="./assets/Admin_style.css">
 
-        <title>Admin</title>
+        <title>Game Vault - Admin Boutique en ligne</title>
     </head>
 
     <body>
-        <header>
 
-            <!DOCTYPE html>
-            <html lang="Fr">
+        <?php require_once('./_include/header.php'); ?>
 
-            <head>
-                <?php require_once("_include/head.php") ?>
-                <title>Game Vault - Boutique en ligne</title>
-            </head>
+        <div class="container-dash-admin">
+            <h2>Dashboard Admin</h2>
+        </div>
 
-            <body>
-
-                <?php require_once('./_include/header.php'); ?>
-
-                <div class="container-dash-admin">
-                    <h2>Dashboard Admin</h2>
-                </div>
-
-                <div class="container-user-man">
+        <!-- <div class="container-user-man">
                     <h3>User Manager</h3>
                 </div>
 
 
                 <div class="container-pro-stock">
                     <h3>Product & Stock management</h3>
-                </div>
+                </div> -->
 
-                <!-- CONTAINER ADD PLATFORM -->
+        <!-- CONTAINER ADD PLATFORM -->
 
-                <div class="container-title">
-                    <h4>Plateform</h4>
-                </div>
+        <div class="container-title">
+            <h4>Plateform</h4>
+        </div>
 
-                <div class="container-btn-plateforme">
+        <!-- <div class="container-btn-plateforme">
 
                     <button type="button" id="add_plat">Plateform</button>
 
-                </div>
+                </div> -->
 
-                <div class="form-add-plateform">
-                    <form action="" method="POST" id="form-insert-plateform">
-                        <label for="plateform"></label>
-                        <input type="text" name="content" id="content" placeholder="Write a plateform">
-                        <button type="submit" name="submit_form" value="submit_form">ADD</button>
-                    </form>
-                </div>
+        <div class="form-add-plateform">
+            <form action="" method="POST" id="form-insert-plateform">
+                <label for="plateform"></label>
+                <input type="text" name="content" id="content" placeholder="Write a plateform">
+                <button type="submit" name="submit_form" value="submit_form">ADD</button>
+            </form>
+        </div>
 
-                <div class="container-mess-plateform">
+        <div class="container-mess-plateform">
 
-                </div>
+        </div>
 
-                <div class="container-table-plat">
-
-
-                </div>
-                <!-- CONTAINER ADD CATEGORY -->
-
-                <div class="container-title">
-                    <h4>Category</h4>
-                </div>
+        <div class="container-table-plat">
 
 
-                <div class="container-btn-category">
+        </div>
+        <!-- CONTAINER ADD CATEGORY -->
+
+        <div class="container-title">
+            <h4>Category</h4>
+        </div>
+
+
+        <!-- <div class="container-btn-category">
                     <button type="button" id="add_category">Category</button>
-                </div>
+                </div> -->
 
-                <div class="form-add-category">
-
-
-                </div>
-
-                <div class="container-mess-cat" style="text-align:center;">
-
-                </div>
-
-                <div class="container-sub-form">
-
-                </div>
-
-                <div class="container-table-cat">
-
-                </div>
-
-                <!-- CONTAINER ADD GAME -->
-                <main>
-
-                    <h2>User manager</h2>
-
-                    <select name="roles" id="role">
-                        <option value="all">-- Choose a role --</option>
-                    </select>
-
-                    <div id="displayUserData"></div>
+        <div class="form-add-category">
 
 
+        </div>
 
-                    <h2>Game manager</h2>
+        <div class="container-mess-cat" style="text-align:center;">
 
-                    <button class="button" id="addFormGame">Add Game</button>
+        </div>
 
-                    <div id="placeAddGame">
+        <div class="container-sub-form">
 
-                    </div>
+        </div>
 
-                    <button class="button" id="showGames">Show Games</button>
+        <div class="container-table-cat">
 
-                    <div id="placeShowGames">
+        </div>
 
-                    </div>
-                </main>
-                <!-- FOOTER -->
-                <footer>
+        <!-- CONTAINER ADD GAME -->
+        <main>
 
-                </footer>
-            </body>
+            <div class="container-title">
+                <h4>Users</h4>
+            </div>
 
-            </html>
-        <?php else : header("location: forbidden.php");
-    endif; ?>
+            <select name="roles" id="role">
+                <option value="all">-- Choose a role --</option>
+            </select>
+
+            <div id="displayUserData"></div>
+
+
+            <div class="container-title">
+                <h4>Game Manager</h4>
+            </div>
+
+            <div class="btn-add-show">
+                 <button class="button" id="addFormGame">Add Game</button>
+
+                 <button class="button" id="showGames">Show Games</button>
+            </div>
+
+            <div id="placeAddGame">
+
+            </div>
+
+
+            <div id="placeShowGames">
+
+            </div>
+        </main>
+        <!-- FOOTER -->
+        <footer>
+
+        </footer>
+    </body>
+
+    </html>
+<?php else : header("location: forbidden.php");
+endif; ?>

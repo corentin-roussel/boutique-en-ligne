@@ -27,7 +27,7 @@ if (session_status() == PHP_SESSION_NONE){ session_start();}
                 <article id="shipping_method">
 
                 </article>
-                <a class="link-adress" href="shipping_info.php"><< Create a new adress</a>
+                <a class="link-adress" href="shipping.php"><< Create a new adress</a>
             </section>
             <section class="flex-payment">
                 <h1 class="title-payment">Payment Method</h1>

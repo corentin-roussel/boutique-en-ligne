@@ -23,9 +23,9 @@ $showTabSubCat = $controllerCat->showSubCat();
                 <th>Sub Category</th>
             </tr>
         </thead>
-        <tbody id="tb_cat" style="display:flex; flex-direction:row; justify-content:space-between">
+        <tbody id="tb_cat">
 
-            <tr class="row_cat" style="display:flex; flex-direction:column; border:1px solid blue;">
+            <tr class="row_cat" id="rowcat1">
                
                 <?php foreach($showTabCat as $showtab) : ?>
                     <td><label for="<?= $showtab['category']?>"><?= $showtab['category']?></label>
@@ -34,7 +34,7 @@ $showTabSubCat = $controllerCat->showSubCat();
                     <?php endforeach ; ?>
                 </tr>
                 <!-- <button type="submit" id="del-cat" name="btn_del_cat" value="">Delete Category</button> -->
-            <tr class="row_cat" style="display:flex; flex-direction:column; border:1px solid pink">
+            <tr class="row_cat" id="rowcat2">
                
                 <?php foreach($showTabSubCat as $showtab) : ?>
                     <td><label for="<?= $showtab['subcategory']?>"><?= $showtab['subcategory']?></label>

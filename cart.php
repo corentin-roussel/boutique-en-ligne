@@ -1,30 +1,33 @@
 <?php
 
-    if(session_status() == PHP_SESSION_NONE){ session_start();}
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
-    require_once ("autoloader.php");
+require_once("autoloader.php");
 
-    use App\Controller\CartController;
-    $cart = new CartController();
+use App\Controller\CartController;
 
-    $pageHTML = [];
+$cart = new CartController();
 
-    if(isset($_GET['getCart'])) {
+$pageHTML = [];
 
-        if(isset($_SESSION['user'])) {
+if (isset($_GET['getCart'])) {
 
-            $content = $cart->GetCartContent($_SESSION['user']['actualCart']);
+    if (isset($_SESSION['user'])) {
 
-            if(isset($content) && isset($content[0]) && $content[0] !== ""){
+        $content = $cart->GetCartContent($_SESSION['user']['actualCart']);
 
-                foreach ($content as $game) {
+        if (isset($content) && isset($content[0]) && $content[0] !== "") {
 
-                    $game['price'] = substr_replace($game['price'], ".", -2, 0) . "€";
-                    $game['total_price'] = substr_replace($game['total_price'], ".", -2, 0) . "€";
+            foreach ($content as $game) {
 
-                    $pageHTML['isEmpty'] = false;
+                $game['price'] = substr_replace($game['price'], ".", -2, 0) . "€";
+                $game['total_price'] = substr_replace($game['total_price'], ".", -2, 0) . "€";
 
-                    $pageHTML['displayGame'][$game['id']] =
+                $pageHTML['isEmpty'] = false;
+
+                $pageHTML['displayGame'][$game['id']] =
                     '<div class="oneGameCart">
 
                         <img src="' . $game['image'] . '" alt="" />
@@ -53,8 +56,8 @@
                         </div>
                     </div>';
 
-                    
-                    $pageHTML['displayPriceBuy'] =
+
+                $pageHTML['displayPriceBuy'] =
                     '<div class="priceBuy">
 
                         <div class="price">
@@ -64,18 +67,17 @@
 
                         <a href="payments.php"><button>Go to payment ></button></a>
                     </div>';
-                }
+            }
+        } else {
 
-            }else{
+            $pageHTML['isEmpty'] = true;
 
-                $pageHTML['isEmpty'] = true;
-
-                $pageHTML['displayGame'] =
+            $pageHTML['displayGame'] =
                 '<i class="fa-solid fa-cart-shopping"></i>
                 <p class="cartEmpty">Your cart is empty</p>
                 <p class="paraCartEmpty">You have added nothing into your cart <br/> Please browse our site to find incredible offer</p>';
 
-                $pageHTML['displayPriceBuy'] =
+            $pageHTML['displayPriceBuy'] =
                 '<div class="priceBuy">
 
                     <div class="price">
@@ -84,19 +86,18 @@
                     </div>
 
                     <button disabled="disabled">Go to payment ></button>
-                </div>'; 
-            }
+                </div>';
+        }
+    } else {
 
-        }else{
+        $pageHTML['isEmpty'] = true;
 
-            $pageHTML['isEmpty'] = true;
-
-            $pageHTML['displayGame'] =
+        $pageHTML['displayGame'] =
             '<i class="fa-solid fa-cart-shopping"></i>
             <p class="cartEmpty">You are not logged</p>
             <p class="paraCartEmpty">You cannot add games to your cart if you are not logged <br/> Please log in or register to add games to the cart</p>';
 
-            $pageHTML['displayPriceBuy'] =
+        $pageHTML['displayPriceBuy'] =
             '<div class="priceBuy">
 
                 <div class="price">
@@ -105,45 +106,54 @@
                 </div>
 
                 <button disabled="disabled">Go to payment ></button>
-            </div>'; 
-
-        }
-
-        $json = json_encode($pageHTML, JSON_PRETTY_PRINT);
-        echo $json;
-
-        die();
+            </div>';
     }
 
-    !isset($_GET['deleteItem']) ?: ($cart->DeleteItem($_GET['deleteItem'])) . (die());
+    $json = json_encode($pageHTML, JSON_PRETTY_PRINT);
+    echo $json;
 
-    !isset($_GET['changeQuantity']) ?: ($cart->ChangeQuantity($_GET['changeQuantity'], $_GET['itemId'], $_GET['plusMinus'])) . (die());
+    die();
+}
+
+!isset($_GET['deleteItem']) ?: ($cart->DeleteItem($_GET['deleteItem'])) . (die());
+
+!isset($_GET['changeQuantity']) ?: ($cart->ChangeQuantity($_GET['changeQuantity'], $_GET['itemId'], $_GET['plusMinus'])) . (die());
 
 ?>
 
 <!doctype html>
 <html lang="en">
+
 <head>
-   <?php require_once("_include/head.php") ?>
+    <?php require_once("_include/head.php") ?>
     <script defer src="cart.js"></script>
-    <link rel="stylesheet" href="./assets.css">
+    <link rel="stylesheet" href="./assets/cart.css">
     <title>Cart</title>
 </head>
+
 <body>
     <header>
         <?php require_once "_include/header.php" ?>
     </header>
 
-    <main>
-        <h2>Cart</h2>
-        <div id="displayCartContent"></div>
+    <main class="container-cart">
+
+        <h2>Your Cart</h2>
+        <!-- <hr id="hre"> -->
+
+        <div id="displayCartContent">
+
+        </div>
+
+        <hr id="hre">
         <h2>Summary</h2>
+
+
         <div id="displayCartPriceBuy"></div>
         <div id="displayInspired"></div>
     </main>
 
-    <footer>
-        <?php require_once "_include/footer.php" ?>
-    </footer>
+
 </body>
+
 </html>
