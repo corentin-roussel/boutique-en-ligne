@@ -23,7 +23,7 @@ const displayForm = async ()=>{
             e.preventDefault();
             // console.log("toto");
             await getInfo(formProfil,paraForm);
-            // displayMessProfil(response,paraForm);
+            //displayMessProfil(response,paraForm);
         })
     }
 
@@ -63,8 +63,6 @@ const getInfo  = async(formData,para) =>{
         para.textContent = response['noSub'];
     }
 
-
-    console.log(response);
 }
 
 

@@ -22,6 +22,8 @@ $getData = $showInfoUser->showInfosProfil();
 
     <input class="input" type="password" name="conf_pass" placeholder="Confirmation password" >
 
+    <input class="input" type="password" name="old_pass" placeholder="Old password">
+
     <input class="input" type="text " name="email" value="<?= $_SESSION['user']['email']?>" >
 
     <input class="input" type="text" name="firstname" placeholder="FirstName" >

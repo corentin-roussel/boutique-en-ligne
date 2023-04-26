@@ -7,11 +7,13 @@
 require_once('autoloader.php');
 
 use App\Controller\ProfilController;
+use App\Controller\UserController;
 
 $updateProfil = new ProfilController();
+$newUpdateProfil = new UserController();
 
 if(isset($_GET['other'])){
-    $updateProfil->updateInfoProfil($_POST['login'],$_POST['new_pass'],$_POST['conf_pass'],$_POST['email'],$_POST['firstname'],$_POST['lastname'],$_POST['date'],$_POST['phone']);
+    $newUpdateProfil->Update($_POST['login'],$_POST['new_pass'],$_POST['conf_pass'],$_POST['old_pass'],$_POST['email'],$_POST['firstname'],$_POST['lastname'],$_POST['date'],$_POST['phone']);
     die();
 }
 
