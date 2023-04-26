@@ -99,6 +99,7 @@ if (isset($_GET['tableUserRole'])) : $dataUsers = $adminUser->GetUsersDataByRole
 <?php die();
 endif;
 
+
 !isset($_GET['changeRole']) ?: ($adminUser->ChangeUserRole($_GET['changeRole'], $_GET['userId'])) . (die());
 
 !isset($_GET['deleteUser']) ?: ($adminUser->DeleteUser($_GET['deleteUser'])) . (die());
@@ -132,26 +133,11 @@ if (isset($_SESSION) && $_SESSION['user']['role'] === 'admin' || $_SESSION['user
             <h2>Dashboard Admin</h2>
         </div>
 
-        <!-- <div class="container-user-man">
-                    <h3>User Manager</h3>
-                </div>
-
-
-                <div class="container-pro-stock">
-                    <h3>Product & Stock management</h3>
-                </div> -->
-
         <!-- CONTAINER ADD PLATFORM -->
 
         <div class="container-title">
             <h4>Plateform</h4>
         </div>
-
-        <!-- <div class="container-btn-plateforme">
-
-                    <button type="button" id="add_plat">Plateform</button>
-
-                </div> -->
 
         <div class="form-add-plateform">
             <form action="" method="POST" id="form-insert-plateform">
@@ -176,10 +162,7 @@ if (isset($_SESSION) && $_SESSION['user']['role'] === 'admin' || $_SESSION['user
         </div>
 
 
-        <!-- <div class="container-btn-category">
-                    <button type="button" id="add_category">Category</button>
-                </div> -->
-
+  
         <div class="form-add-category">
 
 
@@ -239,3 +222,5 @@ if (isset($_SESSION) && $_SESSION['user']['role'] === 'admin' || $_SESSION['user
     </html>
 <?php else : header("location: forbidden.php");
 endif; ?>
+
+

@@ -60,9 +60,6 @@ const addSubCatForm = async(formData)=>{
 
 }
 
-// const deleteCat = async(){
-
-// }
 
 
 const displayMessForm = (dataJSON) => {
