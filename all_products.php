@@ -73,6 +73,7 @@
     <script defer src="search.js"></script>
     <link rel="stylesheet" href="./assets/all_products.css">
     <link rel="stylesheet" href="./assets/style.css">
+
     <title>All products</title>
 </head>
 <body>

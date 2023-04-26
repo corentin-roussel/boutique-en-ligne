@@ -23,9 +23,13 @@ const displayGamesSearch = async(search, pageNum) => {
 
         tabHTML[pageNum] = Object.values(tabHTML[pageNum])
 
+        const divAllGamesSearch = document.createElement('div');
+        divAllGamesSearch.className = 'allGamesSearch';
+        mainSearch.appendChild(divAllGamesSearch);
+
         tabHTML[pageNum].forEach(gameHTML => {
 
-            mainSearch.innerHTML = mainSearch.innerHTML + gameHTML;
+            divAllGamesSearch.innerHTML = divAllGamesSearch.innerHTML + gameHTML;
         });
     }
 }
@@ -100,8 +104,10 @@ const body = bodyList[0];
 
 const mainSearch = document.createElement('main');
 mainSearch.className = "searchMain";
+const footer = document.getElementsByTagName('footer')[0];
 
 mainBefore.style.display = "block";
+footer.style.display = "block";
 mainSearch.style.display = "none";
 
 
@@ -118,7 +124,8 @@ searchBar.addEventListener('keyup', async() => {
     pageNumSearch = 1;
 
     mainBefore.style.display = "none";
-    mainSearch.style.display = "block";
+    footer.style.display = "none";
+    mainSearch.style.display = "flex";
 
     body.appendChild(mainSearch);
 
@@ -136,6 +143,7 @@ searchBar.addEventListener('keyup', async() => {
         pageNumSearch = 1;
     
         mainBefore.style.display = "block";
+        footer.style.display = "block";
         mainSearch.style.display = "none";
 
         iconSearch.className = 'fa-solid fa-magnifying-glass';
