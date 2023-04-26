@@ -23,10 +23,7 @@ if (isset($_GET['getArray'])) {
     <link rel="stylesheet" href="assets/style.css">
     <script defer src="search.js"></script>
     <script src="https://kit.fontawesome.com/index.js" crossorigin="anonymous"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap" rel="stylesheet">
-    <script src="index.js" defer></script>
+    <!-- <script src="index.js" defer></script> -->
     <title>Home</title>
 </head>
 

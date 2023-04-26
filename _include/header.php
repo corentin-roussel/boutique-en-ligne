@@ -77,20 +77,25 @@ if (isset($_GET['getAll'])) {
 
 
   <div class="user-info">
+
+  <?php if (!isset($_SESSION['user'])) : ?><i class="fas fa-shopping-cart" id="cart-no-log"></i><?php endif ?>
+  <?php if (isset($_SESSION['user'])) : ?> <a href="cart.php" class="cart"><i class="fas fa-shopping-cart"></i></a><?php endif ?>
+
     <a href="cart.php" class="cart"><i class="fas fa-shopping-cart"></i></a>
     <?php if (!isset($_SESSION['user'])) : ?> <a href="./authentification.php" class="login">Connect</a><?php endif ?>
     <?php if (isset($_SESSION['user'])) : ?> <a href="./disconnect.php" class="login">Disconnect</a><?php endif ?>
+
   </div>
   <nav class="nav-menu">
     <button class="btn-close"><span class="hamburger-icon fa fa-times"></span>
     </button>
     <!-- <p style="color:white">locale_lookup</p> -->
     <ul>
-      <!-- <li><a href="index.php">Home</a></li> -->
+      <li><a href="index.php">Home</a></li>
       <!-- <li><?php if (!isset($_SESSION['user'])) : ?> <a href="authentification.php">Authenticate</a> <?php endif ?></li> -->
       <li><?php if (isset($_SESSION['user'])) : ?> <a href="profile.php">Profile</a> <?php endif ?></li>
       <li><a href="all_products.php">All products</a></li>
-      <li><a href="platform.php">Platform</a></li>
+      <!-- <li><a href="platform.php">Platform</a></li> -->
       <li><?php if (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'admin') : ?> <a href="admin.php">Admin</a> <?php endif ?></li>
     </ul>
   </nav>

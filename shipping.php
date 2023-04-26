@@ -31,12 +31,14 @@ if(isset($_GET['ship'])){
 
 <div class="container-title">
     <h1>Shipping</h1>
+    <hr id="shipHR">
 </div>
+
 
 <div class="container-form-shipping">
     <form action="" method="POST" id="form_shipping" >
         <label for="firstname"></label>
-        <input type="text" name="firstname_ship" placeholder="<?= $_SESSION['user']['firstname'] ?>" value="">
+        <input type="text" name="firstname_ship" placeholder="<?= $_SESSION['user']['firstname'] ?>">
         <label for="lastname"></label>
         <input type="text" name="lastname_ship" placeholder="<?= $_SESSION['user']['lastname'] ?>">
         <label for="phone_number"></label>
@@ -51,8 +53,9 @@ if(isset($_GET['ship'])){
         <input type="text" name="post_code_ship" placeholder="Post Code">
         <p id="mess_form_ship"></p>
         <p id="mess_form"></p>
-        <button type="subit" name="submit_form_profil">Submit</button>
+        <button type="submit" name="submit_form_profil">Submit</button>
     </form>
+    <a href="./payments.php" id="payeship"> <i class="fa-solid fa-arrow-left"></i> Go back to payement</a>
 </div>
 
 

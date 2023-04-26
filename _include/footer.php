@@ -16,15 +16,10 @@
             <div class="container">
                 <p>Developed by Team LCM </p>
             </div>
-            <p> Léa Dubois</p>
-            <p>Corention Roussel</p>
-            <p>Mehdi Romdhani</p>
+            <p> Léa Dubois <a href=""><i class="fa-brands fa-github"></i></a> </p>
+            <p>Corention Roussel <a href=""><i class="fa-brands fa-github"></i></a> </p>
+            <p>Mehdi Romdhani <a href=""><i class="fa-brands fa-github"></i></a> </p>
         </div>
 
      </div>
-
-    <div class="plat-container">
-        <!-- <small>- La Plateforme - </small>  -->
-    </div>
-
 </footer>

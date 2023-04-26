@@ -111,5 +111,8 @@ window.addEventListener('resize', function() {
       exampleDiv.classList.remove('.container-search');
     }
   });
+
+
+  
   
 
