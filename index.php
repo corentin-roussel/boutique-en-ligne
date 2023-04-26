@@ -23,7 +23,6 @@ if (isset($_GET['getArray'])) {
     <link rel="stylesheet" href="assets/style.css">
     <script defer src="search.js"></script>
     <script src="https://kit.fontawesome.com/index.js" crossorigin="anonymous"></script>
-    <!-- <script src="index.js" defer></script> -->
     <title>Home</title>
 </head>
 
