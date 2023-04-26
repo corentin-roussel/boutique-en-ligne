@@ -95,7 +95,7 @@ class UserController
         echo $json;
     }
 
-    public function Update(?string $login, ?string $passwordNew, ?string $passwordNewConfirm, ?string $password, ?string $email, ?string $firstname, ?string $lastname, $birthdate, $phoneNumber)
+    public function Update(?string $login, ?string $passwordNew, ?string $passwordNewConfirm, ?string $password, ?string $email, ?string $firstname, ?string $lastname, ?string $birthdate, ?string $phoneNumber)
     {
 
         $login = htmlspecialchars(trim($login));

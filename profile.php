@@ -7,11 +7,13 @@
 require_once('autoloader.php');
 
 use App\Controller\ProfilController;
+use App\Controller\UserController;
 
 $updateProfil = new ProfilController();
+$newUpdateProfil = new UserController();
 
 if(isset($_GET['other'])){
-    $updateProfil->updateInfoProfil($_POST['login'],$_POST['new_pass'],$_POST['conf_pass'],$_POST['email'],$_POST['firstname'],$_POST['lastname'],$_POST['date'],$_POST['phone']);
+    $newUpdateProfil->Update($_POST['login'],$_POST['new_pass'],$_POST['conf_pass'],$_POST['old_pass'],$_POST['email'],$_POST['firstname'],$_POST['lastname'],$_POST['date'],$_POST['phone']);
     die();
 }
 
@@ -25,6 +27,7 @@ if(isset($_GET['other'])){
 <head>
     <?php require_once("_include/head.php") ?>
     <script defer src="./scripts/profile.js"></script>
+    <link rel="stylesheet" href="./assets/style.css">
     <link rel="stylesheet" href="./assets/Profil_style.css">
     <title>GameVault - Profile</title>
 </head>
@@ -33,17 +36,20 @@ if(isset($_GET['other'])){
 
     <?php require_once('_include/header.php') ?>
 
-    <div class="container-title">
-        <h1>Profil</h1>
-    </div>
 
+<main id="main">
+    <section id="profile">
+        <div class="container-profil">
+            <div class="container-profil-left">
 
-    <div class="container-profil">
-        <div class="container-profil-left">
+            </div>
+            <div class="container-profil-right">
+
+            </div>
         </div>
-        <div class="container-profil-right">
-        </div>
-    </div>
+    </section>
+</main>
+
 
 </body>
 

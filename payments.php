@@ -17,9 +17,6 @@ if (session_status() == PHP_SESSION_NONE){ session_start();}
     <title>Payment</title>
 </head>
 <body>
-    <header>
-
-    </header>
     <main class="flex-all">
         <section class="flex-desktop">
             <section class="flex-payment">

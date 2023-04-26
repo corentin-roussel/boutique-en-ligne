@@ -120,6 +120,7 @@ if (isset($_SESSION) && $_SESSION['user']['role'] === 'admin' || $_SESSION['user
         <script defer src="./scripts/adminCat.js"></script>
         <link rel="stylesheet" href="./assets/Admin_style.css">
 
+
         <title>Game Vault - Admin Boutique en ligne</title>
     </head>
 

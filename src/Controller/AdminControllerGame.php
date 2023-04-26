@@ -21,7 +21,6 @@ class AdminControllerGame {
     {
         foreach(func_get_args() as $values)
         {
-            $values = htmlspecialchars(trim($values));
 
             if(!empty($values))
             {
@@ -37,6 +36,16 @@ class AdminControllerGame {
     public function insertGame($title, $desc, $price, $image, $date, $developper, $publisher, $checkboxArray, $category, $sub_category):void
     {
         $messages = [];
+
+        $title = htmlspecialchars(trim($title));
+        $desc = htmlspecialchars(trim($desc));
+        $price = htmlspecialchars(trim($price));
+        $image = htmlspecialchars(trim($image));
+        $date = htmlspecialchars(trim($date));
+        $developper = htmlspecialchars(trim($developper));
+        $publisher = htmlspecialchars(trim($publisher));
+        $category = htmlspecialchars(trim($category));
+        $sub_category = htmlspecialchars(trim($sub_category));
 
         $priceInt = (int)$price;
         $categoryInt= (int)$category;
@@ -88,6 +97,18 @@ class AdminControllerGame {
 
     public function updateGame($title, $desc, $price, $image, $date, $developper, $publisher, $checkboxArray, $category, $sub_category,$id):void
     {
+
+        $title = htmlspecialchars(trim($title));
+        $desc = htmlspecialchars(trim($desc));
+        $price = htmlspecialchars(trim($price));
+        $image = htmlspecialchars(trim($image));
+        $date = htmlspecialchars(trim($date));
+        $developper = htmlspecialchars(trim($developper));
+        $publisher = htmlspecialchars(trim($publisher));
+        $category = htmlspecialchars(trim($category));
+        $sub_category = htmlspecialchars(trim($sub_category));
+        $id = htmlspecialchars(trim($sub_category));
+
         $messages = [];
 
         $priceInt = (int)$price;

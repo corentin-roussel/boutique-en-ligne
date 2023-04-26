@@ -32,6 +32,7 @@ body::-webkit-scrollbar {
 
 .img-all-products {
   width: 300px;
+  box-shadow: 10px 8px 18px rgba(0, 0, 0, 0.42);
   height: auto;
 }
 
@@ -105,6 +106,7 @@ body::-webkit-scrollbar {
   align-items: center;
   overflow-clip-margin: content-box;
   overflow: clip;
+  box-shadow: 10px 8px 18px rgba(0, 0, 0, 0.42);
 }
 
 .carousel {
@@ -201,6 +203,51 @@ body::-webkit-scrollbar {
   height: 100%;
   border-radius: 7px;
   aspect-ratio: 5/3;
+  box-shadow: 10px 8px 18px rgba(0, 0, 0, 0.42);
+}
+
+@media screen and (min-width: 1000px) {
+  #carousel-img {
+    height: 40rem;
+    object-fit: fill;
+  }
+
+  .carousel #prev {
+    padding: 1%;
+  }
+
+  .carousel #next {
+    padding: 1%;
+  }
+
+  .rand-game {
+    width: 25%;
+  }
+
+  .new-rand-games-title-price {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .new-released-games-title-price {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+  }
+
+
+  .new-released-game {
+    min-width: 500px;
+    min-height: 350px;
+  }
+
+  .new-released-text {
+    width: 90%;
+  }
+
+  .new-released-price {
+    width: 8%;
+  }
 }
 
 /* **************** Header container ******** */
@@ -255,6 +302,10 @@ body::-webkit-scrollbar {
     padding: 8px 15px;
     width: 500px;
     border-radius: 20px;
+  }
+
+  .search-form i {
+    display: none;
   }
 
   /*********** Nav *********/
@@ -367,6 +418,7 @@ body::-webkit-scrollbar {
   .search-form input[type="text"] {
     width: 500px;
   }
+
   #cart-no-log{
     font-size: 1.5rem;
     color: #fff;
@@ -376,6 +428,19 @@ body::-webkit-scrollbar {
   #cart-no-log:hover{
     color: red;
     cursor: not-allowed!important;
+
+
+  .search-form i {
+    display: flex;
+    color: var(--color-light);
+    position: relative;
+    right: 35px;
+    top: 7px;
+  }
+
+  .search-form {
+    display: flex;
+
   }
 }
 
