@@ -108,14 +108,14 @@ class ProductModel {
     }
 
     public function bestsellersGames():array {
-        $req = $this->conn->prepare("SELECT sold.sold,
-                                            sold.id_game,
+        $req = $this->conn->prepare("SELECT inventory.sold,
+                                            inventory.id_game,
                                             product.title,
                                             product.image,
-                                            product.price FROM sold 
+                                            product.price FROM inventory 
                                                 INNER JOIN product 
-                                                    ON product.id = sold.id_game
-                                                               ORDER BY sold.sold DESC LIMIT 5");
+                                                    ON product.id = inventory.id_game
+                                                               ORDER BY inventory.sold DESC LIMIT 5");
         $req->execute();
         return $req->fetchAll(PDO::FETCH_ASSOC);
     }

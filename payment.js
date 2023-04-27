@@ -226,12 +226,9 @@ const displaySummary = (place, summary) => {
 window.addEventListener("load", async() => {
 
     let form = await fetchFormPayment();
-
-
     displayForm(payment, form);
 
     await getAdressById();
-
     await summaryGames();
 
     let button_buy = await fetchInputBuy();
@@ -245,10 +242,6 @@ window.addEventListener("load", async() => {
            {
                window.location.href = "order_summary.php";
            }
-
-
-
-
     })
 })
 

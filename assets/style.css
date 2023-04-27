@@ -259,7 +259,8 @@ body::-webkit-scrollbar {
 
   .new-rand-games-title-price {
     display: flex;
-    justify-content: space-around;
+    justify-content: start;
+    width: 100%;
   }
 
   .new-released-games-title-price {

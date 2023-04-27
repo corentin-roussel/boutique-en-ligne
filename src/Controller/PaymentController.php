@@ -13,6 +13,14 @@ class PaymentController
 
     public function verifFormPayment(?int $idAdress, ?string $cardNumber, ?string $cardExpiration, ?string $cardAuth, ?string $cardName, ?int $id_cart, ?int $id_user) {
 
+        htmlspecialchars(trim($idAdress));
+        htmlspecialchars(trim($cardNumber));
+        htmlspecialchars(trim($cardExpiration));
+        htmlspecialchars(trim($cardAuth));
+        htmlspecialchars(trim($cardName));
+        htmlspecialchars(trim($id_cart));
+        htmlspecialchars(trim($id_user));
+
         $cardNumberRep = str_replace(" ", "", $cardNumber);
 
         $cardExpirationRep = str_replace("/", "", $cardExpiration);

@@ -9,28 +9,6 @@ const getArray = async () => {
   return await response.json();
 };
 
-// const displayImage = (e, array, link, img) => {
-//     let i = 0
-//     if(e.target.id === "next")
-//     {
-//         console.log(i)
-//         for(i ; array[i]; i+=1)
-//         {
-//             console.log(array[i])
-//             link.setAttribute("href", "product.php?id="+array[i].id)
-//             img.setAttribute("src", array[i].image)
-//         }
-//     }
-//     if(e.target.id === "prev")
-//     {
-//         console.log(i)
-//         for(i ; array[i]; i-=1)
-//         {
-//             console.log(array[i])
-//             link.setAttribute("href", "product.php?id="+array[i].id)
-//             img.setAttribute("src", array[i].image)
-//         }
-//     }
 
 const displayImage = (e, array, previous, next, link, img) => {
   let i = 0;

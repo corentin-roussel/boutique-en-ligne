@@ -70,7 +70,6 @@
 <head>
    <?php require_once("_include/head.php") ?>
     <script defer src="all_products.js"></script>
-    <script defer src="search.js"></script>
     <link rel="stylesheet" href="./assets/all_products.css">
     <link rel="stylesheet" href="./assets/style.css">
 
