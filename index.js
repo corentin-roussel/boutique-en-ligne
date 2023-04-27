@@ -47,7 +47,6 @@ const hamburger = document.querySelector(".hamburger");
 const navMenu = document.querySelector(".nav-menu");
 const navLinks = document.querySelectorAll(".nav-menu ul li a");
 const btnClose = document.querySelector(".btn-close");
-// const body = document.querySelector('body');
 
 hamburger.addEventListener("click", () => {
   hamburger.classList.toggle("active");
@@ -66,7 +65,6 @@ navLinks.forEach((link) => {
 btnClose.addEventListener("click", () => {
   navMenu.classList.remove("active");
   body.classList.remove("active");
-  // console.log('lol');
 });
 
 window.addEventListener("resize", function () {
@@ -82,20 +80,16 @@ window.addEventListener("resize", function () {
 const accueil = document.querySelector(".accueil");
 
 accueil.addEventListener("animationend", () => {
-  // Masquer la div d'accueil
   accueil.style.display = "none";
 });
 
-// Vérifier si l'animation a déjà été jouée
 const animationJouee = sessionStorage.getItem('animationJouee');
 
 if (!animationJouee) {
-  // Ajouter une classe pour jouer l'animation
+    
   accueil.classList.add('anim-jouee');
   
-  // l'animation a été jouée
   sessionStorage.setItem('animationJouee', 'true');
 } else {
-  // Masquer la div d'accueil
   accueil.style.display = 'none';
 }

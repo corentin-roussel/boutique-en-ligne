@@ -2,7 +2,6 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-
 require_once("autoloader.php");
 
     use App\Controller\ProductController;
@@ -22,11 +21,13 @@ if (isset($_GET['getArray'])) {
     <link rel="stylesheet" href="assets/index.css">
     <link rel="stylesheet" href="assets/style.css">
     <script src="https://kit.fontawesome.com/index.js" crossorigin="anonymous"></script>
+    <script src="./scripts/index.js"></script>
     <title>Home</title>
 </head>
 
 <body>
 <div class="accueil">
+
   <!-- Contenu de l'écran d'accueil ici -->
   <img src="./_img/new-logo-gmm.png" class="logo" alt="logo">
 </div>
