@@ -165,6 +165,7 @@ const displayGame = (game, place) =>{
             }
             let formUpdate = await fetchUpdateFrom(update_game.value);
                 displayForm(formUpdate, update_game.nextSibling.nextSibling);
+                console.log(update_game)
 
             let formSubmitGame = document.querySelector("#formGame");
 
@@ -230,7 +231,7 @@ const fetchUpdateFrom = async (id) => {
 const updateGame = async(e, form, id) => {
     e.preventDefault()
     const formData = new FormData(form);
-    formData.append("id" , id)
+    formData.append("id_update" , id)
     const response = await fetch("admin_back.php?updateGame=ok", {
         method: "POST",
         body: formData

@@ -87,7 +87,7 @@ class AdminModel{
             ":publisher" => $publisher,
             ":id_category" => $category,
             ":id_subcategory" => $sub_category,
-            "id" => $id
+            ":id" => $id
         ));
 
 

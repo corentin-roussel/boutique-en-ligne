@@ -95,7 +95,7 @@ class AdminControllerGame {
         echo $json;
     }
 
-    public function updateGame($title, $desc, $price, $image, $date, $developper, $publisher, $checkboxArray, $category, $sub_category,$id):void
+    public function updateGame($title, $desc, $price, $image, $date, $developper, $publisher, $checkboxArray, $category, $sub_category, $id_update):void
     {
 
         $title = htmlspecialchars(trim($title));
@@ -107,7 +107,6 @@ class AdminControllerGame {
         $publisher = htmlspecialchars(trim($publisher));
         $category = htmlspecialchars(trim($category));
         $sub_category = htmlspecialchars(trim($sub_category));
-        $id = htmlspecialchars(trim($sub_category));
 
         $messages = [];
 
@@ -118,14 +117,13 @@ class AdminControllerGame {
 
 
 
-        if(preg_match("#^[0-9]*$#" , $price) && grapheme_strlen($desc) > 100 && $this->mempty($title, $desc, $price, $image, $date, $publisher, $developper, $category, $sub_category))
+        if(preg_match("#^[0-9]*$#" , $price) && grapheme_strlen($desc) > 100 && $this->mempty($title, $desc, $price, $image, $date, $publisher, $developper, $categoryInt, $sub_categoryInt))
         {
-            $this->model->updateById($title, $desc, $priceInt, $image, $date, $developper, $publisher, $categoryInt, $sub_categoryInt,$id);
+            $this->model->updateById($title, $desc, $priceInt, $image, $date, $developper, $publisher, $categoryInt, $sub_categoryInt,$id_update);
 
-            $this->model->deleteCompat($id);
+            $this->model->deleteCompat($id_update);
 
-
-            $this->updatePlatform($checkboxArray, $id);
+            $this->updatePlatform($checkboxArray, $id_update);
 
             $messages['okAddGame'] = "You're game has been updated";
         }

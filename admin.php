@@ -17,7 +17,6 @@ $AdminController = new AdminControllerGame();
 $categoryController = new CategoryController();
 
 
-
 if (isset($_POST['content'])) {
     $controlPlat->addForm($_POST['content']);
     die();
