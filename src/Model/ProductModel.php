@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Model;
+
 use Cassandra\Date;
 use PDO;
 use PDOException;
 
-class ProductModel {
+class ProductModel
+{
 
     private ?PDO $conn;
 
@@ -20,7 +22,8 @@ class ProductModel {
         }
     }
 
-    public function GetAllOneTable($table) {
+    public function GetAllOneTable($table)
+    {
 
         $sql = "SELECT * FROM " . $table;
 
@@ -31,7 +34,8 @@ class ProductModel {
         return $tab;
     }
 
-    public function getPlatformProduct($id_game):array {
+    public function getPlatformProduct($id_game): array
+    {
         $req = $this->conn->prepare("SELECT compatibility.id_platform,
                                                 platform.platform
                                                 FROM compatibility 
@@ -44,26 +48,27 @@ class ProductModel {
         return $req->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function GetProductByFilter($platform, $category, $subcategory) {
-
+    public function GetProductByFilter($platform, $category, $subcategory)
+    {
         $sqlParam = [];
 
-        $platform === 'all' ? ($sqlPlat1 = "") . ($sqlPlat2 = "") : ($sqlPlat1 = " INNER JOIN compatibility ON product.id = compatibility.id_game INNER JOIN platform ON compatibility.id_platform = platform.id") . ($sqlPlat2 = " AND id_platform = :platform") . ($sqlParam[':platform'] = $platform);
+        $platform === 'all' ? ($sqlPlat1 = "") . ($sqlPlat2 = "") : ($sqlPlat1 = " INNER JOIN compatibility ON product.id = compatibility.id_game INNER JOIN platform ON compatibility.id_platform = platform.id") . ($sqlPlat2 = $category !== 'all' || $subcategory !== 'all' ? " AND" : " WHERE") . ($sqlPlat2 = $sqlPlat2 . " id_platform = :platform") . ($sqlParam[':platform'] = $platform);
         $category === 'all' ? $sqlCat = "" : ($sqlCat = " WHERE id_category = :category") . ($sqlParam[':category'] = $category);
-        $subcategory === 'all' ? $sqlSubcat = "" : ($sqlSubcat = " AND id_subcategory = :subcategory") . ($sqlParam[':subcategory'] = $subcategory);
+        $subcategory === 'all' ? $sqlSubcat = "" : ($sqlSubcat = $category !== 'all' ? " AND" : " WHERE") . ($sqlSubcat .= " id_subcategory = :subcategory") . ($sqlParam[':subcategory'] = $subcategory);
 
         $sql = "SELECT *,product.id FROM product" . $sqlPlat1 . $sqlCat . $sqlSubcat . $sqlPlat2;
+
         $req = $this->conn->prepare($sql);
         $req->execute($sqlParam);
 
         $tab = $req->fetchAll(PDO::FETCH_ASSOC);
 
         return $tab;
-
     }
 
 
-    public function preorderGames():array {
+    public function preorderGames(): array
+    {
 
         $req = $this->conn->prepare("SELECT 
                                     product.id,
@@ -74,12 +79,9 @@ class ProductModel {
                                     FROM product 
                                     WHERE release_date BETWEEN CURDATE() AND DATE_SUB(CURDATE(), INTERVAL -6 MONTH) 
                                     ORDER BY product.release_date DESC");
-        $req->execute([
-
-        ]);
+        $req->execute([]);
         echo json_encode($req->fetchAll(PDO::FETCH_ASSOC), JSON_PRETTY_PRINT);
         die();
-
     }
 
     public function randomGames()
@@ -92,7 +94,8 @@ class ProductModel {
         return $req->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function newReleasedGames():array {
+    public function newReleasedGames(): array
+    {
 
         $req = $this->conn->prepare("SELECT
                                     product.id ,
@@ -101,13 +104,12 @@ class ProductModel {
                                     product.image
                                     FROM product WHERE release_date BETWEEN DATE_SUB(CURDATE(), INTERVAL 3 MONTH) AND CURDATE() ORDER BY product.release_date DESC LIMIT 5");
 
-        $req->execute([
-
-        ]);
+        $req->execute([]);
         return $req->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function bestsellersGames():array {
+    public function bestsellersGames(): array
+    {
         $req = $this->conn->prepare("SELECT sold.sold,
                                             sold.id_game,
                                             product.title,
@@ -120,20 +122,22 @@ class ProductModel {
         return $req->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getLastCartPaid($id_user):array {
+    public function getLastCartPaid($id_user): array
+    {
         $req = $this->conn->prepare("SELECT cart.id
                                              FROM cart WHERE id_user=:id_user 
                                                          AND is_paid=:is_paid 
                                                        ORDER BY cart.id 
                                                        DESC");
         $req->execute([
-           ":id_user" => $id_user,
+            ":id_user" => $id_user,
             ":is_paid" => true
         ]);
         return $req->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function displayItemCart($id_cart) {
+    public function displayItemCart($id_cart)
+    {
         $req = $this->conn->prepare("SELECT product.title, 
                                             product.image,
                                             item_cart.quantity,
@@ -153,7 +157,8 @@ class ProductModel {
     }
 
 
-    public function GetDataOneProduct($id) {
+    public function GetDataOneProduct($id)
+    {
 
         $sql = "SELECT *,product.id, SUBSTRING(description, 1,200) AS 'short_description' FROM product INNER JOIN category ON product.id_category = category.id INNER JOIN subcategory ON product.id_subcategory = subcategory.id WHERE product.id = :id";
         $req = $this->conn->prepare($sql);
@@ -162,10 +167,10 @@ class ProductModel {
         $tab = $req->fetchAll(PDO::FETCH_ASSOC);
 
         return $tab;
-
     }
 
-    public function GetAllByLetters($search) {
+    public function GetAllByLetters($search)
+    {
 
         $sql = "SELECT * FROM product WHERE title LIKE :search";
 
@@ -175,9 +180,5 @@ class ProductModel {
         $tab = $req->fetchAll(PDO::FETCH_ASSOC);
 
         return $tab;
-
     }
-
 }
-
-?>
