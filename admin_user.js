@@ -107,10 +107,15 @@ const displayUserDataByRole = async(roleId) => {                            // d
             if(window.confirm("Do you really want to delete this user ?")) {
 
                 const response = await fetch('admin.php?deleteUser=' + buttonD.value);
-                await response.text();
+                const result = await response.text();
 
-                buttonD.parentNode.parentNode.parentNode.removeChild(buttonD.parentNode.parentNode);
+                window.alert(result);
 
+                if(result === "User deleted successfully") {
+
+                    buttonD.parentNode.parentNode.parentNode.removeChild(buttonD.parentNode.parentNode);
+
+                }
             }
         })
     }

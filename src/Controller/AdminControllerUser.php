@@ -4,7 +4,8 @@ namespace App\Controller;
 
 use App\Model\AdminModel;
 
-class AdminControllerUser{
+class AdminControllerUser
+{
 
     private $model;
 
@@ -13,7 +14,8 @@ class AdminControllerUser{
         $this->model = new AdminModel();
     }
 
-    public function GetAllRoles() {
+    public function GetAllRoles()
+    {
 
         $roles = $this->model->GetAllRoles();                   // renvoie un tableau PHP avec les id et noms de tous les roles
 
@@ -21,38 +23,41 @@ class AdminControllerUser{
         echo $json;
     }
 
-    public function GetUsersDataByRole($idRole) {
+    public function GetUsersDataByRole($idRole)
+    {
 
         $dataUsers = $this->model->GetUserDataByRoleId($idRole);        // renvoie un tableau php de toutes les data des users appartenant au role choisi
 
         return $dataUsers;
-
     }
 
-    public function GetAllRoleExeptActual($idActualRole) {
+    public function GetAllRoleExeptActual($idActualRole)
+    {
 
         $roles = $this->model->GetAllRoleExeptActualById($idActualRole);
-        
-        return $roles;
 
+        return $roles;
     }
 
-    public function ChangeUserRole($idRole, $idUser) {
+    public function ChangeUserRole($idRole, $idUser)
+    {
 
         $change = $this->model->UpdateRole($idRole, $idUser);
 
         return $change;
-
     }
 
-    public function DeleteUser($idUser) {
+    public function DeleteUser($idUser)
+    {
 
-        $delete = $this->model->DeleteUser($idUser);
+        if ($idUser != $_SESSION['user']['id']) {
+
+            $delete = $this->model->DeleteUser($idUser);
+        } else {
+
+            $delete = "You can't delete yourself";
+        }
 
         return $delete;
-
     }
-
 }
-
-?>
