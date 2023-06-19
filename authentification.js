@@ -133,7 +133,6 @@ const divForm = document.getElementById('divForm');
 window.addEventListener('load', async() => {
         
     const signinForm = document.getElementById('signinForm');
-    console.log(signinForm);
     
     signinForm.addEventListener('submit', (e) => {
 

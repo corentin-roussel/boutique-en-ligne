@@ -23,7 +23,7 @@ const displayGames = async(selectPlatform, selectCategory, selectSubcategory, pa
     }
 }
 
-const displayPagination = async(selectPlatform, selectCategory, selectSubcategory, pageNum) => {
+const displayPagination = async(selectPlatform, selectCategory, selectSubcategory) => {
     
     const divDisplayPagination = document.getElementById('displayPagination');
 
@@ -69,7 +69,7 @@ const ifSelectChangeDo = async() => {
     pageNum = 1;
 
     await displayGames(selectPlatform.value, selectCategory.value, selectSubcategory.value, pageNum);
-    changePage = await displayPagination(selectPlatform.value, selectCategory.value, selectSubcategory.value, pageNum);
+    changePage = await displayPagination(selectPlatform.value, selectCategory.value, selectSubcategory.value);
     
     for (const pagination of changePage) {
 
@@ -78,7 +78,7 @@ const ifSelectChangeDo = async() => {
             pageNum = pagination.innerHTML;
 
             displayGames(selectPlatform.value, selectCategory.value, selectSubcategory.value, pageNum);
-            displayPagination(selectPlatform.value, selectCategory.value, selectSubcategory.value, pageNum);
+            displayPagination(selectPlatform.value, selectCategory.value, selectSubcategory.value);
 
         })
     }
