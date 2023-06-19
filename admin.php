@@ -102,7 +102,10 @@ endif;
 
 !isset($_GET['changeRole']) ?: ($adminUser->ChangeUserRole($_GET['changeRole'], $_GET['userId'])) . (die());
 
-!isset($_GET['deleteUser']) ?: ($adminUser->DeleteUser($_GET['deleteUser'])) . (die());
+if (isset($_GET['deleteUser'])) {
+    echo $adminUser->DeleteUser($_GET['deleteUser']);
+    die();
+}
 
 if (isset($_SESSION) && $_SESSION['user']['role'] === 'admin' || $_SESSION['user']['role'] === 'moderator') :
 
@@ -162,7 +165,7 @@ if (isset($_SESSION) && $_SESSION['user']['role'] === 'admin' || $_SESSION['user
         </div>
 
 
-  
+
         <div class="form-add-category">
 
 
@@ -199,9 +202,9 @@ if (isset($_SESSION) && $_SESSION['user']['role'] === 'admin' || $_SESSION['user
             </div>
 
             <div class="btn-add-show">
-                 <button class="button" id="addFormGame">Add Game</button>
+                <button class="button" id="addFormGame">Add Game</button>
 
-                 <button class="button" id="showGames">Show Games</button>
+                <button class="button" id="showGames">Show Games</button>
             </div>
 
             <div id="placeAddGame">
@@ -222,5 +225,3 @@ if (isset($_SESSION) && $_SESSION['user']['role'] === 'admin' || $_SESSION['user
     </html>
 <?php else : header("location: forbidden.php");
 endif; ?>
-
-
