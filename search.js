@@ -44,15 +44,9 @@ const displayPaginationSearch = async(search) => {
 
     if (tabHTML['numPage'] === undefined) {
 
-        divDisplayPaginationSearch.innerHTML = divDisplayPaginationSearch.innerHTML + '<i class="fa-solid fa-angle-left" id="previousPageSearch"></i>';
-
         divDisplayPaginationSearch.innerHTML = divDisplayPaginationSearch.innerHTML + '<p class="changePageSearch" id="page1">1</p>';
-
-        divDisplayPaginationSearch.innerHTML = divDisplayPaginationSearch.innerHTML + '<i class="fa-solid fa-angle-right" id="nextPageSearch"></i>';
         
     }else{
-
-        divDisplayPaginationSearch.innerHTML = divDisplayPaginationSearch.innerHTML + '<i class="fa-solid fa-angle-left" id="previousPageSearch"></i>';
 
         for (const page in tabHTML['numPage']) {
             if (Object.hasOwnProperty.call(tabHTML['numPage'], page)) {
@@ -62,8 +56,6 @@ const displayPaginationSearch = async(search) => {
                 divDisplayPaginationSearch.innerHTML = divDisplayPaginationSearch.innerHTML + actualPage;
             }
         }
-
-        divDisplayPaginationSearch.innerHTML = divDisplayPaginationSearch.innerHTML + '<i class="fa-solid fa-angle-right" id="nextPageSearch"></i>';
     }
 
     let changePageSearch = document.getElementsByClassName('changePageSearch');
