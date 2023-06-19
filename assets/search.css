@@ -16,6 +16,10 @@
     align-items: center;
 }
 
+.changePageSearch {
+    cursor: pointer;
+}
+
 #displayPaginationSearch {
     display: flex;
     justify-content: space-around;
