@@ -38,11 +38,11 @@ if(isset($_GET['ship'])){
 <div class="container-form-shipping">
     <form action="" method="POST" id="form_shipping" >
         <label for="firstname"></label>
-        <input type="text" name="firstname_ship" placeholder="<?= $_SESSION['user']['firstname'] ?>">
+        <input type="text" name="firstname_ship" placeholder="Firstname" value="<?php if(isset($_SESSION['user']['firstname'])) { echo $_SESSION['user']['firstname'];} ?>">
         <label for="lastname"></label>
-        <input type="text" name="lastname_ship" placeholder="<?= $_SESSION['user']['lastname'] ?>">
+        <input type="text" name="lastname_ship" placeholder="Lastname" value="<?php if(isset($_SESSION['user']['lastname'])) { echo $_SESSION['user']['lastname'];} ?>">
         <label for="phone_number"></label>
-        <input type="text" name="phone_num_ship" placeholder="<?= $_SESSION['user']['phone_number']?>">
+        <input type="text" name="phone_num_ship"  placeholder="Phone number" value="<?php if(isset($_SESSION['user']['phone_number'])) { echo $_SESSION['user']['phone_number'];} ?>">
         <label for="country"></label>
         <input type="text" name="country_ship" placeholder="Country">
         <label for="adress"></label>
