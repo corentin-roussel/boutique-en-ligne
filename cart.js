@@ -76,11 +76,12 @@ const displayGames = async() => {
 
                 if(numOf > 1) {
                     numOf--;
-                    elementNumOf.innerHTML = "";
-                    elementNumOf.innerHTML = numOf;
 
                     const response = await fetch('cart.php?changeQuantity=' + numOf + '&itemId=' + itemId + '&plusMinus=minus')
                     const newPrice = await response.text();
+                    
+                    elementNumOf.innerHTML = "";
+                    elementNumOf.innerHTML = numOf;
 
                     price.innerHTML = newPrice;
                     displayPrice();
