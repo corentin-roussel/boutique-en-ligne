@@ -21,9 +21,6 @@ class CartModel
 
     public function AddProduct( ?int $idProduct, ?int $quantity, ?string $platform, ?int $cartId) : string
     {
-
-        $message = "";
-
         // CHECK IF THE PRODUCT IS ALREADY IN THE CART //
         $sqlCount = "SELECT * FROM item_cart WHERE id_cart = :cart AND id_game = :idProduct AND platform = :platform";
         
@@ -59,24 +56,24 @@ class CartModel
             ]);
 
 
-            // GET CART PRICE //
-            $sqlGetPriceCart = "SELECT total_price FROM cart WHERE id = :cartId";
-            $reqGetPriceCart = $this->conn->prepare($sqlGetPriceCart);
-            $reqGetPriceCart->execute([':cartId' => $cartId]);
+            // // GET CART PRICE //
+            // $sqlGetPriceCart = "SELECT total_price FROM cart WHERE id = :cartId";
+            // $reqGetPriceCart = $this->conn->prepare($sqlGetPriceCart);
+            // $reqGetPriceCart->execute([':cartId' => $cartId]);
 
-            $priceOneCart = $reqGetPriceCart->fetch(PDO::FETCH_ASSOC)['total_price'];
+            // $priceOneCart = $reqGetPriceCart->fetch(PDO::FETCH_ASSOC)['total_price'];
 
-            $newCartPrice = $priceOneCart + $priceItems;
+            // $newCartPrice = $priceOneCart + $priceItems;
 
 
-            // CHANGE CART PRICE //
-            $sqlChangeCartPrice = "UPDATE cart SET total_price = :newPrice WHERE id = :cartId";
-            $reqChangeCartPrice = $this->conn->prepare($sqlChangeCartPrice);
-            $reqChangeCartPrice->execute([':newPrice' => $newCartPrice,
-                                        ':cartId' => $cartId
-            ]);
+            // // CHANGE CART PRICE //
+            // $sqlChangeCartPrice = "UPDATE cart SET total_price = :newPrice WHERE id = :cartId";
+            // $reqChangeCartPrice = $this->conn->prepare($sqlChangeCartPrice);
+            // $reqChangeCartPrice->execute([':newPrice' => $newCartPrice,
+            //                             ':cartId' => $cartId
+            // ]);
 
-            $message = "The article was successfully added to the cart";
+            // $message = "The article was successfully added to the cart";
 
         }else{
 
@@ -103,10 +100,27 @@ class CartModel
                              ':id' => $tab['id']
             ]);
 
-            $message = "The article was successfully added to the cart";
+            // $message = "The article was successfully added to the cart";
         }
 
-        return $message;
+        // GET CART PRICE //
+        $sqlGetPriceCart = "SELECT total_price FROM cart WHERE id = :cartId";
+        $reqGetPriceCart = $this->conn->prepare($sqlGetPriceCart);
+        $reqGetPriceCart->execute([':cartId' => $cartId]);
+
+        $priceOneCart = $reqGetPriceCart->fetch(PDO::FETCH_ASSOC)['total_price'];
+
+        $newCartPrice = $priceOneCart + $priceItems;
+
+
+        // CHANGE CART PRICE //
+        $sqlChangeCartPrice = "UPDATE cart SET total_price = :newPrice WHERE id = :cartId";
+        $reqChangeCartPrice = $this->conn->prepare($sqlChangeCartPrice);
+        $reqChangeCartPrice->execute([':newPrice' => $newCartPrice,
+                                    ':cartId' => $cartId
+        ]);
+
+        return "The article was successfully added to the cart";
 
     }
 
@@ -221,5 +235,3 @@ class CartModel
     }
 
 }
-
-?>
