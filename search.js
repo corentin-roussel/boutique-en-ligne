@@ -88,14 +88,13 @@ const displayPaginationSearch = async(search) => {
 const searchBar = document.getElementById('searchBar');
 const iconSearch = document.getElementById('iconSearch');
 
-const mainList = document.getElementsByTagName('main');
-const mainBefore = mainList[0];
+const mainBefore = document.getElementsByTagName('main')[0];
 
-const bodyList = document.getElementsByTagName('body');
-const body = bodyList[0];
+const body = document.getElementsByTagName('body')[0];
 
 const mainSearch = document.createElement('main');
 mainSearch.className = "searchMain";
+
 const footer = document.getElementsByTagName('footer')[0];
 
 mainBefore.style.display = "block";
@@ -105,10 +104,10 @@ mainSearch.style.display = "none";
 
 searchBar.addEventListener('focus', () => {
     iconSearch.className = 'fa-solid fa-xmark';
-})
 
-searchBar.addEventListener('focusout', () => {
-    iconSearch.className = 'fa-solid fa-magnifying-glass';
+    searchBar.addEventListener('focusout', () => {
+        iconSearch.className = 'fa-solid fa-magnifying-glass';
+    })
 })
 
 searchBar.addEventListener('keyup', async() => {
@@ -124,9 +123,9 @@ searchBar.addEventListener('keyup', async() => {
     displayGamesSearch(searchBar.value, pageNumSearch);
     displayPaginationSearch(searchBar.value);
 
-    searchBar.addEventListener('focusout', () => {
-        iconSearch.className = 'fa-solid fa-xmark';
-    })
+    // searchBar.addEventListener('focusout', () => {
+    //     iconSearch.className = 'fa-solid fa-xmark';
+    // })
 
     iconSearch.addEventListener('click', () => {
 

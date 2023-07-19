@@ -288,7 +288,7 @@ body::-webkit-scrollbar {
 /* .search-form {
   margin-top: 22px;
 } */
-@media (min-width: 769px) {
+@media screen and (min-width: 769px) {
   header {
     position: sticky;
     top: 0;
