@@ -1,8 +1,8 @@
 //*********************** FUNCTIONS ***********************//
 
-const fetchForm = async (lequel) => {
+const fetchForm = async (user) => {
 
-    const response = await fetch('back_authentification.php?' + lequel + '=1');
+    const response = await fetch('back_authentification.php?' + user + '=1');
     const form = await response.text();
 
     return form;
@@ -16,19 +16,19 @@ const displayForm = (form) => {
 
 }
 
-const whenSubmit = async (form, lequel, e) => {
+const whenSubmit = async (form, user, e) => {
 
     e.preventDefault();
     const formData = new FormData(form);
 
-    const response = await fetch('back_authentification.php?' + lequel + '=1', { method: "POST", body: formData });
+    const response = await fetch('back_authentification.php?' + user + '=1', { method: "POST", body: formData });
     const dataJSON = await response.json();
 
-    if(lequel === 'signup') {
+    if(user === 'signup') {
         displayErrorsSignup(dataJSON);
     }
 
-    if(lequel === 'signin') {
+    if(user === 'signin') {
         displayErrorsSignin(dataJSON);
     }
 

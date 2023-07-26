@@ -1,19 +1,13 @@
 <?php
 require_once("autoloader.php");
 
-use App\Model\AdminModel;
 use App\Controller\PlateformController;
 
-$show_plateform = new AdminModel();
-$deleteModel = new PlateformController();
-$plateform = $show_plateform->showPlateform();
+$controller = new PlateformController();
+$plateform = $controller->showPlateform();
 
-// var_dump($_GET);
-!isset($_GET['idPlat']) ?: $deleteModel->deletePlat($_POST['checkplat']);
+!isset($_GET['idPlat']) ?: $controller->deletePlat($_POST['checkplat']);
 
-// var_dump($_POST);
-// var_dump($_GET);
-// var_dump($_POST);
 
 ?>
 

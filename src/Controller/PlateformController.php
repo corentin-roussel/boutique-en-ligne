@@ -18,7 +18,7 @@ class PlateformController
 
     }
 
-    public function addForm(string $content) :void
+    public function addForm(string $content): void
     {
         $content = htmlspecialchars(trim($content));
         $messages = [];
@@ -38,16 +38,24 @@ class PlateformController
     }
 
 
+    public function showPlateform()
+    {
+        $modelPlateform = new AdminModel();
+
+        $tabPlat = $modelPlateform->showPlateform();
+        return $tabPlat;
+    }
+
+
 
 
     public function deletePlat(array $idArrayCheck)
     {
         $model = new AdminModel();
-        
-        foreach($idArrayCheck as $key => $platforme){
+
+        foreach ($idArrayCheck as $key => $platforme) {
             $intPlatform = (int)$platforme;
             $model->deletePlateform($intPlatform);
         }
-
     }
 }
